@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Event management system added to installed apps.
+    'EventManagementSystem',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
