@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Online Karate Event Management System</title>
-</head>
-<body>
-
 {% extends 'event-management-system/header.html' %}
+{% load staticfiles %}
+
+{% block customCss %}
+<link rel="stylesheet" type="text/css" href="{% static 'event-management-system/css/style-index.css' %}">
+{% endblock %}
+
 
 {% block content %}
-
-{% load static %}
 
 <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -68,7 +65,8 @@
 <div class="container marketing">
     <div class="row">
         <div class="col-lg-4">
-            <img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}" alt="Generic placeholder image" width="140"
+            <img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}"
+                 alt="Generic placeholder image" width="140"
                  height="140">
             <h2>President Here</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus voluptate at quas eos, sequi quo
@@ -77,7 +75,8 @@
         </div>
 
         <div class="col-lg-4">
-            <img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}" alt="Generic placeholder image" width="140"
+            <img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}"
+                 alt="Generic placeholder image" width="140"
                  height="140">
             <h2>Vision</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione mollitia ea dolores totam minima sequi?
@@ -86,7 +85,8 @@
         </div>
 
         <div class="col-lg-4">
-            <img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}" alt="Generic placeholder image" width="140"
+            <img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}"
+                 alt="Generic placeholder image" width="140"
                  height="140">
             <h2>Our aim</h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad consequuntur libero quisquam sequi nam
@@ -106,7 +106,8 @@
                 aliquid fugiat ex, porro sequi reiciendis.</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" src="{% static 'event-management-system/img/sample_image.png' %}"
+            <img class="featurette-image img-fluid mx-auto"
+                 src="{% static 'event-management-system/img/sample_image.png' %}"
                  alt="Generic placeholder image">
         </div>
     </div>
@@ -122,7 +123,8 @@
                 beatae ducimus, voluptas ipsam fuga.</p>
         </div>
         <div class="col-md-5 order-md-2">
-            <img class="featurette-image img-fluid mx-auto" src="index/img/sample_image.png"
+            <img class="featurette-image img-fluid mx-auto"
+                 src="{% static 'event-management-system/img/sample_image.png' %}"
                  alt="Generic placeholder image">
         </div>
     </div>
@@ -139,7 +141,8 @@
                 architecto. Consequuntur, distinctio quibusdam!</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" src="{% static 'event-management-system/img/sample_image.png' %}"
+            <img class="featurette-image img-fluid mx-auto"
+                 src="{% static 'event-management-system/img/sample_image.png' %}"
                  alt="Generic placeholder image">
         </div>
     </div>
@@ -148,14 +151,4 @@
 
 </div>
 
-
-<footer class="container">
-    <p>2017-2018 ISKF Karate Federation</p>
-</footer>
-
-
 {% endblock %}
-
-
-</body>
-</html>

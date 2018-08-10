@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load staticfiles %}
+
     <meta charset="UTF-8">
     <title>Online Karate Event Management System</title>
-    {% load staticfiles %}
-    <title>Online Karate Event Management System</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'event-management-system/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'event-management-system/css/style-index.css' %}">
+    {% block customCss %}
+    {% endblock %}
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- jQuery library -->
@@ -47,7 +50,7 @@
                     <span class="glyphicon glyphicon-user"></span> Sign Up</a>
             </li>
             <li>
-                <a href="login.htm">
+                <a href="login">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a>
             </li>
         </ul>
@@ -57,7 +60,10 @@
 
 <div>
     {% block content %}
+    <!-- content is the name of the block -->
     {% endblock %}
+
+
 </div>
 
 
