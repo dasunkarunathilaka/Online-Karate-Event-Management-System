@@ -14,9 +14,22 @@ class User(AbstractUser):
         ('PR', 'province'),
     )
 
+    def __unicode__(self):
+        return self.username
 
-# No need for a SLKF table as there is only one of them.
-# Other users need to have tables because there are multiple instances of them.
+
+class Slkf(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    memberName = models.CharField(max_length=100)
+
+    # position in the SLKF
+    position = models.CharField(max_length=50)
+    telephone = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return self.user
+        # user object will return according to its __unicode__ method (username)
+
 
 class Association(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -24,4 +37,24 @@ class Association(models.Model):
 
     associationName = models.CharField(max_length=100)
     address = models.CharField(max_length=1000)
-    telephone = models.IntegerField(max_length=10)
+    telephone = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return self.user
+
+
+class Province(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    provinceName = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.user
+
+
+class District(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    DistrictName = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.user
