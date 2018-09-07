@@ -2,4 +2,4 @@
 # Every method that is used in elsewhere needs to be imported here, that way it does not need to change the path.
 
 from genericUser import index
-
+import slkf, association, district, province
