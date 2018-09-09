@@ -10,3 +10,4 @@ def index(request):
 
 def login(request):
     return render(request, 'event-management-system/login.html')
+
