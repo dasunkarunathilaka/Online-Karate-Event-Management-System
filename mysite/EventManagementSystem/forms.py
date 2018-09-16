@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
-from models import User
+from models import User, Slkf
 
 
 class SlkfSignupForm(UserCreationForm):
@@ -12,12 +12,23 @@ class SlkfSignupForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
+        fields = ('username', 'firstName', 'lastName', 'position', 'password1', 'password2')
 
     @transaction.atomic
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
+        password = self.cleaned_data['password1']
+        user.set_password(password)
+
+        user.position = self.cleaned_data['position']
+        user.first_name = self.cleaned_data['firstName']
+        user.last_name = self.cleaned_data['lastName']
         user.USER_TYPE_CHOICES = 'SL'
-        user.save()
-        # student = Student.objects.create(user=user)
-        # student.interests.add(*self.cleaned_data.get('interests'))
+
+        if commit:
+            user.save()
+            slkf = Slkf(user=user, memberName=user.first_name, position=user.position)
+            slkf.save()
         return user
+
+# class AssociationSignupForm(UserCreationForm)
