@@ -1,8 +1,4 @@
 from django.conf.urls import url, include
-
-# from mysite.EventManagementSystem.views import slkf, association, district, province
-
-# from mysite.EventManagementSystem import views
 from views import genericUser, slkf, district, province, association
 
 urlpatterns = [
@@ -12,7 +8,10 @@ urlpatterns = [
     # User auth urls
 
     url(r'^accounts', include('django.contrib.auth.urls')),
+
     url(r'^accounts/signup$', slkf.SignUpDirectingView.as_view(), name='signup'),
+    # This directs to a html page with buttons to choose which type of user to create.
+
     url(r'^accounts/signup/slkf$', slkf.SlkfSignUpView.as_view(), name='slkf_signup'),
     url(r'^accounts/signup/association$', association.AssociationSignUpView.as_view(), name='association_signup'),
     url(r'^accounts/signup/district$', district.DistrictSignUpView.as_view(), name='district_signup'),
