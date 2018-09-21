@@ -17,11 +17,14 @@ urlpatterns = [
     url(r'^accounts/signup/district$', district.DistrictSignUpView.as_view(), name='district_signup'),
     url(r'^accounts/signup/province', province.ProvinceSignUpView.as_view(), name='province_signup'),
 
-    # url(r'^login$', views.customLogin, name='login'),
-    # url(r'^auth$', views.userAuth, name='auth'),
-    # url(r'^logged-in', views.loggedin, name='loggedin'),
-    # url(r'^logout$', views.logout, name='logout'),
-    # url(r'^invalid$', views.invalidLogin, name='invalid'),
+    url(r'^accounts/signup/signup-success$', genericUser.signupSuccess, name='signup-success'),
+
+    # Login urls.
+    url(r'^accounts/login$', genericUser.customLogin, name='login'),
+    url(r'^accounts/auth$', genericUser.userAuth, name='auth'),
+    url(r'^accounts/loggedin$', genericUser.loggedin, name='loggedin'),
+    url(r'^accounts/logout$', genericUser.logout, name='logout'),
+    url(r'^accounts/invalid$', genericUser.invalidLogin, name='invalid'),
 
     # User creation can only be done by the SLKF and super admin.
     # url(r'^create-user', views.signupUser, name='signup'),

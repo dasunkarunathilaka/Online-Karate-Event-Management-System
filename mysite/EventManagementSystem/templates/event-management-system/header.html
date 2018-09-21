@@ -45,14 +45,34 @@
             <li>
                 <a href="#">My Portal</a>
             </li>
+            <!--<li>-->
+            <!--<a href="/event-management-system/accounts/signup">-->
+            <!--<span class="glyphicon glyphicon-user"></span> Sign Up</a>-->
+            <!--</li>-->
+            <!--No need of a signup. Users are created by the SLKF/admin. -->
+
+            {% if user.is_authenticated %}
+
             <li>
                 <a href="#">
-                    <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                <span class="glyphicon glyphicon-user"></span>
+                    {{ user.username }} </a>
             </li>
+
             <li>
-                <a href="login">
+                <a href="/event-management-system/accounts/logout">
+                    <span class="glyphicon glyphicon-log-out"></span> Logout </a>
+            </li>
+
+
+            {% else %}
+            <li>
+                <a href="/event-management-system/accounts/login">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a>
             </li>
+
+            {% endif %}
+
         </ul>
     </div>
 </nav>
@@ -62,7 +82,6 @@
     {% block content %}
     <!-- content is the name of the block -->
     {% endblock %}
-
 
 </div>
 

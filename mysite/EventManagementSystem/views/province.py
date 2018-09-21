@@ -1,3 +1,5 @@
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.views.generic import CreateView
 
 from ..models import User
@@ -15,3 +17,4 @@ class ProvinceSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        return HttpResponseRedirect('signup-success')

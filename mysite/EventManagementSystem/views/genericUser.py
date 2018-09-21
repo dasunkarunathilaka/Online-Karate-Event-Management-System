@@ -1,7 +1,9 @@
 # This view can be viewed by every type of users
 # Ex:- Homepage, any page that does not want user to login.
-
+from django.contrib import auth
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.template.context_processors import csrf
 
 
 def index(request):
@@ -11,3 +13,59 @@ def index(request):
 def login(request):
     return render(request, 'event-management-system/login.html')
 
+
+def signupSuccess(request):
+    return render(request, 'event-management-system/registration/signupSuccess.html')
+
+
+def customLogin(request):
+    # To identify whether a user has already logged in or not.
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/event-management-system/')
+    else:
+        return userLogin(request)
+
+
+def userLogin(request):
+    c = {}
+    c.update(csrf(request))
+    return render(request, 'event-management-system/user-login/login.html', c)
+
+
+def userAuth(request):
+
+    print "----------------- Inside views.userAuth------------------"
+    # When user submits the login form, it comes here.
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    # If there is no value returned, empty string is returned by the second parameter.
+
+    user = auth.authenticate(username=username, password=password)
+    # If there is no user matching username and password, return None object. None = Null
+
+
+
+    if user is not None:
+        auth.login(request, user)
+        # Set the current user's status to logged in.
+
+        # Following returns a url... it will be checked in the urls.py to decide what to do.
+        # render returns a html page. So the correct path should be given to that file.
+        return HttpResponseRedirect('loggedin')
+    # user is already in the 'movieratingapp/accounts/' url. we need to give the next location only.
+
+    else:
+        return HttpResponseRedirect('invalid')
+
+
+def loggedin(request):
+    return render(request, 'event-management-system/user-login/loggedin.html', {'user_name': request.user.first_name})
+
+
+def invalidLogin(request):
+    return render(request, 'event-management-system/user-login/invalid.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return render(request, 'event-management-system/user-login/logout.html')
