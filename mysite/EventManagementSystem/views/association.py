@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
 
 from ..models import User
@@ -15,3 +16,4 @@ class AssociationSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        return HttpResponseRedirect('signup-success')
