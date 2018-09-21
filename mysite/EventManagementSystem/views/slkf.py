@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, TemplateView
 
 # This is a class based view. Instead of using a method as a view, this whole class can be used.
@@ -22,9 +22,8 @@ class SlkfSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        return HttpResponseRedirect('signup-success')
 
-        print ("User Type --------------------" + user.USER_TYPE_CHOICES)
+        # print ("User Type --------------------" + user.USER_TYPE_CHOICES)
         # login(self.request, user)
         # return redirect('students:quiz_list')
-
-

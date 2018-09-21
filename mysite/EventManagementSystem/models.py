@@ -12,7 +12,10 @@ class User(AbstractUser):
         ('AS', 'association'),
         ('DI', 'district'),
         ('PR', 'province'),
+        ('AD', 'admin')
     )
+
+    userType = models.CharField(max_length=2, choices=USER_TYPE_CHOICES, default='AD')
 
     def __unicode__(self):
         return self.username
@@ -20,14 +23,14 @@ class User(AbstractUser):
 
 class Slkf(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    memberName = models.CharField(max_length=100)
+    # memberName = models.CharField(max_length=100)
 
     # position in the SLKF
     position = models.CharField(max_length=50)
-    telephone = models.CharField(max_length=10)
+    telephone = models.CharField(max_length=12)
 
     def __unicode__(self):
-        return self.user
+        return self.user.username
         # user object will return according to its __unicode__ method (username)
 
 
@@ -37,10 +40,10 @@ class Association(models.Model):
 
     associationName = models.CharField(max_length=100)
     address = models.CharField(max_length=1000)
-    telephone = models.CharField(max_length=10)
+    telephone = models.CharField(max_length=12)
 
     def __unicode__(self):
-        return self.user
+        return self.user.username
 
 
 class Province(models.Model):
@@ -48,7 +51,7 @@ class Province(models.Model):
     provinceName = models.CharField(max_length=50)
 
     def __unicode__(self):
-        return self.user
+        return self.user.username
 
 
 class District(models.Model):
