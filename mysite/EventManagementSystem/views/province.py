@@ -12,7 +12,7 @@ class ProvinceSignUpView(CreateView):
     template_name = 'event-management-system/registration/provinceSignupForm.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'province'
+        kwargs['user_type'] = 'Province'
         return super(ProvinceSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):

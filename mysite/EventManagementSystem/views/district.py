@@ -11,7 +11,7 @@ class DistrictSignUpView(CreateView):
     template_name = 'event-management-system/registration/districtSignupForm.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'district'
+        kwargs['user_type'] = 'District'
         return super(DistrictSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
