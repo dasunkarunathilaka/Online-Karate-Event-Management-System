@@ -11,7 +11,7 @@ class AssociationSignUpView(CreateView):
     template_name = 'event-management-system/registration/associationSignupForm.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'association'
+        kwargs['user_type'] = 'Association'
         return super(AssociationSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):

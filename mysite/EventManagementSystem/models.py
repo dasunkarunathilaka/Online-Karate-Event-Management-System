@@ -57,7 +57,9 @@ class Province(models.Model):
 class District(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
-    DistrictName = models.CharField(max_length=50)
+    districtName = models.CharField(max_length=50)
+
+    # userType = models.CharField(max_length=2, choices=USER_TYPE_CHOICES, default='AD')
 
     def __unicode__(self):
         return self.user

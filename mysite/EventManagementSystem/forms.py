@@ -90,11 +90,12 @@ class ProvinceSignupForm(UserCreationForm):
 class DistrictSignupForm(UserCreationForm):
     districtName = forms.CharField(required=True)
 
-    # province = forms.
+    # Get province objects from the database.
+    province = forms.ModelChoiceField(queryset=Province.objects.all())
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('districtName', 'password1', 'password2')
+        fields = ('districtName', 'password1', 'password2', 'province')
 
     #     District name is taken as the username.
 
@@ -105,11 +106,15 @@ class DistrictSignupForm(UserCreationForm):
         user.set_password(password)
         user.username = self.cleaned_data['districtName']
 
+        # Province cannot user as a user attribute. It will try to create a
+        # Province Object and raise an exception because District cannot be saved
+        # without saving the related Province first.
+        province = self.cleaned_data['province']
+
         user.userType = 'DI'
 
         if commit:
             user.save()
-            # district = District(user=user, associationName=user.username, address=user.address,
-            #                           telephone=user.telephone)
-            # district.save()
+            district = District(user=user, province=province, districtName=user.username)
+            district.save()
         return user

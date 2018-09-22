@@ -10,10 +10,6 @@ def index(request):
     return render(request, 'event-management-system/index.html')
 
 
-def login(request):
-    return render(request, 'event-management-system/login.html')
-
-
 def signupSuccess(request):
     return render(request, 'event-management-system/registration/signupSuccess.html')
 
@@ -33,8 +29,6 @@ def userLogin(request):
 
 
 def userAuth(request):
-
-    print "----------------- Inside views.userAuth------------------"
     # When user submits the login form, it comes here.
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
@@ -42,8 +36,6 @@ def userAuth(request):
 
     user = auth.authenticate(username=username, password=password)
     # If there is no user matching username and password, return None object. None = Null
-
-
 
     if user is not None:
         auth.login(request, user)
