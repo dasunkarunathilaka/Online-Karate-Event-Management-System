@@ -26,7 +26,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li>
-                <a href="/event-management-system/">Home</a>
+                <a href="{% url 'index' %}">Home</a>
             </li>
             <li>
                 <a href="#">Up coming evnts</a>
@@ -35,39 +35,61 @@
                 <a href="#">Accomplishments</a>
             </li>
             <li>
-                <a href="associationportal/playerform">Online Registration</a>
+                <a href="#">Online Registration</a>
             </li>
             <li>
                 <a href="#">About</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+
+            {% if user.is_authenticated %}
+
+            {% if user.userType == "SL" or user.userType == "AD" %}
             <li>
-                <a href="#">My Portal</a>
+                <a href="{% url 'slkf-portal' %}">SLKF Portal</a>
             </li>
+            {% endif %}
+
+            {% if user.userType == "AS" or user.userType == "AD" %}
+            <li>
+                <a href="#">Association Portal</a>
+            </li>
+            {% endif %}
+
+            {% if user.userType == "DI" or user.userType == "AD" %}
+            <li>
+                <a href="#">District Portal</a>
+            </li>
+            {% endif %}
+
+            {% if user.userType == "PR" or user.userType == "AD" %}
+            <li>
+                <a href="#">Province Portal</a>
+            </li>
+            {% endif %}
             <!--<li>-->
             <!--<a href="/event-management-system/accounts/signup">-->
             <!--<span class="glyphicon glyphicon-user"></span> Sign Up</a>-->
             <!--</li>-->
             <!--No need of a signup. Users are created by the SLKF/admin. -->
 
-            {% if user.is_authenticated %}
 
             <li>
                 <a href="#">
-                <span class="glyphicon glyphicon-user"></span>
+                    <span class="glyphicon glyphicon-user"></span>
                     {{ user.username }} </a>
             </li>
 
             <li>
-                <a href="/event-management-system/accounts/logout">
+                <a href="{% url 'logout' %}">
                     <span class="glyphicon glyphicon-log-out"></span> Logout </a>
             </li>
 
 
             {% else %}
             <li>
-                <a href="/event-management-system/accounts/login">
+                <a href="{% url 'login' %}">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a>
             </li>
 
