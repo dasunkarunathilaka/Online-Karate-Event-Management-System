@@ -1,10 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic import CreateView, TemplateView
 
+from ..decorators import slkf_required
 from ..models import User
-from ..forms import AssociationSignupForm
+from ..forms.associationSignupForm import AssociationSignupForm
+
+decorators = [login_required, slkf_required]
 
 
+@method_decorator(decorators, name='dispatch')
 class AssociationSignUpView(CreateView):
     model = User
     form_class = AssociationSignupForm
@@ -17,3 +23,9 @@ class AssociationSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         return HttpResponseRedirect('signup-success')
+
+
+@method_decorator(decorators, name='dispatch')
+class AssociationPortal(TemplateView):
+    template_name = 'event-management-system/association/associationPortal.html'
+

@@ -53,7 +53,7 @@
 
             {% if user.userType == "AS" or user.userType == "AD" %}
             <li>
-                <a href="#">Association Portal</a>
+                <a href="{% url 'association-portal' %}">Association Portal</a>
             </li>
             {% endif %}
 
