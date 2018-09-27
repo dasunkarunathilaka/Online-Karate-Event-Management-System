@@ -1,0 +1,479 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+<div class="container">
+        <h2>Registration form</h2>
+        <form action="/action_page.php">
+            <h3>Individual Event :</h3>
+            <p>Please tick in the relavent box</p>
+            <div class="row" style="background-color:lavender;">
+                <div class="col-sm-4">
+                    <div class="raw">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> Sub Junior(6-13)</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> Cadet(14-15)</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> Junior(16-17)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="raw">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> Under 21 Years</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> Above 21 Years Senior</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <p>Veteran Events</p>
+                    <div class="col-sm-3">
+                        <p>Yrs :</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 36-40</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 41-45</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 46-50</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 51-55</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 56-60</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 61-65</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 66-70</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio"> 70+</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-1">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradios"> Male</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradios"> Female</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <!--..................................................................................................................-->
+
+            <script>
+                $(function () {
+                    // configuration
+                    // button
+                    var add = $('#add');
+                    // list container
+                    var listContainer = $('#list');
+                    // click event for button
+                    add.on('click', function () {
+                        event.preventDefault(); // stop default behaviour of submit button
+                        // value of input
+                        inputValue = $('#input').val();
+                        // add new list item
+                        listContainer.prepend('<li> ' + inputValue + '</li>');
+                        // clear value input
+                        $('#input').val('');
+                    });
+                });
+            </script>
+
+            <div id="to-do">
+                <form class="form-inline">
+                    <div class="col-xs-4 form-margin">
+                        <input class="form-control" type="text" id="input" placeholder="Name with initial">
+                    </div>
+
+                    <div class="form-group col-xs-2 form-margin">
+                        <!-- Date input -->
+                        <input class="form-control" id="date" name="date" placeholder="Birthday:MM/DD/YYY" type="text" />
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            var date_input = $('input[name="date"]'); //our date input has the name "date"
+                            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                            var options = {
+                                format: 'mm/dd/yyyy',
+                                container: container,
+                                todayHighlight: true,
+                                autoclose: true,
+                            };
+                            date_input.datepicker(options);
+                        })
+                    </script>
+                    <div class="form-group col-xs-2 form-margin">
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>10 Kyu</option>
+                            <option>9 Kyu</option>
+                            <option>8 Kyu</option>
+                            <option>7 Kyu</option>
+                            <option>6 Kyu</option>
+                            <option>5 Kyu</option>
+                            <option>4 Kyu</option>
+                            <option>3 Kyu</option>
+                            <option>2 Kyu</option>
+                            <option>1 Kyu</option>
+                            <option>Black Belt</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-xs-2 form-margin">
+                        <input class="form-control" type="text" id="weight" placeholder="Weight">
+                    </div>
+                    <div class="form-group col-xs-1 raw">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> KATA</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> KUMITE</label>
+                        </div>
+                    </div>
+                    <div class="form-margin1" align="right">
+                        <br>
+                        <button class="btn btn-primary" id="add" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+    <ul id="list"></ul>
+
+    <div class="container">
+        <form action="/action_page.php">
+            <h3>Team Kata :</h3>
+            <p>Please tick in the relavent box</p>
+            <div class="row" style="background-color:lavender;">
+                <div class="form-inline">
+                    <br>
+                    <div class="radio col-sm-2">
+                        <label>
+                            <input type="radio" name="optradio2">Yrs: 06-09</label>
+                    </div>
+                    <div class="radio col-sm-2">
+                        <label>
+                            <input type="radio" name="optradio2">Yrs: 10-13</label>
+                    </div>
+                    <div class="radio col-sm-2">
+                        <label>
+                            <input type="radio" name="optradio2">Yrs: 14-17</label>
+                    </div>
+                    <div class="radio col-sm-2">
+                        <label>
+                            <input type="radio" name="optradio2">Senior</label>
+                    </div>
+                </div>
+                <div class="form-group col-xs-1 raw">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio3"> Male</label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio3"> Female</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <!--..................................................................................................................-->
+
+            <!--    <script>
+                $(function () {
+                    // configuration
+                    // button
+                    var add = $('#add');
+                    // list container
+                    var listContainer = $('#list');
+                    // click event for button
+                    add.on('click', function () {
+                        event.preventDefault(); // stop default behaviour of submit button
+                        // value of input
+                        inputValue = $('#input').val();
+                        // add new list item
+                        listContainer.prepend('<li> ' + inputValue + '</li>');
+                        // clear value input
+                        $('#input').val('');
+                    });
+                });
+            </script>  -->
+
+            <div id="to-do">
+                <form class="form-inline">
+                    <div class="col-xs-1 form-margin">
+                        No:1
+                    </div>
+                    <div class="col-xs-4 form-margin">
+                        <input class="form-control" type="text" id="input" placeholder="Name with initial">
+                    </div>
+
+                    <div class="form-group col-xs-2 form-margin">
+                        <!-- Date input -->
+                        <input class="form-control" id="date" name="date" placeholder="Birthday:MM/DD/YYY" type="text" />
+                    </div>
+                    <!--      <script>
+                        $(document).ready(function () {
+                            var date_input = $('input[name="date"]'); //our date input has the name "date"
+                            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                            var options = {
+                                format: 'mm/dd/yyyy',
+                                container: container,
+                                todayHighlight: true,
+                                autoclose: true,
+                            };
+                            date_input.datepicker(options);
+                        })
+                    </script>-->
+                    <div class="form-group col-xs-2 form-margin">
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>10 Kyu</option>
+                            <option>9 Kyu</option>
+                            <option>8 Kyu</option>
+                            <option>7 Kyu</option>
+                            <option>6 Kyu</option>
+                            <option>5 Kyu</option>
+                            <option>4 Kyu</option>
+                            <option>3 Kyu</option>
+                            <option>2 Kyu</option>
+                            <option>1 Kyu</option>
+                            <option>Black Belt</option>
+                        </select>
+                    </div>
+
+                    <!--         <div class="form-group col-xs-2 form-margin">
+                        <input class="form-control" type="text" id="weight" placeholder="Weight">
+                    </div>
+                    <div class="form-group col-xs-1 raw">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> KATA</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> KUMITE</label>
+                        </div>
+                    </div>
+                  <div class="form-margin1" align="right">
+                        <br>
+                        <button class="btn btn-primary" id="add" type="submit">Add</button>
+                    </div>-->
+                    <div class="form-group col-xs-3">
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <!--............................................................................................................-->
+                    <!--    <script>
+                        $(function () {
+                            // configuration
+                            // button
+                            var add = $('#add');
+                            // list container
+                            var listContainer = $('#list');
+                            // click event for button
+                            add.on('click', function () {
+                                event.preventDefault(); // stop default behaviour of submit button
+                                // value of input
+                                inputValue = $('#input').val();
+                                // add new list item
+                                listContainer.prepend('<li> ' + inputValue + '</li>');
+                                // clear value input
+                                $('#input').val('');
+                            });
+                        });
+                    </script>  -->
+
+                    <div id="to-do">
+                        <form class="form-inline">
+                            <div class="col-xs-1 form-margin">
+                                No:2
+                            </div>
+                            <div class="col-xs-4 form-margin">
+                                <input class="form-control" type="text" id="input" placeholder="Name with initial">
+                            </div>
+
+                            <div class="form-group col-xs-2 form-margin">
+                                <!-- Date input -->
+                                <input class="form-control" id="date" name="date" placeholder="Birthday:MM/DD/YYY" type="text" />
+                            </div>
+                            <!--      <script>
+                                $(document).ready(function () {
+                                    var date_input = $('input[name="date"]'); //our date input has the name "date"
+                                    var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                                    var options = {
+                                        format: 'mm/dd/yyyy',
+                                        container: container,
+                                        todayHighlight: true,
+                                        autoclose: true,
+                                    };
+                                    date_input.datepicker(options);
+                                })
+                            </script>-->
+                            <div class="form-group col-xs-2 form-margin">
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option>10 Kyu</option>
+                                    <option>9 Kyu</option>
+                                    <option>8 Kyu</option>
+                                    <option>7 Kyu</option>
+                                    <option>6 Kyu</option>
+                                    <option>5 Kyu</option>
+                                    <option>4 Kyu</option>
+                                    <option>3 Kyu</option>
+                                    <option>2 Kyu</option>
+                                    <option>1 Kyu</option>
+                                    <option>Black Belt</option>
+                                </select>
+                            </div>
+
+                            <!--         <div class="form-group col-xs-2 form-margin">
+                                <input class="form-control" type="text" id="weight" placeholder="Weight">
+                            </div>
+                            <div class="form-group col-xs-1 raw">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> KATA</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> KUMITE</label>
+                                </div>
+                            </div>
+                          <div class="form-margin1" align="right">
+                                <br>
+                                <button class="btn btn-primary" id="add" type="submit">Add</button>
+                            </div>-->
+                            <div class="form-group col-xs-3">
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            <!--............................................................................................................-->
+                            <!--    <script>
+                        $(function () {
+                            // configuration
+                            // button
+                            var add = $('#add');
+                            // list container
+                            var listContainer = $('#list');
+                            // click event for button
+                            add.on('click', function () {
+                                event.preventDefault(); // stop default behaviour of submit button
+                                // value of input
+                                inputValue = $('#input').val();
+                                // add new list item
+                                listContainer.prepend('<li> ' + inputValue + '</li>');
+                                // clear value input
+                                $('#input').val('');
+                            });
+                        });
+                    </script>  -->
+
+                            <div id="to-do">
+                                <form class="form-inline">
+                                    <div class="col-xs-1 form-margin">
+                                        No:3
+                                    </div>
+                                    <div class="col-xs-4 form-margin">
+                                        <input class="form-control" type="text" id="input" placeholder="Name with initial">
+                                    </div>
+
+                                    <div class="form-group col-xs-2 form-margin">
+                                        <!-- Date input -->
+                                        <input class="form-control" id="date" name="date" placeholder="Birthday:MM/DD/YYY" type="text" />
+                                    </div>
+                                    <!--      <script>
+                                $(document).ready(function () {
+                                    var date_input = $('input[name="date"]'); //our date input has the name "date"
+                                    var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                                    var options = {
+                                        format: 'mm/dd/yyyy',
+                                        container: container,
+                                        todayHighlight: true,
+                                        autoclose: true,
+                                    };
+                                    date_input.datepicker(options);
+                                })
+                            </script>-->
+                                    <div class="form-group col-xs-2 form-margin">
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>10 Kyu</option>
+                                            <option>9 Kyu</option>
+                                            <option>8 Kyu</option>
+                                            <option>7 Kyu</option>
+                                            <option>6 Kyu</option>
+                                            <option>5 Kyu</option>
+                                            <option>4 Kyu</option>
+                                            <option>3 Kyu</option>
+                                            <option>2 Kyu</option>
+                                            <option>1 Kyu</option>
+                                            <option>Black Belt</option>
+                                        </select>
+                                    </div>
+
+                                    <!--         <div class="form-group col-xs-2 form-margin">
+                                <input class="form-control" type="text" id="weight" placeholder="Weight">
+                            </div>
+                            <div class="form-group col-xs-1 raw">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> KATA</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> KUMITE</label>
+                                </div>
+                            </div>-->
+                                    <div class="form-margin1" align="right">
+                                        <br>
+                                        <button class="btn btn-primary" id="add" type="submit">Add</button>
+                                    </div>
+                                    <div class="form-group col-xs-3">
+                                        <br>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <!--............................................................................................................-->
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+{% endblock %}

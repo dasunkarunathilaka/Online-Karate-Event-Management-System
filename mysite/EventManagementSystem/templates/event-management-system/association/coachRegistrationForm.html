@@ -1,0 +1,68 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Coach Application</h2>
+    <hr>
+    <div>Applicant should be registered under Sri Lanka Karate Do Federation and should wear coach ID issued by the
+        federation.
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="row margin-t">
+            <div class="col-sm-4">
+                <b>Name of the Coach :</b>
+            </div>
+            <div class="col-sm-8">
+                <input id="msg" type="text" class="form-control" name="msg" placeholder="Full Name">
+            </div>
+        </div>
+        <div class="row margin-t">
+            <div class="col-sm-4">
+                <b>NIC No :</b>
+            </div>
+            <div class="col-sm-8">
+                <input id="msg" type="text" class="form-control" name="msg" placeholder="NIC">
+            </div>
+        </div>
+        <div class="row margin-t">
+            <div class="col-sm-4  margin-b">
+                <b>Contact No :</b>
+            </div>
+            <div class="col-sm-8  margin-b">
+                <input id="msg" type="text" class="form-control" name="msg" placeholder="Mobile">
+            </div>
+            <div class="margin-l">
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">
+                    <div>above Coach is a Member of our Association and here by grant Permision to Paticipate in the
+                        above
+                        2018 National Karate Championship as per there rules and regulations.
+                    </div>
+                </label>
+            </div>
+            <div class="margin-to" align="right">
+                <button class="btn btn-primary" id="add" type="submit">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10 margin-t">
+        <div class="row">
+            <div class="col-sm-6" align="center">
+                <b>Name</b>
+            </div>
+            <div class="col-sm-3" align="center">
+                <b>NIC</b>
+            </div>
+            <div class="col-sm-3" align="center">
+                <b>Mobile</b>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+{% endblock %}

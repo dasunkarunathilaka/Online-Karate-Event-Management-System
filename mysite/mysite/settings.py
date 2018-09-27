@@ -125,4 +125,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Because we use a custom User model, it should be indicated.
 AUTH_USER_MODEL = 'EventManagementSystem.User'
+
+# When @login_required decorator fails, it is directed to this LOGIN_URL.
+LOGIN_URL = 'login'
+
+# After login, users can be directed to this URL.
+# LOGIN_REDIRECT_URL = '/user/accounts/'

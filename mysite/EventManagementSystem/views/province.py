@@ -1,11 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 
+from ..decorators import slkf_required
 from ..models import User
-from ..forms import ProvinceSignupForm
+from ..forms.provinceSignupForm import ProvinceSignupForm
+
+decorators = [login_required, slkf_required]
 
 
+@method_decorator(decorators, name='dispatch')
 class ProvinceSignUpView(CreateView):
     model = User
     form_class = ProvinceSignupForm
