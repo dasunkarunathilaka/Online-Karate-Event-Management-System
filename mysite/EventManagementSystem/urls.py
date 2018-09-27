@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^accounts/signup/slkf$', slkf.SlkfSignUpView.as_view(), name='slkf_signup'),
     url(r'^accounts/signup/association$', association.AssociationSignUpView.as_view(), name='association_signup'),
     url(r'^accounts/signup/district$', district.DistrictSignUpView.as_view(), name='district_signup'),
-    url(r'^accounts/signup/province', province.ProvinceSignUpView.as_view(), name='province_signup'),
+    url(r'^accounts/signup/province$', province.ProvinceSignUpView.as_view(), name='province_signup'),
 
     url(r'^accounts/signup/signup-success$', genericUser.signupSuccess, name='signup-success'),
 
@@ -28,9 +28,11 @@ urlpatterns = [
     url(r'^accounts/invalid$', genericUser.invalidLogin, name='invalid'),
 
     # User portals.
-    url(r'^slkf-portal', slkf.SlkfPortal.as_view(), name='slkf-portal'),
-    url(r'^association-portal', association.AssociationPortal.as_view(), name='association-portal'),
-    # url(r'^district-portal', district.DistrictPortal.as_view(), name='district-portal'),
-    # url(r'^province-portal', province.ProvincePortal.as_view(), name='province-portal'),
+    url(r'^slkf-portal$', slkf.SlkfPortal.as_view(), name='slkf-portal'),
+    url(r'^association-portal$', association.AssociationPortal.as_view(), name='association-portal'),
+    # url(r'^district-portal$', district.DistrictPortal.as_view(), name='district-portal'),
+    # url(r'^province-portal$', province.ProvincePortal.as_view(), name='province-portal'),
 
+    url(r'^association-portal/player-registration$', association.PlayerRegistrationView.as_view(), name='player-registration'),
+    url(r'^association-portal/coach-registration$', association.CoachRegistrationView.as_view(), name='coach-registration'),
 ]

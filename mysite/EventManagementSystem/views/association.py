@@ -29,3 +29,18 @@ class AssociationSignUpView(CreateView):
 class AssociationPortal(TemplateView):
     template_name = 'event-management-system/association/associationPortal.html'
 
+
+@method_decorator(decorators, name='dispatch')
+class PlayerRegistrationView(CreateView):
+    # model = Player
+    # form_class = PlayerRegistrationForm
+
+    template_name = 'event-management-system/association/playerRegistrationForm.html'
+
+
+@method_decorator(decorators, name='dispatch')
+class CoachRegistrationView(CreateView):
+    # model = Coach
+    # form_class = CoachRegistrationForm
+
+    template_name = 'event-management-system/association/coachRegistrationForm.html'
