@@ -6,11 +6,16 @@ from ..models import User, Association
 
 
 class AssociationSignupForm(UserCreationForm):
+    # associationID = forms.RegexField(regex=r'^(SLKF-)\d$',
+    #                                  error_message="Association ID must be entered in the format: SLKF-12")
+
     associationID = forms.CharField(required=True)
+    # Ex: slkf-12
+
     associationName = forms.CharField(required=True)
     address = forms.CharField()
-    telephone = forms.RegexField(regex=r'^\+?1?\d{11}$', error_message=(
-        "Phone number must be entered in the format: '+999999999'. 11 digits allowed."))
+    telephone = forms.RegexField(regex=r'^(\+94)?1?\d{9}$', error_message=(
+        "Phone number must be entered in the format: '+94769266301'. 11 digits allowed."))
 
     class Meta(UserCreationForm.Meta):
         model = User

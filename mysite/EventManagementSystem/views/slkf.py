@@ -5,9 +5,10 @@ from django.views.generic import CreateView, TemplateView
 
 # This is a class based view. Instead of using a method as a view, this whole class can be used.
 # as_view() method needs to be called (inherited from CreateView) in the urls.py
+from ..forms.eventCreationForm import EventCreationForm
 from ..decorators import slkf_required
 from ..forms.slkfSignupForm import SlkfSignupForm
-from ..models import User
+from ..models import User, Event
 
 decorators = [login_required, slkf_required]
 
@@ -36,3 +37,14 @@ class SlkfSignUpView(CreateView):
 @method_decorator(decorators, name='dispatch')
 class SlkfPortal(TemplateView):
     template_name = 'event-management-system/slkf/slkfPortal.html'
+
+
+@method_decorator(decorators, name='dispatch')
+class EventCreationView(CreateView):
+    model = Event
+    form_class = EventCreationForm
+    template_name = 'event-management-system/slkf/eventCreation.html'
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponseRedirect('event-created')

@@ -1,1 +1,1 @@
-import associationSignupForm, districtSignupForm, provinceSignupForm, slkfSignupForm
+import associationSignupForm, districtSignupForm, provinceSignupForm, slkfSignupForm, eventCreationForm
