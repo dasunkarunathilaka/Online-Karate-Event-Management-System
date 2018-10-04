@@ -1,0 +1,48 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <style>
+                .btn-lf {
+                    padding: .1rem 16rem;
+                    margin-bottom: 0.5rem;
+                    font-size: 2.25rem;
+                    line-height: 2.5;
+                    border-radius: 1.3rem
+                }
+            </style>
+            <div class="row margin">
+                <div class="col-sm-6">
+                    <a href="{% url 'player-registration' %}" class="btn btn-block btn-primary btn-lf" role="button">Register
+                        Players</a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{% url 'coach-registration' %}" class="btn btn-block btn-primary btn-lf" role="button">Register
+                        Coaches</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="#" class="btn btn-block btn-primary btn-lf" role="button">btn</a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="#" class="btn btn-block btn-primary btn-lf" role="button">btn</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="#" class="btn btn-block btn-primary btn-lf" role="button">btn</a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="#" class="btn btn-block btn-primary btn-lf" role="button">btn</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,4 +1,6 @@
 from django.conf.urls import url, include
+from django.views.generic import TemplateView
+
 from views import genericUser, slkf, district, province, association
 
 urlpatterns = [
@@ -9,12 +11,14 @@ urlpatterns = [
 
     url(r'^accounts', include('django.contrib.auth.urls')),
 
-    url(r'^accounts/signup$', slkf.SignUpDirectingView.as_view(), name='signup'),
     # This directs to a html page with buttons to choose which type of user to create.
+    url(r'^accounts/signup$', slkf.SignUpDirectingView.as_view(), name='signup'),
 
+    # User creation urls.
+    url(r'^accounts/signup/slkf$', slkf.SlkfSignUpView.as_view(), name='slkf_signup'),
     url(r'^accounts/signup/association$', association.AssociationSignUpView.as_view(), name='association_signup'),
     url(r'^accounts/signup/district$', district.DistrictSignUpView.as_view(), name='district_signup'),
-    url(r'^accounts/signup/province', province.ProvinceSignUpView.as_view(), name='province_signup'),
+    url(r'^accounts/signup/province$', province.ProvinceSignUpView.as_view(), name='province_signup'),
 
     url(r'^accounts/signup/signup-success$', genericUser.signupSuccess, name='signup-success'),
 
@@ -25,13 +29,22 @@ urlpatterns = [
     url(r'^accounts/logout$', genericUser.logout, name='logout'),
     url(r'^accounts/invalid$', genericUser.invalidLogin, name='invalid'),
 
-    # User creation can only be done by the SLKF and super admin.
-    # url(r'^create-user', views.signupUser, name='signup'),
-    # url(r'^signed-up$', views.signupSuccess, name='signedup'),
+    # User portals.
+    url(r'^slkf-portal$', slkf.SlkfPortal.as_view(), name='slkf-portal'),
+    url(r'^association-portal$', association.AssociationPortal.as_view(), name='association-portal'),
+    # url(r'^district-portal', district.DistrictPortal.as_view(), name='district-portal'),
+    # url(r'^province-portal', province.ProvincePortal.as_view(), name='province-portal'),
 
-    url(r'^slkf-portal', slkf.slkfPortal.as_view(), name='slkf-portal'),
+    # Event urls
+    # Create new event - done by the SLKF.
+    url(r'^slkf-portal/create-event$', slkf.EventCreationView.as_view(), name='create-event'),
+    url(r'^slkf-portal/event-created$',
+        TemplateView.as_view(template_name='event-management-system/slkf/eventCreated.html')),
 
-    # Create new SLKF user
-    url(r'^accounts/signup/slkf$', slkf.SlkfSignUpView.as_view(), name='slkf_signup'),
+    # Player Registration
+    url(r'^association-portal/player-registration$', association.PlayerRegistrationView.as_view(),
+        name='player-registration'),
+    url(r'^association-portal/player-registered$',
+        TemplateView.as_view(template_name='event-management-system/association/playerRegistrationSuccess.html')),
 
 ]
