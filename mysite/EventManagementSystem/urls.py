@@ -1,4 +1,6 @@
 from django.conf.urls import url, include
+from django.views.generic import TemplateView
+
 from views import genericUser, slkf, district, province, association
 
 urlpatterns = [
@@ -30,9 +32,19 @@ urlpatterns = [
     # User portals.
     url(r'^slkf-portal$', slkf.SlkfPortal.as_view(), name='slkf-portal'),
     url(r'^association-portal$', association.AssociationPortal.as_view(), name='association-portal'),
-    # url(r'^district-portal$', district.DistrictPortal.as_view(), name='district-portal'),
-    # url(r'^province-portal$', province.ProvincePortal.as_view(), name='province-portal'),
+    # url(r'^district-portal', district.DistrictPortal.as_view(), name='district-portal'),
+    # url(r'^province-portal', province.ProvincePortal.as_view(), name='province-portal'),
 
-    url(r'^association-portal/player-registration$', association.PlayerRegistrationView.as_view(), name='player-registration'),
-    url(r'^association-portal/coach-registration$', association.CoachRegistrationView.as_view(), name='coach-registration'),
+    # Event urls
+    # Create new event - done by the SLKF.
+    url(r'^slkf-portal/create-event$', slkf.EventCreationView.as_view(), name='create-event'),
+    url(r'^slkf-portal/event-created$',
+        TemplateView.as_view(template_name='event-management-system/slkf/eventCreated.html')),
+
+    # Player Registration
+    url(r'^association-portal/player-registration$', association.PlayerRegistrationView.as_view(),
+        name='player-registration'),
+    url(r'^association-portal/player-registered$',
+        TemplateView.as_view(template_name='event-management-system/association/playerRegistrationSuccess.html')),
+
 ]
