@@ -37,8 +37,16 @@ urlpatterns = [
 
     # Event urls
     # Create new event - done by the SLKF.
-    url(r'slkf-portal/create-event$', slkf.EventCreationView.as_view(), name='create-event'),
-    url(r'slkf-portal/event-created$',
+    url(r'^slkf-portal/create-event$', slkf.EventCreationView.as_view(), name='create-event'),
+    url(r'^slkf-portal/event-created$',
         TemplateView.as_view(template_name='event-management-system/slkf/eventCreated.html')),
+
+    # Player Registration
+    url(r'^association-portal/player-registration$', association.PlayerRegistrationView.as_view(),
+        name='player-registration'),
+    url(r'^association-portal/player-registered$',
+        TemplateView.as_view(template_name='event-management-system/association/playerRegistrationSuccess.html')),
+
+
 
 ]

@@ -11,6 +11,8 @@ class DistrictSignupForm(UserCreationForm):
 
     # Get province objects from the database.
     province = forms.ModelChoiceField(queryset=Province.objects.all())
+    # In the drop down, the unicode function defined in Model class is called.
+    # It returns the username of the Province, which is the provinceName.
 
     districtSecretaryName = forms.CharField(required=True)
     telephone = forms.CharField(required=True)
