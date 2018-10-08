@@ -6,8 +6,8 @@ from ..models import User, Association
 
 
 class AssociationSignupForm(UserCreationForm):
-    associationID = forms.RegexField(regex=r'^(slkf-)\d+$',
-                                     error_message="Association ID must be entered in the format: slkf-12 (all lowercase)")
+    # associationID = forms.RegexField(regex=r'^(slkf-)\d+$',
+    #                                  error_message="Association ID must be entered in the format: slkf-12 (all lowercase)")
     # Ex: slkf-12
 
     # associationID = forms.CharField(required=True)
@@ -22,14 +22,14 @@ class AssociationSignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = (
-            'associationID', 'associationName', 'address', 'telephone', 'chiefInstructorName', 'password1', 'password2')
+            'username', 'associationName', 'address', 'telephone', 'chiefInstructorName', 'password1', 'password2')
 
     @transaction.atomic
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
         password = self.cleaned_data['password1']
         user.set_password(password)
-        user.username = self.cleaned_data['associationID']
+        # user.username = self.cleaned_data['associationID']
         user.address = self.cleaned_data['address']
         user.telephone = self.cleaned_data['telephone']
         associationName = self.cleaned_data['associationName']
@@ -40,7 +40,6 @@ class AssociationSignupForm(UserCreationForm):
         if commit:
             user.save()
             association = Association(user=user,
-                                      associationID=user.username,
                                       associationName=associationName,
                                       address=user.address,
                                       telephone=user.telephone,

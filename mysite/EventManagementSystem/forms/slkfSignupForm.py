@@ -9,10 +9,11 @@ class SlkfSignupForm(UserCreationForm):
     firstName = forms.CharField(required=True)
     lastName = forms.CharField(required=True)
     position = forms.CharField(required=True)
+    telephone = forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'firstName', 'lastName', 'position', 'password1', 'password2')
+        fields = ('username', 'firstName', 'lastName', 'position', 'telephone', 'password1', 'password2')
 
     @transaction.atomic
     def save(self, commit=True):
@@ -24,9 +25,10 @@ class SlkfSignupForm(UserCreationForm):
         user.first_name = self.cleaned_data['firstName']
         user.last_name = self.cleaned_data['lastName']
         user.userType = 'SL'
+        telephone = self.cleaned_data['telephone']
 
         if commit:
             user.save()
-            slkf = Slkf(user=user, position=user.position)
+            slkf = Slkf(user=user, position=user.position, telephone=telephone)
             slkf.save()
         return user

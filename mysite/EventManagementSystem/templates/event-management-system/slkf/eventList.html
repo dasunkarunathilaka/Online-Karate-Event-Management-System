@@ -1,0 +1,25 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+
+<table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Event ID</th>
+          <th>Event Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in eventList %}
+          <tr>
+            <td>{{ event.eventID }}</td>
+            <td>{{ event.eventName }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

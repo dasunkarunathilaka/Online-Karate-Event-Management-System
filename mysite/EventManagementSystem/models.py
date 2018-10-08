@@ -38,7 +38,7 @@ class Association(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     # Association does not need a unique ID because it can have username from User model.
 
-    associationID = models.CharField(max_length=100, blank=False, unique=True)
+    # associationID = models.CharField(max_length=100, blank=False, unique=True)
     associationName = models.CharField(max_length=100, blank=False)
     address = models.CharField(max_length=1000, blank=False)
     telephone = models.CharField(max_length=12, blank=False)
@@ -50,7 +50,9 @@ class Association(models.Model):
 
 class Province(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    provinceName = models.CharField(max_length=50, blank=False)
+    # provinceName = models.CharField(max_length=50, blank=False)
+    # Province Name is not needed - this is already in User table as the username.
+
     provinceSecretaryName = models.CharField(max_length=100, blank=False)
     telephone = models.CharField(max_length=12, blank=False)
 
@@ -61,7 +63,10 @@ class Province(models.Model):
 class District(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
-    districtName = models.CharField(max_length=50, blank=False)
+
+    # districtName = models.CharField(max_length=50, blank=False)
+    # District Name is not needed - this is already in User table as the username.
+
     districtSecretaryName = models.CharField(max_length=100, blank=False)
     telephone = models.CharField(max_length=12, blank=False)
 

@@ -1,0 +1,35 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+
+<table class="table mb-0">
+    <thead>
+    <tr>
+        <th>District Name</th>
+        <th>District Secretary Name</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th>Registered Date</th>
+        <th>Last Login</th>
+        <th>Province Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for districtUser in districtUserList %}
+    <tr>
+        <td>{{ districtUser.user.username }}</td>
+        <td>{{ districtUser.districtSecretaryName }}</td>
+        <td>{{ districtUser.telephone }}</td>
+        <td>{{ districtUser.user.email }}</td>
+        <td>{{ districtUser.user.date_joined }}</td>
+        <td>{{ districtUser.user.last_login }}</td>
+        <td>{{ districtUser.province.user.username }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

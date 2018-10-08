@@ -1,0 +1,33 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+
+<table class="table mb-0">
+    <thead>
+    <tr>
+        <th>Province Name</th>
+        <th>Province Secretary Name</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th>Registered Date</th>
+        <th>Last Login</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for provinceUser in provinceUserList %}
+    <tr>
+        <td>{{ provinceUser.user.username }}</td>
+        <td>{{ provinceUser.provinceSecretaryName }}</td>
+        <td>{{ provinceUser.telephone }}</td>
+        <td>{{ provinceUser.user.email }}</td>
+        <td>{{ provinceUser.user.date_joined }}</td>
+        <td>{{ provinceUser.user.last_login }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
