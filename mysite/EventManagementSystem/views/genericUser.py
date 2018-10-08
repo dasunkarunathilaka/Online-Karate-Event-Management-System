@@ -10,6 +10,7 @@ from django.template.context_processors import csrf
 def index(request):
     return render(request, 'event-management-system/index.html')
 
+
 @login_required
 def signupSuccess(request):
     return render(request, 'event-management-system/registration/signupSuccess.html')
@@ -50,6 +51,7 @@ def userAuth(request):
     else:
         return HttpResponseRedirect('invalid')
 
+
 @login_required
 def loggedin(request):
     return render(request, 'event-management-system/user-login/loggedin.html', {'user_name': request.user.first_name})
@@ -57,6 +59,7 @@ def loggedin(request):
 
 def invalidLogin(request):
     return render(request, 'event-management-system/user-login/invalid.html')
+
 
 @login_required
 def logout(request):
