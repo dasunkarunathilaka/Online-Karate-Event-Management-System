@@ -1,0 +1,31 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+
+<table class="table mb-0">
+    <thead>
+    <tr>
+        <th>Association ID</th>
+        <th>Association Name</th>
+        <th>Chief Instructor</th>
+        <th>Telephone</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for association in associationList %}
+    <tr>
+        <td>{{ association.user.username }}</td>
+        <td>{{ association.associationName }}</td>
+        <td>{{ association.chiefInstructorName }}</td>
+        <td>{{ association.telephone }}</td>
+        <td>{{ association.address }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

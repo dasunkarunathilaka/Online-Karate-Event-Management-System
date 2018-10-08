@@ -1,14 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, ListView
 
 # This is a class based view. Instead of using a method as a view, this whole class can be used.
 # as_view() method needs to be called (inherited from CreateView) in the urls.py
 from ..forms.eventCreationForm import EventCreationForm
 from ..decorators import slkf_required
 from ..forms.slkfSignupForm import SlkfSignupForm
-from ..models import User, Event
+from ..models import User, Event, Association, Slkf, District, Province
 
 decorators = [login_required, slkf_required]
 
@@ -26,7 +26,7 @@ class SlkfSignUpView(CreateView):
     template_name = 'event-management-system/registration/slkfSignupForm.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'SLKF'
+        kwargs['user_type'] = 'SLKF User'
         return super(SlkfSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
@@ -48,3 +48,58 @@ class EventCreationView(CreateView):
     def form_valid(self, form):
         form.save()
         return HttpResponseRedirect('event-created')
+
+
+@method_decorator(decorators, name='dispatch')
+class EventsListView(ListView):
+    model = Event
+    context_object_name = 'eventList'
+    template_name = 'event-management-system/slkf/eventList.html'
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset
+
+
+@method_decorator(decorators, name='dispatch')
+class AssociationsListView(ListView):
+    model = Association
+    context_object_name = 'associationList'
+    template_name = 'event-management-system/slkf/associationList.html'
+
+    def get_queryset(self):
+        queryset = Association.objects.all()
+        return queryset
+
+
+@method_decorator(decorators, name='dispatch')
+class SlkfUsersListView(ListView):
+    model = Slkf
+    context_object_name = 'slkfUserList'
+    template_name = 'event-management-system/slkf/slkfUserList.html'
+
+    def get_queryset(self):
+        queryset = Slkf.objects.all()
+        return queryset
+
+
+@method_decorator(decorators, name='dispatch')
+class DistrictUsersListView(ListView):
+    model = District
+    context_object_name = 'districtUserList'
+    template_name = 'event-management-system/slkf/districtUserList.html'
+
+    def get_queryset(self):
+        queryset = District.objects.all()
+        return queryset
+
+
+@method_decorator(decorators, name='dispatch')
+class ProvinceUsersListView(ListView):
+    model = Province
+    context_object_name = 'provinceUserList'
+    template_name = 'event-management-system/slkf/provinceUserList.html'
+
+    def get_queryset(self):
+        queryset = Province.objects.all()
+        return queryset

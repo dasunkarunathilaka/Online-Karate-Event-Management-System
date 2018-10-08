@@ -6,8 +6,8 @@ from ..models import Province, User, District
 
 
 class DistrictSignupForm(UserCreationForm):
-    districtName = forms.CharField(required=True)
-    # Ex: slkf-galle
+    # districtName = forms.CharField(required=True)
+    # # Ex: slkf-galle
 
     # Get province objects from the database.
     province = forms.ModelChoiceField(queryset=Province.objects.all())
@@ -19,7 +19,7 @@ class DistrictSignupForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('districtName', 'province', 'districtSecretaryName', 'telephone', 'password1', 'password2')
+        fields = ('username', 'province', 'districtSecretaryName', 'telephone', 'password1', 'password2')
 
     #     District name is taken as the username.
 
@@ -28,7 +28,7 @@ class DistrictSignupForm(UserCreationForm):
         user = super(UserCreationForm, self).save(commit=False)
         password = self.cleaned_data['password1']
         user.set_password(password)
-        user.username = self.cleaned_data['districtName']
+        # user.username = self.cleaned_data['districtName']
 
         # Province cannot use as a user attribute. It will try to create a
         # Province Object and raise an exception because District cannot be saved
@@ -41,7 +41,9 @@ class DistrictSignupForm(UserCreationForm):
 
         if commit:
             user.save()
-            district = District(user=user, province=province, districtName=user.username,
-                                districtSecretaryName=districtSecretaryName, telephone=telephone)
+            district = District(user=user,
+                                province=province,
+                                districtSecretaryName=districtSecretaryName,
+                                telephone=telephone)
             district.save()
         return user

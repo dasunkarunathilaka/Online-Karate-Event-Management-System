@@ -47,6 +47,14 @@ urlpatterns = [
     url(r'^association-portal/player-registered$',
         TemplateView.as_view(template_name='event-management-system/association/playerRegistrationSuccess.html')),
 
+    # SLKF functions
+    url(r'^slkf-portal/display-all-events$', slkf.EventsListView.as_view(), name='all-events'),
+    url(r'^slkf-portal/display-associations$', slkf.AssociationsListView.as_view(), name='association-list'),
+    url(r'^slkf-portal/view-users$',
+        TemplateView.as_view(template_name='event-management-system/slkf/userListDirect.html'), name='view-users'),
 
+    url(r'^slkf-portal/view-users/display-slkf-users$', slkf.SlkfUsersListView.as_view(), name='slkf-users'),
+    url(r'^slkf-portal/view-users/display-district-users$', slkf.DistrictUsersListView.as_view(), name='district-users'),
+    url(r'^slkf-portal/view-users/display-province-users$', slkf.ProvinceUsersListView.as_view(), name='province-users'),
 
 ]
