@@ -6,21 +6,32 @@ from ..models import Player, Association, District, Event
 
 
 class PlayerRegistrationForm(ModelForm):
-    association = forms.ModelChoiceField(queryset=Association.objects.all())
+
+    # Constructor gets the user object passed by the view class.
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(PlayerRegistrationForm, self).__init__(*args, **kwargs)
+
+    # association = forms.ModelChoiceField(queryset=Association.objects.all())
+    # This would allow Associations to submit players from other Associations.
+    # Not good...
+
     district = forms.ModelChoiceField(queryset=District.objects.all())
     event = forms.ModelChoiceField(queryset=Event.objects.all())
 
     class Meta:
         model = Player
-        fields = '__all__'
+        fields = ('playerName', 'telephone', 'district', 'event')
 
     @transaction.atomic
     def save(self, commit=True):
         playerName = self.cleaned_data['playerName']
         telephone = self.cleaned_data['telephone']
-        association = self.cleaned_data['association']
         district = self.cleaned_data['district']
         event = self.cleaned_data['event']
+
+        # Only the logged in user can submit its players.
+        association = self.user.association
 
         if commit:
             player = Player(playerName=playerName,

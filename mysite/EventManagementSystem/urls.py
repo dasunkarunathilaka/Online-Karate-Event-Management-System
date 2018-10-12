@@ -41,11 +41,24 @@ urlpatterns = [
     url(r'^slkf-portal/event-created$',
         TemplateView.as_view(template_name='event-management-system/slkf/eventCreated.html')),
 
+    # Association functions
     # Player Registration
     url(r'^association-portal/player-registration$', association.PlayerRegistrationView.as_view(),
         name='player-registration'),
     url(r'^association-portal/player-registered$',
         TemplateView.as_view(template_name='event-management-system/association/playerRegistrationSuccess.html')),
+
+    # Coach Registration
+    url(r'^association-portal/coach-registration$', association.CoachRegistrationView.as_view(),
+        name='coach-registration'),
+    url(r'^association-portal/coach-registered$',
+        TemplateView.as_view(template_name='event-management-system/association/coachRegistrationSuccess.html')),
+
+    # View registered players/coaches
+    url(r'^association-portal/view-players$', association.RegisteredPlayerListView.as_view(),
+        name='view-players'),
+    url(r'^association-portal/view-coaches$', association.RegisteredCoachListView.as_view(),
+        name='view-coaches'),
 
     # SLKF functions
     url(r'^slkf-portal/display-all-events$', slkf.EventsListView.as_view(), name='all-events'),
@@ -54,7 +67,17 @@ urlpatterns = [
         TemplateView.as_view(template_name='event-management-system/slkf/userListDirect.html'), name='view-users'),
 
     url(r'^slkf-portal/view-users/display-slkf-users$', slkf.SlkfUsersListView.as_view(), name='slkf-users'),
-    url(r'^slkf-portal/view-users/display-district-users$', slkf.DistrictUsersListView.as_view(), name='district-users'),
-    url(r'^slkf-portal/view-users/display-province-users$', slkf.ProvinceUsersListView.as_view(), name='province-users'),
+    url(r'^slkf-portal/view-users/display-district-users$', slkf.DistrictUsersListView.as_view(),
+        name='district-users'),
+    url(r'^slkf-portal/view-users/display-province-users$', slkf.ProvinceUsersListView.as_view(),
+        name='province-users'),
+
+    # User profile options
+    url(r'^profile$',
+        TemplateView.as_view(template_name='event-management-system/user-profile/userProfile.html'),
+        name='user-profile'),
+    url(r'^user-profile/change-password$', 'django.contrib.auth.views.password_change',
+        {'template_name': 'event-management-system/user-profile/resetPassword.html'},
+        name='reset-password'),
 
 ]
