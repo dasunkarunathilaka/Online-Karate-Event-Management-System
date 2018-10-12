@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^accounts/signup/slkf$', slkf.SlkfSignUpView.as_view(), name='slkf_signup'),
     url(r'^accounts/signup/association$', association.AssociationSignUpView.as_view(), name='association_signup'),
     url(r'^accounts/signup/district$', district.DistrictSignUpView.as_view(), name='district_signup'),
-    url(r'^accounts/signup/province', province.ProvinceSignUpView.as_view(), name='province_signup'),
+    url(r'^accounts/signup/province$', province.ProvinceSignUpView.as_view(), name='province_signup'),
 
     url(r'^accounts/signup/signup-success$', genericUser.signupSuccess, name='signup-success'),
 
