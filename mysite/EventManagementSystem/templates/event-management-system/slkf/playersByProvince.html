@@ -1,16 +1,19 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
-<h2>Players of {{ association }} Association</h2>
+
+<h2>Players of {{ province }} Province</h2>
 <br>
+
 <table class="table mb-0">
     <thead>
     <tr>
         <th>Player ID</th>
         <th>Player Name</th>
         <th>Telephone</th>
-        <th>District</th>
-        <th>Province</th>
+        <th>Association</th>
+        <!--<th>District</th>-->
+        <!--<th>Province</th>-->
         <th>Event</th>
     </tr>
     </thead>
@@ -20,8 +23,9 @@
         <td>{{ player.id }}</td>
         <td>{{ player.playerName }}</td>
         <td>{{ player.telephone }}</td>
-        <td>{{ player.district.user.username }}</td>
-        <td>{{ player.district.province.user.username }}</td>
+        <td>{{ player.association.user.username }}</td>
+        <!--<td>{{ player.district.user.username }}</td>-->
+        <!--<td>{{ player.district.province.user.username }}</td>-->
         <td>{{ player.event.eventID }}</td>
     </tr>
     {% empty %}

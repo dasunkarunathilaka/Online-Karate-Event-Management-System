@@ -14,13 +14,19 @@
     </thead>
     <tbody>
     {% for association in associationList %}
+
     <tr>
         <td>{{ association.user.username }}</td>
         <td>{{ association.associationName }}</td>
         <td>{{ association.chiefInstructorName }}</td>
         <td>{{ association.telephone }}</td>
         <td>{{ association.address }}</td>
+        <td><a href="display-associations/players/?association={{association.user.username}}" class="btn btn-block btn-primary btn-lf"
+               role="button">View Registered Players</a></td>
+        <td><a href="display-associations/coaches/?association={{association.user.username}}" class="btn btn-block btn-primary btn-lf"
+               role="button">View Registered Coaches</a></td>
     </tr>
+
     {% empty %}
     <tr>
         <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>

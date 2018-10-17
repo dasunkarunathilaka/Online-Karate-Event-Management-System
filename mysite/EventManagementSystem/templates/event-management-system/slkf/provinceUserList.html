@@ -22,6 +22,9 @@
         <td>{{ provinceUser.user.email }}</td>
         <td>{{ provinceUser.user.date_joined }}</td>
         <td>{{ provinceUser.user.last_login }}</td>
+        <td><a href="display-province-users/players/?province={{provinceUser.user.username}}"
+               class="btn btn-block btn-primary btn-lf"
+               role="button">View Registered Players</a></td>
     </tr>
     {% empty %}
     <tr>

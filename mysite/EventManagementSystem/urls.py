@@ -72,6 +72,29 @@ urlpatterns = [
     url(r'^slkf-portal/view-users/display-province-users$', slkf.ProvinceUsersListView.as_view(),
         name='province-users'),
 
+    url(r'^slkf-portal/display-associations/players/$', slkf.PlayersListByAssociationView.as_view(),
+        name='slkf-player-list'),
+    url(r'^slkf-portal/display-associations/coaches/$', slkf.RegisteredCoachSlkfListView.as_view(),
+        name='slkf-coach-list'),
+
+    # Display all registered players
+    url(r'^slkf-portal/view-players/$', slkf.AllPlayersListView.as_view(),
+        name='view-all-players'),
+
+    # Display players on events.
+    url(r'^slkf-portal/display-all-events/players/$', slkf.PlayersListByEventView.as_view(),
+        name='view-players-on-events'),
+
+    # Display players on districts.
+    url(r'^slkf-portal/view-users/display-district-users/players/$', slkf.PlayersListByDistrictView.as_view(),
+        name='view-players-on-districts'),
+
+    # Display players on provinces.
+    url(r'^slkf-portal/view-users/display-province-users/players/$', slkf.PlayersListByProvinceView.as_view(),
+        name='view-players-on-provinces'),
+
+
+
     # User profile options
     url(r'^profile$',
         TemplateView.as_view(template_name='event-management-system/user-profile/userProfile.html'),
