@@ -101,3 +101,15 @@ class Player(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
+
+class Coach(models.Model):
+    coachID = models.CharField(primary_key=True, max_length=10, blank=False)
+    coachName = models.CharField(max_length=100, blank=False)
+    association = models.ForeignKey(Association, on_delete=models.CASCADE)
+    telephone = models.CharField(max_length=12, blank=False)
+
+    def __unicode__(self):
+        return unicode(self.coachID)
+
+

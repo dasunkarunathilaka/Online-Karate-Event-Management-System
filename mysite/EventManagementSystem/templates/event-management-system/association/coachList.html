@@ -1,0 +1,28 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+<h2>Coaches of {{ association }} Association</h2>
+<br>
+<table class="table mb-0">
+    <thead>
+    <tr>
+        <th>Coach ID</th>
+        <th>Coach Name</th>
+        <th>Telephone</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for coach in coachList %}
+    <tr>
+        <td>{{ coach.coachID }}</td>
+        <td>{{ coach.coachName }}</td>
+        <td>{{ coach.telephone }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td class="bg-light text-center font-italic" colspan="3">You haven't registered any coaches yet.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
