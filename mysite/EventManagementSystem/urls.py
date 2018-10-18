@@ -1,5 +1,6 @@
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 from views import genericUser, slkf, district, province, association
 
@@ -93,8 +94,6 @@ urlpatterns = [
     url(r'^slkf-portal/view-users/display-province-users/players/$', slkf.PlayersListByProvinceView.as_view(),
         name='view-players-on-provinces'),
 
-
-
     # User profile options
     url(r'^profile$',
         TemplateView.as_view(template_name='event-management-system/user-profile/userProfile.html'),
@@ -102,5 +101,12 @@ urlpatterns = [
     url(r'^user-profile/change-password$', 'django.contrib.auth.views.password_change',
         {'template_name': 'event-management-system/user-profile/resetPassword.html'},
         name='reset-password'),
+
+    # Password reset urls.
+    url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),
+    url(r'^password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        auth_views.password_reset_confirm, name='password_reset_confirm'),
+    url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
 
 ]

@@ -133,3 +133,7 @@ LOGIN_URL = 'login'
 
 # After login, users can be directed to this URL.
 # LOGIN_REDIRECT_URL = '/user/accounts/'
+
+# To send emails without integrating a SMTP server.
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
