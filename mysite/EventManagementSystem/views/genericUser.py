@@ -65,3 +65,7 @@ def invalidLogin(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'event-management-system/user-login/logout.html')
+
+
+def tournamentPage(request):
+    return render(request, 'event-management-system/tournamentPage.html')

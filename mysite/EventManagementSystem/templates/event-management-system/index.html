@@ -12,6 +12,7 @@
     Online Tournament Management System for SLKF
 </div>
 <div class="col-sm-6 col-sm-offset-3" style="margin-top: 5%">
+    {% if user.is_authenticated %}
     <a href="#">
         <div class="panel panel-info" style="width: 100%; opacity: 0.7">
             <div class="panel-heading" style="text-align: center">
@@ -22,150 +23,18 @@
             </div>
         </div>
     </a>
+    {% else %}
+    <a href="{% url 'tournament-page' %}">
+        <div class="panel panel-info" style="width: 100%; opacity: 0.7">
+            <div class="panel-heading" style="text-align: center">
+                <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+            </div>
+            <div class="panel-body">
+                Basic details about the tournament.
+            </div>
+        </div>
+    </a>
+    {% endif %}
 </div>
-<!--<div class="container">-->
-<!--<div id="myCarousel" class="carousel slide" style="width: 400px; margin: 0 auto" data-ride="carousel">-->
-<!--&lt;!&ndash; Indicators &ndash;&gt;-->
-<!--<ol class="carousel-indicators">-->
-<!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
-<!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
-<!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
-<!--</ol>-->
-
-<!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
-<!--<div class="carousel-inner" style ="margin-bottom: 10px;">-->
-
-<!--<div class="item active">-->
-
-<!--<img src="{% static 'event-management-system/img/home-image-3.jpg' %}" alt="sample_image"-->
-<!--style="width:100%;">-->
-<!--<div class="carousel-caption">-->
-<!--<h3>sample_image</h3>-->
-<!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="item">-->
-<!--<img src="{% static 'event-management-system/img/home-image-2.jpg' %}" alt="sample_image"-->
-<!--style="width:100%;">-->
-<!--<div class="carousel-caption">-->
-<!--<h3>sample_image</h3>-->
-<!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="item">-->
-<!--<img src="{% static 'event-management-system/img/home-image-3.jpg' %}" alt="sample_image"-->
-<!--style="width:100%;">-->
-<!--<div class="carousel-caption">-->
-<!--<h3>sample_image</h3>-->
-<!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--</div>-->
-
-<!--&lt;!&ndash; Left and right controls &ndash;&gt;-->
-<!--<a class="left carousel-control" href="#myCarousel" data-slide="prev">-->
-<!--<span class="glyphicon glyphicon-chevron-left"></span>-->
-<!--<span class="sr-only">Previous</span>-->
-<!--</a>-->
-<!--<a class="right carousel-control" href="#myCarousel" data-slide="next">-->
-<!--<span class="glyphicon glyphicon-chevron-right"></span>-->
-<!--<span class="sr-only">Next</span>-->
-<!--</a>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="container marketing">-->
-<!--<div class="row">-->
-<!--<div class="col-lg-4">-->
-<!--<img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}"-->
-<!--alt="Generic placeholder image" width="140"-->
-<!--height="140">-->
-<!--<h2>President Here</h2>-->
-<!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus voluptate at quas eos, sequi quo-->
-<!--asperiores delectus tempora dolore error. Placeat aperiam a neque error ullam alias dolor sed-->
-<!--distinctio.</p>-->
-<!--</div>-->
-
-<!--<div class="col-lg-4">-->
-<!--<img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}"-->
-<!--alt="Generic placeholder image" width="140"-->
-<!--height="140">-->
-<!--<h2>Vision</h2>-->
-<!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione mollitia ea dolores totam minima sequi?-->
-<!--Dolore consequuntur impedit placeat officia perferendis harum et ab labore id consectetur libero,-->
-<!--laboriosam dicta.</p>-->
-<!--</div>-->
-
-<!--<div class="col-lg-4">-->
-<!--<img class="rounded-circle" src="{% static 'event-management-system/img/sample_image.png' %}"-->
-<!--alt="Generic placeholder image" width="140"-->
-<!--height="140">-->
-<!--<h2>Our aim</h2>-->
-<!--<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad consequuntur libero quisquam sequi nam-->
-<!--asperiores, a obcaecati ipsum distinctio nemo dolore placeat quasi autem? Facilis odio perspiciatis-->
-<!--aspernatur dolore cumque!</p>-->
-<!--</div>-->
-
-<!--</div>-->
-
-<!--<hr class="featurette-divider">-->
-
-<!--<div class="row featurette">-->
-<!--<div class="col-md-7">-->
-<!--<h2 class="featurette-heading">-->
-<!--sample text</h2>-->
-<!--<p class="lead" style="font-size: 14pt">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique autem, placeat dolores-->
-<!--culpa repudiandae maiores qui suscipit. Nulla non ullam architecto ipsum accusamus exercitationem-->
-<!--aliquid fugiat ex, porro sequi reiciendis.</p>-->
-<!--</div>-->
-<!--<div class="col-md-5">-->
-<!--<img class="featurette-image img-fluid mx-auto"-->
-<!--src="{% static 'event-management-system/img/sample_image.png' %}"-->
-<!--alt="Generic placeholder image">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<hr class="featurette-divider">-->
-
-<!--<div class="row featurette">-->
-<!--<div class="col-md-7 order-md-1">-->
-<!--<h2 class="featurette-heading">-->
-<!--sample text-->
-<!--</h2>-->
-<!--<p class="lead" style="font-size: 14pt">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum, beatae. Magni, voluptatibus-->
-<!--expedita nostrum, aliquam impedit ad pariatur eligendi quia, possimus laboriosam quasi? Nemo explicabo-->
-<!--beatae ducimus, voluptas ipsam fuga.</p>-->
-<!--</div>-->
-<!--<div class="col-md-5 order-md-2">-->
-<!--<img class="featurette-image img-fluid mx-auto"-->
-<!--src="{% static 'event-management-system/img/sample_image.png' %}"-->
-<!--alt="Generic placeholder image">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<hr class="featurette-divider">-->
-
-<!--<div class="row featurette">-->
-<!--<div class="col-md-7">-->
-<!--<h2 class="featurette-heading">-->
-<!--Sample Text-->
-<!--</h2>-->
-<!--<p class="lead" style="font-size: 14pt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores possimus eligendi fugit-->
-<!--itaque ad ullam delectus quaerat saepe cumque, quis est repudiandae esse enim accusantium repellendus-->
-<!--architecto. Consequuntur, distinctio quibusdam!</p>-->
-<!--</div>-->
-<!--<div class="col-md-5">-->
-<!--<img class="featurette-image img-fluid mx-auto"-->
-<!--src="{% static 'event-management-system/img/sample_image.png' %}"-->
-<!--alt="Generic placeholder image">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<hr class="featurette-divider">-->
-
-<!--</div>-->
 
 {% endblock %}
