@@ -113,3 +113,12 @@ class Coach(models.Model):
         return unicode(self.coachID)
 
 
+# State table for Open/close registration
+
+class State(models.Model):
+    stateID = models.SmallIntegerField(primary_key=True)
+    isOpen = models.BooleanField(default=True, help_text="Designates whether registrations is open",
+                                 verbose_name='active')
+
+    def __unicode__(self):
+        return bool(self.isOpen)

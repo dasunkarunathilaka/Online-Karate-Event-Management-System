@@ -1,14 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, TemplateView, ListView
+from django.views.generic import CreateView, TemplateView, ListView, View
 
 # This is a class based view. Instead of using a method as a view, this whole class can be used.
 # as_view() method needs to be called (inherited from CreateView) in the urls.py
 from ..forms.eventCreationForm import EventCreationForm
 from ..decorators import slkf_required
 from ..forms.slkfSignupForm import SlkfSignupForm
-from ..models import User, Event, Association, Slkf, District, Province, Player, Coach
+from ..models import User, Event, Association, Slkf, District, Province, Player, Coach, State
 
 decorators = [login_required, slkf_required]
 
@@ -195,3 +195,48 @@ class PlayersListByProvinceView(ListView):
     def get_context_data(self, **kwargs):
         kwargs['province'] = self.request.GET.get('province', "")
         return super(PlayersListByProvinceView, self).get_context_data(**kwargs)
+
+
+class OpenTournament(View):
+    model = State
+
+    def get(self, request, *args, **kwargs):
+        queryset = State.objects.all()
+
+        if queryset.count() != 1:
+            State(stateID=1, isOpen=True).save()
+
+        else:
+            obj = State.objects.get(stateID=1)
+            obj.isOpen = True
+            obj.save()
+
+        return HttpResponseRedirect("tournament-opened")
+
+
+class OpenTournamentSuccess(TemplateView):
+    template_name = 'event-management-system/slkf/openRegistration.html'
+
+
+class CloseTournament(View):
+    model = State
+
+    def get(self, request, *args, **kwargs):
+        queryset = State.objects.all()
+
+        if queryset.count() != 1:
+            return HttpResponseRedirect("tournament-not-opened")
+
+        else:
+            obj = State.objects.get(stateID=1)
+            obj.isOpen = False
+            obj.save()
+            return HttpResponseRedirect("tournament-closed")
+
+
+class CloseTournamentSuccess(TemplateView):
+    template_name = 'event-management-system/slkf/closeRegistration.html'
+
+
+class AlreadyClosedTournament(TemplateView):
+    template_name = 'event-management-system/slkf/tournamentNotOpened.html'
