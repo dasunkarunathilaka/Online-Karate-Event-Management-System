@@ -6,10 +6,12 @@ from views import genericUser, slkf, district, province, association
 
 urlpatterns = [
     url(r'^$', genericUser.index, name='index'),
-    # url(r'^login$', views.login, name='login')
+    # Don't need as_view() function call because index is a function, not a class.
+
+    # Home page directives.
+    url(r'^tournament-page$', genericUser.tournamentPage, name='tournament-page'),
 
     # User auth urls
-
     url(r'^accounts', include('django.contrib.auth.urls')),
 
     # This directs to a html page with buttons to choose which type of user to create.
@@ -41,6 +43,15 @@ urlpatterns = [
     url(r'^slkf-portal/create-event$', slkf.EventCreationView.as_view(), name='create-event'),
     url(r'^slkf-portal/event-created$',
         TemplateView.as_view(template_name='event-management-system/slkf/eventCreated.html')),
+
+    # Opening/closing registration
+    url(r'^slkf-portal/open-tournament$', slkf.OpenTournament.as_view(), name='open-tournament'),
+    url(r'^slkf-portal/tournament-opened$', slkf.OpenTournamentSuccess.as_view(), name='tournament-opened'),
+    url(r'^slkf-portal/close-tournament$', slkf.CloseTournament.as_view(), name='close-tournament'),
+    url(r'^slkf-portal/tournament-closed$', slkf.CloseTournamentSuccess.as_view(), name='tournament-closed'),
+    url(r'^slkf-portal/tournament-not-opened$', slkf.CloseTournamentSuccess.as_view(), name='tournament-closed'),
+
+
 
     # Association functions
     # Player Registration

@@ -116,6 +116,18 @@ class State(models.Model):
     stateID = models.SmallIntegerField(primary_key=True)
     isOpen = models.BooleanField(default=True, help_text='Designates whether the registration is open.', verbose_name='active')
 
+<<<<<<< HEAD
     def __unicode__(self):
         return bool(self.isOpen)
  
+=======
+# State table for Open/close registration
+
+class State(models.Model):
+    stateID = models.SmallIntegerField(primary_key=True)
+    isOpen = models.BooleanField(default=True, help_text="Designates whether registrations is open",
+                                 verbose_name='active')
+
+    def __unicode__(self):
+        return bool(self.isOpen)
+>>>>>>> upstream/master

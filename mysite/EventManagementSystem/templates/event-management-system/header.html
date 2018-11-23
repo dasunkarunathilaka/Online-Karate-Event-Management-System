@@ -18,27 +18,23 @@
 </head>
 
 
-<body>
-<nav class="navbar navbar-inverse">
+<body background="{% static 'event-management-system/img/background-image.jpg' %}" style="background-size: cover">
+<nav class="navbar navbar-inverse" style="background-color: #333">
     <div class="container-fluid">
         <div class="navbar-header active">
-            <div class="navbar-brand">SLKF KARATE</div>
+            <a href="{% url 'index' %}">
+                <div class="navbar-brand">E-DOJO</div>
+            </a>
         </div>
         <ul class="nav navbar-nav">
             <li>
-                <a href="{% url 'index' %}">Home</a>
-            </li>
-            <li>
-                <a href="#">Up coming evnts</a>
-            </li>
-            <li>
-                <a href="#">Accomplishments</a>
-            </li>
-            <li>
-                <a href="#">Online Registration</a>
+                <a href="#">Up coming events</a>
             </li>
             <li>
                 <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Contact Us</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
