@@ -206,6 +206,8 @@ class PlayersListByEventViewBeforeShuffle(ListView):
                     del d[asso]
                 if (d == {}):
                     break
+        if(len(afterList)==0):
+            return queryset
         return afterList
 
     def get_context_data(self, **kwargs):

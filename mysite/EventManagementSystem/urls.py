@@ -72,8 +72,15 @@ urlpatterns = [
     url(r'^association-portal/view-coaches$', association.RegisteredCoachListView.as_view(),
         name='view-coaches'),
 
+    #View draws
+    url(r'^association-portal/display-all-events-draws-for-association$', association.EventsListViewForDraws.as_view(), name='all-events-draws-for-association'),
+
+    # Display players on events as a List before shuffling.
+    url(r'^association-portal/display-all-events-draws-for-association/draws/$', association.PlayersListByEventViewBeforeShuffle.as_view(),
+        name='view-players-on-events-draws'),
+
     # SLKF functions
-    url(r'^slkf-portal/display-all-events-players$', slkf.EventsListViewForEvents.as_view(), name='all-events-players'),
+    url(r'^slkf-portal/display-all-events-player$', slkf.EventsListViewForEvents.as_view(), name='all-events-players'),
     url(r'^slkf-portal/display-all-events-draws$', slkf.EventsListViewForDraws.as_view(), name='all-events-draws'),
     url(r'^slkf-portal/display-associations$', slkf.AssociationsListView.as_view(), name='association-list'),
     url(r'^slkf-portal/view-users$',
