@@ -14,14 +14,14 @@
     <tr>
         <td>{{ event.eventID }}</td>
         <td>{{ event.eventName }}</td>
-        <td><a href="display-all-events/players/?event={{event.eventID}}"
+        <td><a href="display-all-events-draws-for-association/draws/?event={{event.eventID}}"
                class="btn btn-block btn-primary btn-lf"
                style="width: 30%"
-               role="button">View Registered Players</a></td>
+               role="button">View Draw</a></td>
     </tr>
     {% empty %}
     <tr>
-        <td class="bg-light text-center font-italic" colspan="3">No events have been added.</td>
+        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
     </tr>
     {% endfor %}
     </tbody>

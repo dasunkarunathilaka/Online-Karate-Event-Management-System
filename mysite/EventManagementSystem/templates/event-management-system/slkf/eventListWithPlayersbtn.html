@@ -1,0 +1,29 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+
+<table class="table mb-0">
+    <thead>
+    <tr>
+        <th>Event ID</th>
+        <th>Event Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for event in eventList %}
+    <tr>
+        <td>{{ event.eventID }}</td>
+        <td>{{ event.eventName }}</td>
+        <td><a href="display-all-events-players/players/?event={{event.eventID}}"
+               class="btn btn-block btn-primary btn-lf"
+               style="width: 30%"
+               role="button">View Registered Players</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td class="bg-light text-center font-italic" colspan="3">No events have been added.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

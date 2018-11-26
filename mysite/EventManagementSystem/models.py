@@ -112,7 +112,6 @@ class Coach(models.Model):
     def __unicode__(self):
         return unicode(self.coachID)
 
-
 # State table for Open/close registration
 
 class State(models.Model):

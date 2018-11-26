@@ -70,8 +70,16 @@ urlpatterns = [
     url(r'^association-portal/view-coaches$', association.RegisteredCoachListView.as_view(),
         name='view-coaches'),
 
+    #View draws
+    url(r'^association-portal/display-all-events-draws-for-association$', association.EventsListViewForDraws.as_view(), name='all-events-draws-for-association'),
+
+    # Display players on events as a List before shuffling.
+    url(r'^association-portal/display-all-events-draws-for-association/draws/$', association.PlayersListByEventViewBeforeShuffle.as_view(),
+        name='view-players-on-events-draws'),
+
     # SLKF functions
-    url(r'^slkf-portal/display-all-events$', slkf.EventsListView.as_view(), name='all-events'),
+    url(r'^slkf-portal/display-all-events-player$', slkf.EventsListViewForEvents.as_view(), name='all-events-players'),
+    url(r'^slkf-portal/display-all-events-draws$', slkf.EventsListViewForDraws.as_view(), name='all-events-draws'),
     url(r'^slkf-portal/display-associations$', slkf.AssociationsListView.as_view(), name='association-list'),
     url(r'^slkf-portal/view-users$',
         TemplateView.as_view(template_name='event-management-system/slkf/userListDirect.html'), name='view-users'),
@@ -92,8 +100,12 @@ urlpatterns = [
         name='view-all-players'),
 
     # Display players on events.
-    url(r'^slkf-portal/display-all-events/players/$', slkf.PlayersListByEventView.as_view(),
-        name='view-players-on-events'),
+    url(r'^slkf-portal/display-all-events-players/players/$', slkf.PlayersListByEventView.as_view(),
+        name='view-players-on-events-players'),
+
+    # Display players on events as a List before shuffling.
+    url(r'^slkf-portal/display-all-events-draws/players/$', slkf.PlayersListByEventViewBeforeShuffle.as_view(),
+        name='view-players-on-events-draws'),
 
     # Display players on districts.
     url(r'^slkf-portal/view-users/display-district-users/players/$', slkf.PlayersListByDistrictView.as_view(),

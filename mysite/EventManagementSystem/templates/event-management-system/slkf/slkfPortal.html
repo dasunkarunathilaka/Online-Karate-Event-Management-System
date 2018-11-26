@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <a href="{% url 'all-events' %}" class="btn btn-block btn-primary btn-lf" role="button">View
+                    <a href="{% url 'all-events-players' %}" class="btn btn-block btn-primary btn-lf" role="button">View
                         Events</a>
                 </div>
                 <div class="col-sm-6">
@@ -51,6 +51,14 @@
                 </div>
                 <div class="col-sm-6">
                     <a href="{% url 'close-tournament' %}" class="btn btn-block btn-primary btn-lf" role="button">Close Registraiton</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="{% url 'all-events-draws' %}" class="btn btn-block btn-primary btn-lf" role="button">View Draws</a>
+                </div>
+                <div class="col-sm-6">
+                    <!--<a href="{% url 'close-tournament' %}" class="btn btn-block btn-primary btn-lf" role="button">Close Registraiton</a>-->
                 </div>
             </div>
         </div>
