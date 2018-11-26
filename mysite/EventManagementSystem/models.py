@@ -112,15 +112,6 @@ class Coach(models.Model):
     def __unicode__(self):
         return unicode(self.coachID)
 
-class State(models.Model):
-    stateID = models.SmallIntegerField(primary_key=True)
-    isOpen = models.BooleanField(default=True, help_text='Designates whether the registration is open.', verbose_name='active')
-
-<<<<<<< HEAD
-    def __unicode__(self):
-        return bool(self.isOpen)
- 
-=======
 # State table for Open/close registration
 
 class State(models.Model):
@@ -130,4 +121,3 @@ class State(models.Model):
 
     def __unicode__(self):
         return bool(self.isOpen)
->>>>>>> upstream/master
