@@ -55,13 +55,13 @@
 
             {% if user.userType == "DI" or user.userType == "AD" %}
             <li>
-                <a href="#">District Portal</a>
+                <a href="{% url 'district-portal' %}">District Portal</a>
             </li>
             {% endif %}
 
             {% if user.userType == "PR" or user.userType == "AD" %}
             <li>
-                <a href="#">Province Portal</a>
+                <a href="{% url 'province-portal' %}">Province Portal</a>
             </li>
             {% endif %}
             <!--<li>-->

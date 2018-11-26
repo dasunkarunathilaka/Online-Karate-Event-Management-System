@@ -50,7 +50,7 @@ class EventCreationView(CreateView):
         return HttpResponseRedirect('event-created')
 
 
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class EventsListView(ListView):
     model = Event
     context_object_name = 'eventList'
@@ -61,7 +61,7 @@ class EventsListView(ListView):
         return queryset
 
 
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class AssociationsListView(ListView):
     model = Association
     context_object_name = 'associationList'
@@ -106,7 +106,7 @@ class ProvinceUsersListView(ListView):
 
 
 # List players for each association for the SLKF user view.
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class PlayersListByAssociationView(ListView):
     model = Player
     context_object_name = 'playerList'
@@ -122,7 +122,7 @@ class PlayersListByAssociationView(ListView):
 
 
 # List coaches for each association for the SLKF user view.
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class RegisteredCoachSlkfListView(ListView):
     model = Coach
     context_object_name = 'coachList'
@@ -150,7 +150,7 @@ class AllPlayersListView(ListView):
 
 
 # List players on events.
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class PlayersListByEventView(ListView):
     model = Player
     context_object_name = 'playerList'

@@ -13,7 +13,9 @@
 </div>
 <div class="col-sm-6 col-sm-offset-3" style="margin-top: 5%">
     {% if user.is_authenticated %}
-    <a href="#">
+
+    {% if user.userType == "AD" or user.userType == "AD" %}
+    <a href="{% url 'slkf-portal' %}">
         <div class="panel panel-info" style="width: 100%; opacity: 0.7">
             <div class="panel-heading" style="text-align: center">
                 <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
@@ -23,6 +25,44 @@
             </div>
         </div>
     </a>
+
+    {% elif user.userType == "DI" %}
+    <a href="{% url 'district-portal' %}">
+        <div class="panel panel-info" style="width: 100%; opacity: 0.7">
+            <div class="panel-heading" style="text-align: center">
+                <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+            </div>
+            <div class="panel-body">
+                Basic details about the tournament.
+            </div>
+        </div>
+    </a>
+
+    {% elif user.userType == "PR" %}
+    <a href="{% url 'province-portal' %}">
+        <div class="panel panel-info" style="width: 100%; opacity: 0.7">
+            <div class="panel-heading" style="text-align: center">
+                <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+            </div>
+            <div class="panel-body">
+                Basic details about the tournament.
+            </div>
+        </div>
+    </a>
+
+    {% elif user.userType == "AS" %}
+    <a href="{% url 'association-portal' %}">
+        <div class="panel panel-info" style="width: 100%; opacity: 0.7">
+            <div class="panel-heading" style="text-align: center">
+                <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+            </div>
+            <div class="panel-body">
+                Basic details about the tournament.
+            </div>
+        </div>
+    </a>
+    {% endif %}
+
     {% else %}
     <a href="{% url 'tournament-page' %}">
         <div class="panel panel-info" style="width: 100%; opacity: 0.7">

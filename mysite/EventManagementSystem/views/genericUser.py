@@ -1,6 +1,6 @@
 # This view can be viewed by every type of users
 # Ex:- Homepage, any page that does not want user to login.
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render

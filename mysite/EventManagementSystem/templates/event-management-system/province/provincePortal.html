@@ -15,23 +15,20 @@
             </style>
             <div class="row margin">
                 <div class="col-sm-6">
-                    <a href="{% url 'view-events' %}" class="btn btn-block btn-primary btn-lf" role="button">View
-                        Events</a>
+                    <a href="{% url 'province-events' %}" class="btn btn-block btn-primary btn-lf" role="button">View Events</a>
                 </div>
                 <div class="col-sm-6">
-                    <a href="{% url 'view-associations' %}" class="btn btn-block btn-primary btn-lf" role="button">View
-                        Associations</a>
+                    <a href="{% url 'province-players' %}" class="btn btn-block btn-primary btn-lf" role="button">View Players</a>
                 </div>
             </div>
-            <br>
-            <h3>Please login for further options.</h3>
-            <h4>Only Associations, District and Province authorities that are recognized by SLKF can login to this
-                system.</h4>
-
+            <div class="row margin">
+                <div class="col-sm-6">
+                    <a href="{% url 'province-coaches' %}" class="btn btn-block btn-primary btn-lf" role="button">View Coaches</a>
+                </div>
+            </div>
         </div>
         <div class="col-sm-2"></div>
     </div>
 </div>
 
 {% endblock %}
-

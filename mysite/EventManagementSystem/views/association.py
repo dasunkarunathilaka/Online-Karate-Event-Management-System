@@ -80,7 +80,7 @@ class CoachRegistrationView(CreateView):
 
 @method_decorator(associationDecorators, name='dispatch')
 class RegisteredCoachListView(ListView):
-    model = Player
+    model = Coach
     context_object_name = 'coachList'
     template_name = 'event-management-system/association/coachList.html'
 
