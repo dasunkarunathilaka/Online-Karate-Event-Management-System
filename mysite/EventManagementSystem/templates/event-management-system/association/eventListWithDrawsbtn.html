@@ -1,29 +1,38 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
+    <style>
+        .table-style {
+            width: 50%;
+            margin-left: 25%;
+            background-color: white;
+            opacity: 0.8;
+        }
+    </style>
 
-<table class="table mb-0">
-    <thead>
-    <tr>
-        <th>Event ID</th>
-        <th>Event Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for event in eventList %}
-    <tr>
-        <td>{{ event.eventID }}</td>
-        <td>{{ event.eventName }}</td>
-        <td><a href="display-all-events-draws-for-association/draws/?event={{event.eventID}}"
-               class="btn btn-block btn-primary btn-lf"
-               style="width: 30%"
-               role="button">View Draw</a></td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <table class="table mb-0 table-style">
+        <thead>
+        <tr>
+            <th style="width: 15%; text-align: center">Event ID</th>
+            <th style="width: 55%">Event Name</th>
+            <th style="width: 30%; text-align: center">Match Draws</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in eventList %}
+            <tr>
+                <td style="width: 15%; text-align: center">{{ event.eventID }}</td>
+                <td style="width: 55%">{{ event.eventName }}</td>
+                <td style="width: 30%"><a href="display-all-events-draws-for-association/draws/?event={{ event.eventID }}"
+                       class="btn btn-block btn-primary btn-lf"
+                       style="width: 40%; margin-left: 30%"
+                       role="button">View</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

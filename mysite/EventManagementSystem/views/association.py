@@ -6,7 +6,7 @@ from django.views.generic import CreateView, TemplateView, ListView
 from ..forms.coachRegistrationForm import CoachRegistrationForm
 from ..forms.playerRegistrationForm import PlayerRegistrationForm
 from ..decorators import slkf_required, association_required
-from ..models import User, Event, Player, Coach
+from ..models import User, Event, Player, Coach, State
 from ..forms.associationSignupForm import AssociationSignupForm
 
 slkfDecorators = [login_required, slkf_required]
@@ -29,8 +29,14 @@ class AssociationSignUpView(CreateView):
 
 
 @method_decorator(associationDecorators, name='dispatch')
-class AssociationPortal(TemplateView):
+class AssociationPortal(ListView):
     template_name = 'event-management-system/association/associationPortal.html'
+    model = State
+    context_object_name = 'states'
+
+    def get_queryset(self):
+        queryset = State.objects.filter(stateID=1)
+        return queryset
 
 
 @method_decorator(associationDecorators, name='dispatch')
@@ -61,6 +67,10 @@ class RegisteredPlayerListView(ListView):
         queryset = Player.objects.filter(association=self.request.user.association)
         return queryset
 
+    def get_context_data(self, **kwargs):
+        kwargs['association'] = self.request.user.username
+        return super(RegisteredPlayerListView, self).get_context_data(**kwargs)
+
 
 @method_decorator(associationDecorators, name='dispatch')
 class CoachRegistrationView(CreateView):
@@ -88,6 +98,12 @@ class RegisteredCoachListView(ListView):
         queryset = Coach.objects.filter(association=self.request.user.association)
         return queryset
 
+    def get_context_data(self, **kwargs):
+        kwargs['association'] = self.request.user.username
+        return super(RegisteredCoachListView, self).get_context_data(**kwargs)
+
+
+
 @method_decorator(associationDecorators, name='dispatch')
 class EventsListViewForDraws(ListView):
     model = Event
@@ -98,6 +114,7 @@ class EventsListViewForDraws(ListView):
         queryset = Event.objects.all()
         return queryset
 
+
 # List players on events as A list before shuffling.
 @method_decorator(associationDecorators, name='dispatch')
 class PlayersListByEventViewBeforeShuffle(ListView):
@@ -107,12 +124,12 @@ class PlayersListByEventViewBeforeShuffle(ListView):
 
     def get_queryset(self):
         queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
-        beforeList=[]
+        beforeList = []
         for i in queryset:
-            a =[str(i.id),str(i.association.user.username),str(i.playerName)]
+            a = [str(i.id), str(i.association.user.username), str(i.playerName)]
             beforeList.append(a)
 
-        #code for shuffling on association
+        # code for shuffling on association
         d = dict()
         for player in beforeList:
             if player[1] in d:
@@ -130,11 +147,10 @@ class PlayersListByEventViewBeforeShuffle(ListView):
                     del d[asso]
                 if (d == {}):
                     break
-        if(len(afterList)==0):
+        if (len(afterList) == 0):
             return queryset
         return afterList
 
     def get_context_data(self, **kwargs):
         kwargs['event'] = self.request.GET.get('event', "")
         return super(PlayersListByEventViewBeforeShuffle, self).get_context_data(**kwargs)
-

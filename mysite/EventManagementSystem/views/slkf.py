@@ -290,15 +290,15 @@ class PlayersListByEventViewBeforeShuffle(ListView):
                 d[player[1]].append([player[0], player[2]])
 
         afterList = []
-        while (d != {}):
+        while d != {}:
             for asso in d.keys():
                 afterList.append(d[asso][0])
                 d[asso].remove(d[asso][0])
-                if (d[asso] == []):
+                if not d[asso]:
                     del d[asso]
-                if (d == {}):
+                if d == {}:
                     break
-        if (len(afterList) == 0):
+        if len(afterList) == 0:
             return queryset
         return afterList
 

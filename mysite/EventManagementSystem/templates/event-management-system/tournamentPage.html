@@ -9,16 +9,20 @@
                 .btn-lf {
                     margin-bottom: 0.5rem;
                     font-size: 2.25rem;
-                    line-height: 2.5;
-                    border-radius: 1.3rem;
+                    line-height: 5;
+                    border-radius: 0.1rem;
+                    height: 120px;
+                }
+                .column-style {
+                    padding: 2px;
                 }
             </style>
             <div class="row margin">
-                <div class="col-sm-6">
+                <div class="col-sm-6 column-style">
                     <a href="{% url 'view-events' %}" class="btn btn-block btn-primary btn-lf" role="button">View
                         Events</a>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 column-style">
                     <a href="{% url 'view-associations' %}" class="btn btn-block btn-primary btn-lf" role="button">View
                         Associations</a>
                 </div>
