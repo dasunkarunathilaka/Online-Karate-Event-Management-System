@@ -23,7 +23,14 @@ html, body, .tournament {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  background-color: black;
+      background: linear-gradient(
+    to right,
+    red 0%,
+    red 50%,
+    blue 50%,
+    blue 100%
+  );
+  /*background-color: indigo;*/
 }
 .bracket li {
   position: relative;
@@ -43,7 +50,7 @@ html, body, .tournament {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  background-color: black;
+  background-color: indigo;
 }
 .bracket li.winner {
   position: absolute;

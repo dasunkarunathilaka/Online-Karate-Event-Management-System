@@ -80,7 +80,12 @@ while(cleanUp()) { }
 
 var $empty = $('li:empty');
 for(var i = 0; i < participants.length; i++) {
-  $empty.eq(i).html('<button>' + participants[i] + '</button>');
+  if(i%2===0){
+    $empty.eq(i).html('<button style="color:red;border: 2px solid Tomato;">' + participants[i] + '</button>');
+  }
+  else{
+    $empty.eq(i).html('<button style="color:Blue;border: 2px solid DodgerBlue;">' + participants[i] + '</button>');
+  }
 }
 
 function changeToButtons() {
