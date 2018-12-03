@@ -49,7 +49,10 @@ class PlayerRegistrationView(CreateView):
     # Player registration form have the Association column filled automatically.
     def get_form_kwargs(self):
         kwargs = super(PlayerRegistrationView, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
+        if self.request.user.userType == 'AS':
+            kwargs.update({'user': self.request.user})
+        else:
+            pass
         return kwargs
 
     def form_valid(self, form):
@@ -101,7 +104,6 @@ class RegisteredCoachListView(ListView):
     def get_context_data(self, **kwargs):
         kwargs['association'] = self.request.user.username
         return super(RegisteredCoachListView, self).get_context_data(**kwargs)
-
 
 
 @method_decorator(associationDecorators, name='dispatch')

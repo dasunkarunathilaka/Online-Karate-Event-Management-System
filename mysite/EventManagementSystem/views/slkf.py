@@ -51,17 +51,6 @@ class EventCreationView(CreateView):
 
 
 # @method_decorator(decorators, name='dispatch')
-class EventsListView(ListView):
-    model = Event
-    context_object_name = 'eventList'
-    template_name = 'event-management-system/slkf/eventList.html'
-
-    def get_queryset(self):
-        queryset = Event.objects.all()
-        return queryset
-
-
-# @method_decorator(decorators, name='dispatch')
 class AssociationsListView(ListView):
     model = Association
     context_object_name = 'associationList'

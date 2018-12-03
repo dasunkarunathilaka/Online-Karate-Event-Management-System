@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.context_processors import csrf
+from django.views.generic import ListView
+
+from ..models import Event, Association
 
 
 def index(request):
@@ -69,3 +72,23 @@ def logout(request):
 
 def tournamentPage(request):
     return render(request, 'event-management-system/tournamentPage.html')
+
+
+class EventsListView(ListView):
+    model = Event
+    context_object_name = 'eventList'
+    template_name = 'event-management-system/generic-user/eventList.html'
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset
+
+
+class AssociationsListView(ListView):
+    model = Association
+    context_object_name = 'associationList'
+    template_name = 'event-management-system/generic-user/associationList.html'
+
+    def get_queryset(self):
+        queryset = Association.objects.all()
+        return queryset
