@@ -1,7 +1,7 @@
 var $tournament = $('.tournament'),
     $bracket = $('<ul class="bracket"><li></li><li></li></ul>');
 
-var participants = ['Jeewantha','Chamoda','Adam', 'Matt', 'Evan', 'Abby', 'Heather', 'Christina', 'Ryan', 'Tyler', 'Steve', 'Steph', 'Jenna', 'Derek', 'Mike', 'Sam'];
+var participants = ['Chamoda','Adam', 'Matt', 'Evan', 'Abby', 'Heather', 'Christina', 'Ryan', 'Tyler', 'Steve', 'Steph', 'Jenna', 'Derek', 'Mike', 'Sam'];
 
 function buildBracket($el, p1, p2) {
   if(!p1 && !p2) {
@@ -80,12 +80,7 @@ while(cleanUp()) { }
 
 var $empty = $('li:empty');
 for(var i = 0; i < participants.length; i++) {
-  if(i%2===0){
-    $empty.eq(i).html('<button style="color:red;border: 2px solid Tomato;">' + participants[i] + '</button>');
-  }
-  else{
-    $empty.eq(i).html('<button style="color:Blue;border: 2px solid DodgerBlue;">' + participants[i] + '</button>');
-  }
+  $empty.eq(i).html('<button>' + participants[i] + '</button>');
 }
 
 function changeToButtons() {

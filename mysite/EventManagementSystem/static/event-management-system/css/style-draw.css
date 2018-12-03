@@ -50,7 +50,7 @@ html, body, .tournament {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  background-color: indigo;
+  background-color: #a54c71;
 }
 .bracket li.winner {
   position: absolute;
