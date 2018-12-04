@@ -260,39 +260,39 @@ class EventsListViewForDraws(ListView):
 
 # List players on events as A list before shuffling.
 @method_decorator(decorators, name='dispatch')
-class PlayersListByEventViewBeforeShuffle(TemplateView):
-    # model = Player
-    # context_object_name = 'playerList'
-    template_name = 'draw/index.html'
+class PlayersListByEventViewBeforeShuffle(ListView):
+    model = Player
+    context_object_name = 'playerList'
+    template_name = 'draw/index-draw.html'
 
-    # def get_queryset(self):
-    #     queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
-    #     beforeList = []
-    #     for i in queryset:
-    #         a = [str(i.id), str(i.association.user.username), str(i.playerName)]
-    #         beforeList.append(a)
-    #
-    #     # code for shuffling on association
-    #     d = dict()
-    #     for player in beforeList:
-    #         if player[1] in d:
-    #             d[player[1]].append([player[0], player[2]])
-    #         else:
-    #             d.setdefault(player[1], [])
-    #             d[player[1]].append([player[0], player[2]])
-    #
-    #     afterList = []
-    #     while d != {}:
-    #         for asso in d.keys():
-    #             afterList.append(d[asso][0])
-    #             d[asso].remove(d[asso][0])
-    #             if not d[asso]:
-    #                 del d[asso]
-    #             if d == {}:
-    #                 break
-    #     if len(afterList) == 0:
-    #         return queryset
-    #     return afterList
+    def get_queryset(self):
+        queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
+        beforeList = []
+        for i in queryset:
+            a = [str(i.id), str(i.association.user.username), str(i.playerName)]
+            beforeList.append(a)
+
+        # code for shuffling on association
+        d = dict()
+        for player in beforeList:
+            if player[1] in d:
+                d[player[1]].append([player[0], player[2]])
+            else:
+                d.setdefault(player[1], [])
+                d[player[1]].append([player[0], player[2]])
+
+        afterList = []
+        while d != {}:
+            for asso in d.keys():
+                afterList.append(d[asso][0])
+                d[asso].remove(d[asso][0])
+                if not d[asso]:
+                    del d[asso]
+                if d == {}:
+                    break
+        if len(afterList) == 0:
+            return queryset
+        return afterList
 
 
     def get_context_data(self, **kwargs):
