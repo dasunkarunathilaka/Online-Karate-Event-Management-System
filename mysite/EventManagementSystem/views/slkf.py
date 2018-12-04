@@ -100,6 +100,8 @@ class PlayersListByAssociationView(ListView):
     model = Player
     context_object_name = 'playerList'
     template_name = 'event-management-system/association/playerList.html'
+    # request.session['my_thing'] = my_thing
+
 
     def get_queryset(self):
         queryset = Player.objects.filter(association__user__username=self.request.GET.get('association', ""))
@@ -107,6 +109,7 @@ class PlayersListByAssociationView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['association'] = self.request.GET.get('association', "")
+        # self.request.session['association'] = "d"
         return super(PlayersListByAssociationView, self).get_context_data(**kwargs)
 
 

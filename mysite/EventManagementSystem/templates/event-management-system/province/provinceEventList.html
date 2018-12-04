@@ -25,7 +25,7 @@
             <tr>
                 <td style="width: 15%; text-align: center">{{ event.eventID }}</td>
                 <td style="width: 55%">{{ event.eventName }}</td>
-                <td style="width: 30%"><a href="display-events/players/?event={{ event.eventID }}"
+                <td style="width: 30%"><a href="{% url 'view-dis-players-on-events' %}?event={{ event.eventID }}"
                                           class="btn btn-block btn-primary btn-lf"
                                           style="width: 40%; margin-left: 30%"
                                           role="button">View</a></td>

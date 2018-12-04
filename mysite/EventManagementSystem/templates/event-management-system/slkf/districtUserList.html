@@ -36,7 +36,7 @@
                 <td style="width: 15%">{{ districtUser.user.date_joined }}</td>
                 <td style="width: 15%">{{ districtUser.user.last_login }}</td>
                 <td style="width: 10%">{{ districtUser.province.user.username }}</td>
-                <td style="width: 10%; text-align: center"><a href="display-district-users/players/?district={{ districtUser.user.username }}"
+                <td style="width: 10%; text-align: center"><a href="{% url 'view-players-on-districts' %}?district={{ districtUser.user.username }}"
                        class="btn btn-block btn-primary btn-lf"
                        role="button">View</a></td>
             </tr>

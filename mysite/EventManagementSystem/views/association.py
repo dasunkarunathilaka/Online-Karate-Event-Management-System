@@ -5,13 +5,13 @@ from django.views.generic import CreateView, TemplateView, ListView
 
 from ..forms.coachRegistrationForm import CoachRegistrationForm
 from ..forms.playerRegistrationForm import PlayerRegistrationForm
-from ..decorators import slkf_required, association_required
-from ..models import User, Event, Player, Coach, State
+from ..decorators import slkf_required, association_required, association_or_slkf_required
+from ..models import User, Event, Player, Coach, State, Association
 from ..forms.associationSignupForm import AssociationSignupForm
 
 slkfDecorators = [login_required, slkf_required]
 associationDecorators = [login_required, association_required]
-
+associationOrSlkfDecorators = [login_required, association_or_slkf_required]
 
 @method_decorator(slkfDecorators, name='dispatch')
 class AssociationSignUpView(CreateView):
@@ -39,7 +39,7 @@ class AssociationPortal(ListView):
         return queryset
 
 
-@method_decorator(associationDecorators, name='dispatch')
+@method_decorator(associationOrSlkfDecorators, name='dispatch')
 class PlayerRegistrationView(CreateView):
     model = Player
     form_class = PlayerRegistrationForm
@@ -52,7 +52,10 @@ class PlayerRegistrationView(CreateView):
         if self.request.user.userType == 'AS':
             kwargs.update({'user': self.request.user})
         else:
-            pass
+            associationID = self.request.GET.get('association', "")
+            association = User.objects.filter(username=associationID)
+            associationList = list(association).pop(0)
+            kwargs.update({'user': associationList})
         return kwargs
 
     def form_valid(self, form):
