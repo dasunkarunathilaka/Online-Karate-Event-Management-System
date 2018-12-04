@@ -7,7 +7,6 @@ from views import genericUser, slkf, district, province, association
 urlpatterns = [
     url(r'^$', genericUser.index, name='index'),
     # Don't need as_view() function call because index is a function, not a class.
-
     # Home page directives.
     url(r'^tournament-page$', genericUser.tournamentPage, name='tournament-page'),
 
