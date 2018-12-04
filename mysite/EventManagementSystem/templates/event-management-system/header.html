@@ -6,8 +6,11 @@
     <meta charset="UTF-8">
     <title>Online Karate Event Management System</title>
 
-    {% block customCss %}
-    {% endblock %}
+    <!--{% block customCss %}-->
+    <!--{% endblock %}-->
+    <!--Draw-css-->
+    {% block stylesheet %}{% endblock %}
+
     <link rel="stylesheet" type="text/css" href="{% static 'event-management-system/css/style-index.css' %}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -100,6 +103,7 @@
     {% block content %}
     <!-- content is the name of the block -->
     {% endblock %}
+    {% block javascript %}{% endblock %}
 
 </div>
 
