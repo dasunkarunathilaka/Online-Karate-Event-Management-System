@@ -1,0 +1,44 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+    <h2 style="text-align: center; color: white">Associations</h2>
+    <br>
+
+    <style>
+        .table-style {
+            width: 80%;
+            margin-left: 10%;
+            background-color: white;
+            opacity: 0.8;
+        }
+    </style>
+
+    <table class="table mb-0 table-style">
+        <thead>
+        <tr>
+            <th style="width: 10%; text-align: center">Registered Number</th>
+            <th style="width: 20%">Association Name</th>
+            <th style="width: 20%">Chief Instructor</th>
+            <th style="width: 20%; text-align: center">Telephone</th>
+            <th style="width: 30%">Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for association in associationList %}
+
+            <tr>
+                <td style="width: 10%; text-align: center">{{ association.user.username }}</td>
+                <td style="width: 20%">{{ association.associationName }}</td>
+                <td style="width: 20%">{{ association.chiefInstructorName }}</td>
+                <td style="width: 20%; text-align: center">{{ association.telephone }}</td>
+                <td style="width: 30%">{{ association.address }}</td>
+            </tr>
+
+        {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="3">No events have been added.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

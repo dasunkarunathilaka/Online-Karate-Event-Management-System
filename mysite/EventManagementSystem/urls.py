@@ -69,11 +69,13 @@ urlpatterns = [
     url(r'^association-portal/view-coaches$', association.RegisteredCoachListView.as_view(),
         name='view-coaches'),
 
-    #View draws
-    url(r'^association-portal/display-all-events-draws-for-association$', association.EventsListViewForDraws.as_view(), name='all-events-draws-for-association'),
+    # View draws
+    url(r'^association-portal/display-all-events-draws-for-association$', association.EventsListViewForDraws.as_view(),
+        name='all-events-draws-for-association'),
 
     # Display players on events as a List before shuffling.
-    url(r'^association-portal/display-all-events-draws-for-association/draws/$', association.PlayersListByEventViewBeforeShuffle.as_view(),
+    url(r'^association-portal/display-all-events-draws-for-association/draws/$',
+        association.PlayersListByEventViewBeforeShuffle.as_view(),
         name='view-players-on-events-draws'),
 
     # SLKF functions
@@ -150,14 +152,7 @@ urlpatterns = [
         name='view-prov-players-on-events'),
 
     # Generic User Functions
-    url(r'^tournament-page/view-events$', slkf.EventsListView.as_view(), name='view-events'),
-    url(r'^tournament-page/view-associations$', slkf.AssociationsListView.as_view(), name='view-associations'),
-    # Display players on events.
-    url(r'^tournament-page/display-all-events/players/$', slkf.PlayersListByEventView.as_view(),
-        name='view-players-on-events'),
-    url(r'^tournament-page/display-associations/players/$', slkf.PlayersListByAssociationView.as_view(),
-        name='slkf-player-list'),
-    url(r'^tournament-page/display-associations/coaches/$', slkf.RegisteredCoachSlkfListView.as_view(),
-        name='slkf-coach-list'),
+    url(r'^tournament-page/view-events$', genericUser.EventsListView.as_view(), name='view-events'),
+    url(r'^tournament-page/view-associations$', genericUser.AssociationsListView.as_view(), name='view-associations'),
 
 ]
