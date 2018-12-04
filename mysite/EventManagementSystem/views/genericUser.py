@@ -2,6 +2,7 @@
 # Ex:- Homepage, any page that does not want user to login.
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.context_processors import csrf
@@ -46,28 +47,26 @@ def userAuth(request):
         auth.login(request, user)
         # Set the current user's status to logged in.
 
-        # Following returns a url... it will be checked in the urls.py to decide what to do.
-        # render returns a html page. So the correct path should be given to that file.
-        return HttpResponseRedirect('loggedin')
-    # user is already in the 'movieratingapp/accounts/' url. we need to give the next location only.
+        messages.success(request, 'Logged in successfully.')
+        if request.user.userType == 'AS':
+            return HttpResponseRedirect(reverse('association-portal'))
+        elif request.user.userType == 'DI':
+            return HttpResponseRedirect(reverse('district-portal'))
+        elif request.user.userType == 'PR':
+            return HttpResponseRedirect(reverse('province-portal'))
+        else:
+            return HttpResponseRedirect(reverse('slkf-portal'))
 
     else:
-        return HttpResponseRedirect('invalid')
-
-
-@login_required
-def loggedin(request):
-    return render(request, 'event-management-system/user-login/loggedin.html', {'user_name': request.user.first_name})
-
-
-def invalidLogin(request):
-    return render(request, 'event-management-system/user-login/invalid.html')
+        messages.success(request, 'Login failed. Try again.')
+        return HttpResponseRedirect(reverse('login'))
 
 
 @login_required
 def logout(request):
     auth.logout(request)
-    return render(request, 'event-management-system/user-login/logout.html')
+    messages.success(request, 'Logged out!')
+    return HttpResponseRedirect(reverse('index'))
 
 
 def tournamentPage(request):

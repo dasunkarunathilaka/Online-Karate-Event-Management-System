@@ -27,9 +27,7 @@ urlpatterns = [
     # Login urls.
     url(r'^accounts/login$', genericUser.customLogin, name='login'),
     url(r'^accounts/auth$', genericUser.userAuth, name='auth'),
-    url(r'^accounts/loggedin$', genericUser.loggedin, name='loggedin'),
     url(r'^accounts/logout$', genericUser.logout, name='logout'),
-    url(r'^accounts/invalid$', genericUser.invalidLogin, name='invalid'),
 
     # User portals.
     url(r'^slkf-portal$', slkf.SlkfPortal.as_view(), name='slkf-portal'),
@@ -45,10 +43,7 @@ urlpatterns = [
 
     # Opening/closing tournaments by SLKF
     url(r'^slkf-portal/open-tournament$', slkf.OpenTournament.as_view(), name='open-tournament'),
-    url(r'^slkf-portal/tournament-opened$', slkf.OpenTournamentSuccess.as_view(), name='tournament-opened'),
     url(r'^slkf-portal/close-tournament$', slkf.CloseTournament.as_view(), name='close-tournament'),
-    url(r'^slkf-portal/tournament-closed$', slkf.CloseTournamentSuccess.as_view(), name='tournament-closed'),
-    url(r'^slkf-portal/tournament-not-opened$', slkf.CloseTournamentSuccess.as_view(), name='tournament-closed'),
 
     # Association functions
     # Player Registration

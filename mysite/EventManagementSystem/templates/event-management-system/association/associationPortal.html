@@ -7,21 +7,34 @@
         }
     </script>
 
+    {% for message in messages %}
+        <div style="text-align: center">
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert"
+                 style="background-color: #148a12; color: white; text-align: center; width: 50%; display: inline-block">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <style>
                     .btn-lf {
-                    margin-bottom: 0.5rem;
-                    font-size: 2.25rem;
-                    line-height: 5;
-                    border-radius: 0.1rem;
-                    height: 120px;
-                }
-                .column-style {
-                    padding: 2px;
-                }
+                        margin-bottom: 0.5rem;
+                        font-size: 2.25rem;
+                        line-height: 5;
+                        border-radius: 0.1rem;
+                        height: 120px;
+                    }
+
+                    .column-style {
+                        padding: 2px;
+                    }
                 </style>
                 {% if states.0.isOpen %}
                     <div class="row margin">
@@ -40,9 +53,9 @@
                 {% else %}
                     <div class="row margin">
                         <div class="col-sm-6 column-style">
-                                <a href="javascript:AlertIt();" class="btn btn-block btn-primary btn-lf"
-                                   role="button">Register
-                                    Players</a>
+                            <a href="javascript:AlertIt();" class="btn btn-block btn-primary btn-lf"
+                               role="button">Register
+                                Players</a>
                         </div>
                         <div class="col-sm-6 column-style">
                             <a href="javascript:AlertIt();" class="btn btn-block btn-primary btn-lf" role="button">Register

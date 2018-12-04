@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, TemplateView, ListView
@@ -58,9 +60,16 @@ class PlayerRegistrationView(CreateView):
             kwargs.update({'user': associationList})
         return kwargs
 
+    def form_invalid(self, form):
+        pass
+
     def form_valid(self, form):
         form.save()
-        return HttpResponseRedirect('player-registered')
+        messages.success(self.request, 'New player added successfully!')
+        if self.request.user.userType == 'AS':
+            return HttpResponseRedirect(reverse('view-players'))
+        else:
+            return HttpResponseRedirect(reverse('slkf-portal'))
 
 
 @method_decorator(associationDecorators, name='dispatch')
