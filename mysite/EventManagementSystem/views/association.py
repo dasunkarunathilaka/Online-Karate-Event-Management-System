@@ -134,7 +134,7 @@ class EventsListViewForDraws(ListView):
 class PlayersListByEventViewBeforeShuffle(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'draw/draw.html'
+    template_name = 'draw/index-draw.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
