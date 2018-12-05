@@ -7,7 +7,6 @@ from views import genericUser, slkf, district, province, association
 urlpatterns = [
     url(r'^$', genericUser.index, name='index'),
     # Don't need as_view() function call because index is a function, not a class.
-
     # Home page directives.
     url(r'^tournament-page$', genericUser.tournamentPage, name='tournament-page'),
 
@@ -28,15 +27,13 @@ urlpatterns = [
     # Login urls.
     url(r'^accounts/login$', genericUser.customLogin, name='login'),
     url(r'^accounts/auth$', genericUser.userAuth, name='auth'),
-    url(r'^accounts/loggedin$', genericUser.loggedin, name='loggedin'),
     url(r'^accounts/logout$', genericUser.logout, name='logout'),
-    url(r'^accounts/invalid$', genericUser.invalidLogin, name='invalid'),
 
     # User portals.
     url(r'^slkf-portal$', slkf.SlkfPortal.as_view(), name='slkf-portal'),
     url(r'^association-portal$', association.AssociationPortal.as_view(), name='association-portal'),
-    # url(r'^district-portal', district.DistrictPortal.as_view(), name='district-portal'),
-    # url(r'^province-portal', province.ProvincePortal.as_view(), name='province-portal'),
+    url(r'^district-portal$', district.DistrictPortal.as_view(), name='district-portal'),
+    url(r'^province-portal$', province.ProvincePortal.as_view(), name='province-portal'),
 
     # Event urls
     # Create new event - done by the SLKF.
@@ -44,14 +41,9 @@ urlpatterns = [
     url(r'^slkf-portal/event-created$',
         TemplateView.as_view(template_name='event-management-system/slkf/eventCreated.html')),
 
-    # Opening/closing registration
+    # Opening/closing tournaments by SLKF
     url(r'^slkf-portal/open-tournament$', slkf.OpenTournament.as_view(), name='open-tournament'),
-    url(r'^slkf-portal/tournament-opened$', slkf.OpenTournamentSuccess.as_view(), name='tournament-opened'),
     url(r'^slkf-portal/close-tournament$', slkf.CloseTournament.as_view(), name='close-tournament'),
-    url(r'^slkf-portal/tournament-closed$', slkf.CloseTournamentSuccess.as_view(), name='tournament-closed'),
-    url(r'^slkf-portal/tournament-not-opened$', slkf.CloseTournamentSuccess.as_view(), name='tournament-closed'),
-
-
 
     # Association functions
     # Player Registration
@@ -72,8 +64,18 @@ urlpatterns = [
     url(r'^association-portal/view-coaches$', association.RegisteredCoachListView.as_view(),
         name='view-coaches'),
 
+    # View draws
+    url(r'^association-portal/display-all-events-draws-for-association$', association.EventsListViewForDraws.as_view(),
+        name='all-events-draws-for-association'),
+
+    # Display players on events as a List before shuffling.
+    url(r'^association-portal/display-all-events-draws-for-association/draws/$',
+        association.PlayersListByEventViewBeforeShuffle.as_view(),
+        name='view-players-on-events-draws-for-association'),
+
     # SLKF functions
-    url(r'^slkf-portal/display-all-events$', slkf.EventsListView.as_view(), name='all-events'),
+    url(r'^slkf-portal/display-all-events-player$', slkf.EventsListViewForEvents.as_view(), name='all-events-players'),
+    url(r'^slkf-portal/display-all-events-draws$', slkf.EventsListViewForDraws.as_view(), name='all-events-draws'),
     url(r'^slkf-portal/display-associations$', slkf.AssociationsListView.as_view(), name='association-list'),
     url(r'^slkf-portal/view-users$',
         TemplateView.as_view(template_name='event-management-system/slkf/userListDirect.html'), name='view-users'),
@@ -94,8 +96,12 @@ urlpatterns = [
         name='view-all-players'),
 
     # Display players on events.
-    url(r'^slkf-portal/display-all-events/players/$', slkf.PlayersListByEventView.as_view(),
-        name='view-players-on-events'),
+    url(r'^slkf-portal/display-all-events-players/players/$', slkf.PlayersListByEventView.as_view(),
+        name='view-players-on-events-players'),
+
+    # Display players on events as a List before shuffling.
+    url(r'^slkf-portal/display-all-events-draws/draws/$', slkf.PlayersListByEventViewBeforeShuffle.as_view(),
+        name='view-players-on-events-draws'),
 
     # Display players on districts.
     url(r'^slkf-portal/view-users/display-district-users/players/$', slkf.PlayersListByDistrictView.as_view(),
@@ -119,5 +125,29 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         auth_views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
+
+    # District Functions
+    url(r'^district-portal/view-events/$', district.DistrictEventsListView.as_view(),
+        name='district-events'),
+    url(r'^district-portal/view-players/$', district.DistrictPlayersListView.as_view(),
+        name='district-players'),
+    url(r'^district-portal/view-coaches/$', district.DistrictCoachesListView.as_view(),
+        name='district-coaches'),
+    url(r'^district-portal/view-events/display-events/players/$', district.DistrictPlayersByEventListView.as_view(),
+        name='view-dis-players-on-events'),
+
+    # Province Functions
+    url(r'^province-portal/view-players/$', province.ProvincePlayersListView.as_view(),
+        name='province-players'),
+    url(r'^province-portal/view-events/$', province.ProvinceEventsListView.as_view(),
+        name='province-events'),
+    url(r'^province-portal/view-coaches/$', province.ProvinceCoachesListView.as_view(),
+        name='province-coaches'),
+    url(r'^province-portal/view-events/display-events/players/$', province.ProvincePlayersByEventListView.as_view(),
+        name='view-prov-players-on-events'),
+
+    # Generic User Functions
+    url(r'^tournament-page/view-events$', genericUser.EventsListView.as_view(), name='view-events'),
+    url(r'^tournament-page/view-associations$', genericUser.AssociationsListView.as_view(), name='view-associations'),
 
 ]

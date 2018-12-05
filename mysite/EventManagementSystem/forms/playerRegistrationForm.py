@@ -14,7 +14,6 @@ class PlayerRegistrationForm(ModelForm):
 
     # association = forms.ModelChoiceField(queryset=Association.objects.all())
     # This would allow Associations to submit players from other Associations.
-    # Not good...
 
     district = forms.ModelChoiceField(queryset=District.objects.all())
     event = forms.ModelChoiceField(queryset=Event.objects.all())

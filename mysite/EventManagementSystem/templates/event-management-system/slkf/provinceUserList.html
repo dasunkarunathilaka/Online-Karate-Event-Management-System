@@ -1,36 +1,48 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
+    <h2 style="text-align: center; color: white">Province Users</h2>
+    <br>
 
-<table class="table mb-0">
-    <thead>
-    <tr>
-        <th>Province Name</th>
-        <th>Province Secretary Name</th>
-        <th>Telephone</th>
-        <th>Email</th>
-        <th>Registered Date</th>
-        <th>Last Login</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for provinceUser in provinceUserList %}
-    <tr>
-        <td>{{ provinceUser.user.username }}</td>
-        <td>{{ provinceUser.provinceSecretaryName }}</td>
-        <td>{{ provinceUser.telephone }}</td>
-        <td>{{ provinceUser.user.email }}</td>
-        <td>{{ provinceUser.user.date_joined }}</td>
-        <td>{{ provinceUser.user.last_login }}</td>
-        <td><a href="display-province-users/players/?province={{provinceUser.user.username}}"
-               class="btn btn-block btn-primary btn-lf"
-               role="button">View Registered Players</a></td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <style>
+        .table-style {
+            width: 90%;
+            margin-left: 5%;
+            background-color: white;
+            opacity: 0.8;
+        }
+    </style>
+
+    <table class="table mb-0 table-style">
+            <thead>
+            <tr>
+                <th style="width: 10%">Province Name</th>
+                <th style="width: 15%">Province Secretary Name</th>
+                <th style="width: 10%; text-align: center">Telephone</th>
+                <th style="width: 15%">Email</th>
+                <th style="width: 20%">Registered Date</th>
+                <th style="width: 20%">Last Login</th>
+                <th style="width: 10%; text-align: center">Registered Players</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for provinceUser in provinceUserList %}
+                <tr>
+                    <td style="width: 10%">{{ provinceUser.user.username }}</td>
+                    <td style="width: 15%">{{ provinceUser.provinceSecretaryName }}</td>
+                    <td style="width: 10%; text-align: center">{{ provinceUser.telephone }}</td>
+                    <td style="width: 15%">{{ provinceUser.user.email }}</td>
+                    <td style="width: 20%">{{ provinceUser.user.date_joined }}</td>
+                    <td style="width: 20%">{{ provinceUser.user.last_login }}</td>
+                    <td style="width: 10%; text-align: center"><a href="{% url 'view-players-on-provinces' %}?province={{ provinceUser.user.username }}"
+                           class="btn btn-block btn-primary btn-lf"
+                           role="button">View</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td class="bg-light text-center font-italic" colspan="3">No events have been added yet.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 {% endblock %}

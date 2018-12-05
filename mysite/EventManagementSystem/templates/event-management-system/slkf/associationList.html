@@ -1,37 +1,52 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
+    <h2 style="text-align: center; color: white">Associations</h2>
+    <br>
 
-<table class="table mb-0">
-    <thead>
-    <tr>
-        <th>Association ID</th>
-        <th>Association Name</th>
-        <th>Chief Instructor</th>
-        <th>Telephone</th>
-        <th>Address</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for association in associationList %}
+    <style>
+        .table-style {
+            width: 80%;
+            margin-left: 10%;
+            background-color: white;
+            opacity: 0.8;
+        }
+    </style>
 
-    <tr>
-        <td>{{ association.user.username }}</td>
-        <td>{{ association.associationName }}</td>
-        <td>{{ association.chiefInstructorName }}</td>
-        <td>{{ association.telephone }}</td>
-        <td>{{ association.address }}</td>
-        <td><a href="display-associations/players/?association={{association.user.username}}" class="btn btn-block btn-primary btn-lf"
-               role="button">View Registered Players</a></td>
-        <td><a href="display-associations/coaches/?association={{association.user.username}}" class="btn btn-block btn-primary btn-lf"
-               role="button">View Registered Coaches</a></td>
-    </tr>
+    <table class="table mb-0 table-style">
+        <thead>
+        <tr>
+            <th style="width: 10%; text-align: center">Registered Number</th>
+            <th style="width: 15%">Association Name</th>
+            <th style="width: 15%">Chief Instructor</th>
+            <th style="width: 15%; text-align: center">Telephone</th>
+            <th style="width: 25%">Address</th>
+            <th style="width: 10%; text-align: center">Registered Players</th>
+            <th style="width: 10%; text-align: center">Registered Coaches</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for association in associationList %}
 
-    {% empty %}
-    <tr>
-        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+            <tr>
+                <td style="width: 10%; text-align: center">{{ association.user.username }}</td>
+                <td style="width: 15%">{{ association.associationName }}</td>
+                <td style="width: 15%">{{ association.chiefInstructorName }}</td>
+                <td style="width: 15%; text-align: center">{{ association.telephone }}</td>
+                <td style="width: 25%">{{ association.address }}</td>
+                <td style="width: 10%; text-align: center"><a href="{% url 'slkf-player-list' %}?association={{ association.user.username }}"
+                       class="btn btn-block btn-primary btn-lf"
+                       role="button">View</a></td>
+                <td style="width: 10%; text-align: center"><a href="{% url 'slkf-coach-list' %}?association={{ association.user.username }}"
+                       class="btn btn-block btn-primary btn-lf"
+                       role="button">View</a></td>
+            </tr>
+
+        {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="3">No events have been added.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

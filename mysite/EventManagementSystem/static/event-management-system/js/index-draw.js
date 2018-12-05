@@ -1,7 +1,7 @@
 var $tournament = $('.tournament'),
     $bracket = $('<ul class="bracket"><li></li><li></li></ul>');
 
-var participants = ['chamoda','Adam', 'Matt', 'Evan', 'Abby', 'Heather', 'Christina', 'Ryan', 'Tyler', 'Steve', 'Steph', 'Jenna', 'Derek', 'Mike', 'Sam'];
+// var participants = ['Chamoda','Adam', 'Matt', 'Evan', 'Abby', 'Heather', 'Christina', 'Ryan', 'Tyler', 'Steve', 'Steph', 'Jenna', 'Derek', 'Mike', 'Sam'];
 
 function buildBracket($el, p1, p2) {
   if(!p1 && !p2) {

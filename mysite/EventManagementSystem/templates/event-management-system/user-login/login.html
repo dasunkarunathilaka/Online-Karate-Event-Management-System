@@ -1,26 +1,37 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
+    {% for message in messages %}
+        <div style="text-align: center">
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert"
+                 style="background-color: #8c0404; color: white; text-align: center; width: 50%; display: inline-block">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
 
-<form action="auth" method="post" class="form-signin">
+    <form action="auth" method="post" class="form-signin">
 
-    {% csrf_token %}
+        {% csrf_token %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
-    <label class="sr-only">User Name</label>
-    <input name='username' type="text" id="inputUserName" class="form-control" placeholder="Username">
-    <label class="sr-only">Password</label>
-    <input name='password' type="password" id="inputPassword" class="form-control" placeholder="Password">
-    <div class="checkbox mb-3">
+        <h1 class="h3 mb-3 font-weight-normal" style="color: white; text-align: center">Log in</h1>
+        <label class="sr-only">User Name</label>
+        <input name='username' type="text" id="inputUserName" class="form-control" placeholder="Username">
+        <label class="sr-only">Password</label>
+        <input name='password' type="password" id="inputPassword" class="form-control" placeholder="Password">
+        <div class="checkbox mb-3">
 
-    </div>
-    <br>
-    <center><a href="{% url 'password_reset' %}">Forgot your password?</a></center>
-    <br>
-    <br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        </div>
+        <br>
+        <div style="text-align: center;"><a href="{% url 'password_reset' %}">Forgot your password?</a></div>
+        <br>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-</form>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
 
 {% endblock %}

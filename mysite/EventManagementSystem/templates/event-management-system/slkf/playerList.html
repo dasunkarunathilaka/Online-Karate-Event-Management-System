@@ -2,34 +2,46 @@
 
 {% block content %}
 
-<table class="table mb-0">
-    <thead>
-    <tr>
-        <th>Player ID</th>
-        <th>Player Name</th>
-        <th>Telephone</th>
-        <th>Association</th>
-        <th>District</th>
-        <th>Province</th>
-        <th>Event</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for player in playerList %}
-    <tr>
-        <td>{{ player.id }}</td>
-        <td>{{ player.playerName }}</td>
-        <td>{{ player.telephone }}</td>
-        <td>{{ player.association.user.username }}</td>
-        <td>{{ player.district.user.username }}</td>
-        <td>{{ player.district.province.user.username }}</td>
-        <td>{{ player.event.eventID }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td class="bg-light text-center font-italic" colspan="3">You haven't registered any players yet.</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <h2 style="text-align: center; color: white">All Registered Players</h2>
+    <br>
+
+    <style>
+        .table-style {
+            width: 90%;
+            margin-left: 5%;
+            background-color: white;
+            opacity: 0.8;
+        }
+    </style>
+
+    <table class="table mb-0 table-style">
+        <thead>
+        <tr>
+            <th style="width: 10%">Player ID</th>
+            <th style="width: 20%">Player Name</th>
+            <th style="width: 10%; text-align: center">Telephone</th>
+            <th style="width: 10%">Association</th>
+            <th style="width: 20%">District</th>
+            <th style="width: 20%">Province</th>
+            <th style="width: 10%">Event</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for player in playerList %}
+            <tr>
+                <td style="width: 10%">{{ player.id }}</td>
+                <td style="width: 20%">{{ player.playerName }}</td>
+                <td style="width: 10%; text-align: center">{{ player.telephone }}</td>
+                <td style="width: 10%">{{ player.association.user.username }}</td>
+                <td style="width: 20%">{{ player.district.user.username }}</td>
+                <td style="width: 20%">{{ player.district.province.user.username }}</td>
+                <td style="width: 10%">{{ player.event.eventID }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="3">No players have been registered yet.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, TemplateView, ListView, View
@@ -50,18 +52,7 @@ class EventCreationView(CreateView):
         return HttpResponseRedirect('event-created')
 
 
-@method_decorator(decorators, name='dispatch')
-class EventsListView(ListView):
-    model = Event
-    context_object_name = 'eventList'
-    template_name = 'event-management-system/slkf/eventList.html'
-
-    def get_queryset(self):
-        queryset = Event.objects.all()
-        return queryset
-
-
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class AssociationsListView(ListView):
     model = Association
     context_object_name = 'associationList'
@@ -106,11 +97,13 @@ class ProvinceUsersListView(ListView):
 
 
 # List players for each association for the SLKF user view.
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class PlayersListByAssociationView(ListView):
     model = Player
     context_object_name = 'playerList'
     template_name = 'event-management-system/association/playerList.html'
+    # request.session['my_thing'] = my_thing
+
 
     def get_queryset(self):
         queryset = Player.objects.filter(association__user__username=self.request.GET.get('association', ""))
@@ -118,11 +111,12 @@ class PlayersListByAssociationView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['association'] = self.request.GET.get('association', "")
+        # self.request.session['association'] = "d"
         return super(PlayersListByAssociationView, self).get_context_data(**kwargs)
 
 
 # List coaches for each association for the SLKF user view.
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class RegisteredCoachSlkfListView(ListView):
     model = Coach
     context_object_name = 'coachList'
@@ -150,7 +144,7 @@ class AllPlayersListView(ListView):
 
 
 # List players on events.
-@method_decorator(decorators, name='dispatch')
+# @method_decorator(decorators, name='dispatch')
 class PlayersListByEventView(ListView):
     model = Player
     context_object_name = 'playerList'
@@ -197,6 +191,7 @@ class PlayersListByProvinceView(ListView):
         return super(PlayersListByProvinceView, self).get_context_data(**kwargs)
 
 
+@method_decorator(decorators, name='dispatch')
 class OpenTournament(View):
     model = State
 
@@ -211,13 +206,11 @@ class OpenTournament(View):
             obj.isOpen = True
             obj.save()
 
-        return HttpResponseRedirect("tournament-opened")
+        messages.success(request, 'Tournament registration opened!')
+        return HttpResponseRedirect(reverse('slkf-portal'))
 
 
-class OpenTournamentSuccess(TemplateView):
-    template_name = 'event-management-system/slkf/openRegistration.html'
-
-
+@method_decorator(decorators, name='dispatch')
 class CloseTournament(View):
     model = State
 
@@ -225,18 +218,78 @@ class CloseTournament(View):
         queryset = State.objects.all()
 
         if queryset.count() != 1:
-            return HttpResponseRedirect("tournament-not-opened")
+            messages.success(request, 'Tournament not opened yet!')
 
         else:
             obj = State.objects.get(stateID=1)
             obj.isOpen = False
             obj.save()
-            return HttpResponseRedirect("tournament-closed")
+            messages.success(request, 'Tournament registration closed!')
+
+        return HttpResponseRedirect(reverse('slkf-portal'))
 
 
-class CloseTournamentSuccess(TemplateView):
-    template_name = 'event-management-system/slkf/closeRegistration.html'
+# ------------------------------------------------------------------------------
+
+@method_decorator(decorators, name='dispatch')
+class EventsListViewForEvents(ListView):
+    model = Event
+    context_object_name = 'eventList'
+    template_name = 'event-management-system/slkf/eventListWithPlayersbtn.html'
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset
 
 
-class AlreadyClosedTournament(TemplateView):
-    template_name = 'event-management-system/slkf/tournamentNotOpened.html'
+@method_decorator(decorators, name='dispatch')
+class EventsListViewForDraws(ListView):
+    model = Event
+    context_object_name = 'eventList'
+    template_name = 'event-management-system/slkf/eventListWithDrawsbtn.html'
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset
+
+
+# List players on events as A list before shuffling.
+@method_decorator(decorators, name='dispatch')
+class PlayersListByEventViewBeforeShuffle(ListView):
+    model = Player
+    context_object_name = 'playerList'
+    template_name = 'draw/index-draw.html'
+
+    def get_queryset(self):
+        queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
+        beforeList = []
+        for i in queryset:
+            a = [str(i.id), str(i.association.user.username), str(i.playerName)]
+            beforeList.append(a)
+
+        # code for shuffling on association
+        d = dict()
+        for player in beforeList:
+            if player[1] in d:
+                d[player[1]].append([player[0], player[2]])
+            else:
+                d.setdefault(player[1], [])
+                d[player[1]].append([player[0], player[2]])
+
+        afterList = []
+        while d != {}:
+            for asso in d.keys():
+                afterList.append(d[asso][0])
+                d[asso].remove(d[asso][0])
+                if not d[asso]:
+                    del d[asso]
+                if d == {}:
+                    break
+        if len(afterList) == 0:
+            return queryset
+        return afterList
+
+
+    def get_context_data(self, **kwargs):
+        kwargs['event'] = self.request.GET.get('event', "")
+        return super(PlayersListByEventViewBeforeShuffle, self).get_context_data(**kwargs)

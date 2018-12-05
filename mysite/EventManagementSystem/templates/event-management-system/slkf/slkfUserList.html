@@ -1,33 +1,44 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
+    <h2 style="text-align: center; color: white">SLKF Users</h2>
+    <br>
 
-<table class="table mb-0">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Position</th>
-        <th>Telephone</th>
-        <th>Email</th>
-        <th>Registered Date</th>
-        <th>Last Login</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for slkfUser in slkfUserList %}
-    <tr>
-        <td>{{ slkfUser.user.first_name }} {{ slkfUser.user.last_name }}</td>
-        <td>{{ slkfUser.position }}</td>
-        <td>{{ slkfUser.telephone }}</td>
-        <td>{{ slkfUser.user.email }}</td>
-        <td>{{ slkfUser.user.date_joined }}</td>
-        <td>{{ slkfUser.user.last_login }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td class="bg-light text-center font-italic" colspan="3">You haven't added any events yet.</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <style>
+        .table-style {
+            width: 80%;
+            margin-left: 10%;
+            background-color: white;
+            opacity: 0.8;
+        }
+    </style>
+
+    <table class="table mb-0 table-style">
+        <thead>
+        <tr>
+            <th style="width: 20%">Name</th>
+            <th style="width: 10%">Position</th>
+            <th style="width: 10%; text-align: center">Telephone</th>
+            <th style="width: 20%">Email</th>
+            <th style="width: 20%">Registered Date</th>
+            <th style="width: 20%">Last Login</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for slkfUser in slkfUserList %}
+            <tr>
+                <td style="width: 20%">{{ slkfUser.user.first_name }} {{ slkfUser.user.last_name }}</td>
+                <td style="width: 10%">{{ slkfUser.position }}</td>
+                <td style="width: 10%; text-align: center">{{ slkfUser.telephone }}</td>
+                <td style="width: 20%">{{ slkfUser.user.email }}</td>
+                <td style="width: 20%">{{ slkfUser.user.date_joined }}</td>
+                <td style="width: 20%">{{ slkfUser.user.last_login }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="3">No events have been added.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -1,16 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView, ListView
 
-from ..decorators import slkf_required
-from ..models import User
+from ..decorators import slkf_required, province_required
+from ..models import User, Player, Coach, Event
 from ..forms.provinceSignupForm import ProvinceSignupForm
 
-decorators = [login_required, slkf_required]
+slkfDecorators = [login_required, slkf_required]
+provinceDecorators = [login_required, province_required]
 
-
-@method_decorator(decorators, name='dispatch')
+@method_decorator(slkfDecorators, name='dispatch')
 class ProvinceSignUpView(CreateView):
     model = User
     form_class = ProvinceSignupForm
@@ -23,3 +23,61 @@ class ProvinceSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         return HttpResponseRedirect('signup-success')
+
+
+@method_decorator(provinceDecorators, name='dispatch')
+class ProvincePortal(TemplateView):
+    template_name = 'event-management-system/province/provincePortal.html'
+
+
+@method_decorator(provinceDecorators, name='dispatch')
+class ProvincePlayersListView(ListView):
+    model = Player
+    context_object_name = 'playerList'
+    template_name = 'event-management-system/slkf/playersByProvince.html'
+
+    def get_queryset(self):
+        queryset = Player.objects.filter(district__province__user=self.request.user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        kwargs['province'] = self.request.user.username
+        return super(ProvincePlayersListView, self).get_context_data(**kwargs)
+
+
+@method_decorator(provinceDecorators, name='dispatch')
+class ProvinceCoachesListView(ListView):
+    model = Coach
+    context_object_name = 'coachList'
+    template_name = 'event-management-system/province/coachList.html'
+
+    def get_queryset(self):
+        queryset = Coach.objects.all()
+        return queryset
+
+
+@method_decorator(provinceDecorators, name='dispatch')
+class ProvinceEventsListView(ListView):
+    model = Event
+    context_object_name = 'eventList'
+    template_name = 'event-management-system/province/provinceEventList.html'
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset
+
+
+@method_decorator(provinceDecorators, name='dispatch')
+class ProvincePlayersByEventListView(ListView):
+    model = Player
+    context_object_name = 'playerList'
+    template_name = 'event-management-system/slkf/playersByEvent.html'
+
+    def get_queryset(self):
+        queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""),
+                                         district__province__user=self.request.user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        kwargs['event'] = self.request.GET.get('event', "")
+        return super(ProvincePlayersByEventListView, self).get_context_data(**kwargs)
