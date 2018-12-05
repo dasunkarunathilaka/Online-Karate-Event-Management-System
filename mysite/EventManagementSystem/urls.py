@@ -71,7 +71,7 @@ urlpatterns = [
     # Display players on events as a List before shuffling.
     url(r'^association-portal/display-all-events-draws-for-association/draws/$',
         association.PlayersListByEventViewBeforeShuffle.as_view(),
-        name='view-players-on-events-draws'),
+        name='view-players-on-events-draws-for-association'),
 
     # SLKF functions
     url(r'^slkf-portal/display-all-events-player$', slkf.EventsListViewForEvents.as_view(), name='all-events-players'),
@@ -100,7 +100,7 @@ urlpatterns = [
         name='view-players-on-events-players'),
 
     # Display players on events as a List before shuffling.
-    url(r'^slkf-portal/display-all-events-draws/players/$', slkf.PlayersListByEventViewBeforeShuffle.as_view(),
+    url(r'^slkf-portal/display-all-events-draws/draws/$', slkf.PlayersListByEventViewBeforeShuffle.as_view(),
         name='view-players-on-events-draws'),
 
     # Display players on districts.
