@@ -60,9 +60,6 @@ class PlayerRegistrationView(CreateView):
             kwargs.update({'user': associationList})
         return kwargs
 
-    def form_invalid(self, form):
-        pass
-
     def form_valid(self, form):
         form.save()
         messages.success(self.request, 'New player added successfully!')
