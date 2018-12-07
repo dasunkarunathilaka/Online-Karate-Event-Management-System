@@ -55,8 +55,6 @@ urlpatterns = [
     # Coach Registration
     url(r'^association-portal/coach-registration$', association.CoachRegistrationView.as_view(),
         name='coach-registration'),
-    url(r'^association-portal/coach-registered$',
-        TemplateView.as_view(template_name='event-management-system/association/coachRegistrationSuccess.html')),
 
     # View registered players/coaches
     url(r'^association-portal/view-players$', association.RegisteredPlayerListView.as_view(),

@@ -26,7 +26,7 @@ class Slkf(models.Model):
     # memberName = models.CharField(max_length=100)
 
     # position in the SLKF
-    position = models.CharField(max_length=50, blank=False)
+    position = models.CharField(max_length=50, blank=False, verbose_name="Position at SLKF")
     telephone = models.CharField(max_length=12, blank=False)
 
     def __unicode__(self):
@@ -53,7 +53,7 @@ class Province(models.Model):
     # provinceName = models.CharField(max_length=50, blank=False)
     # Province Name is not needed - this is already in User table as the username.
 
-    provinceSecretaryName = models.CharField(max_length=100, blank=False)
+    provinceSecretaryName = models.CharField(max_length=100, blank=False, verbose_name="Province Secretary Name")
     telephone = models.CharField(max_length=12, blank=False)
 
     def __unicode__(self):
@@ -67,7 +67,7 @@ class District(models.Model):
     # districtName = models.CharField(max_length=50, blank=False)
     # District Name is not needed - this is already in User table as the username.
 
-    districtSecretaryName = models.CharField(max_length=100, blank=False)
+    districtSecretaryName = models.CharField(max_length=100, blank=False, verbose_name="District Secretary Name")
     telephone = models.CharField(max_length=12, blank=False)
 
     # userType = models.CharField(max_length=2, choices=USER_TYPE_CHOICES, default='AD')
@@ -77,8 +77,8 @@ class District(models.Model):
 
 
 class Event(models.Model):
-    eventID = models.SmallIntegerField(primary_key=True)
-    eventName = models.CharField(max_length=100, blank=False)
+    eventID = models.SmallIntegerField(primary_key=True, verbose_name="Event Number")
+    eventName = models.CharField(max_length=100, blank=False, verbose_name="Event Name")
 
     # Weight, Age, Kata, Kumite.... details.
 
@@ -91,9 +91,9 @@ class Event(models.Model):
 class Player(models.Model):
     # Auto generated ID is the primary key.
 
-    playerName = models.CharField(max_length=100, blank=False)
-    telephone = models.CharField(max_length=12, blank=False)
-    association = models.ForeignKey(Association, on_delete=models.CASCADE)
+    playerName = models.CharField(max_length=100, blank=False, verbose_name="Player Name")
+    telephone = models.CharField(max_length=12, blank=False, verbose_name="Telephone")
+    association = models.ForeignKey(Association, on_delete=models.CASCADE, verbose_name="Association Name")
     district = models.ForeignKey(District, on_delete=models.CASCADE)
 
     # players should be submitted to the system for each event he participates.
@@ -104,13 +104,14 @@ class Player(models.Model):
 
 
 class Coach(models.Model):
-    coachID = models.CharField(primary_key=True, max_length=10, blank=False)
-    coachName = models.CharField(max_length=100, blank=False)
-    association = models.ForeignKey(Association, on_delete=models.CASCADE)
+    coachID = models.CharField(primary_key=True, max_length=10, blank=False, verbose_name="Registration Number")
+    coachName = models.CharField(max_length=100, blank=False, verbose_name="Name of the Coach")
+    association = models.ForeignKey(Association, on_delete=models.CASCADE, verbose_name="Association Name")
     telephone = models.CharField(max_length=12, blank=False)
 
     def __unicode__(self):
         return unicode(self.coachID)
+
 
 # State table for Open/close registration
 

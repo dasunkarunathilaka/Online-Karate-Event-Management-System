@@ -1,8 +1,8 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
-<h2 style="text-align: center; color: white">Coaches of {{ association }} Association</h2>
-<br>
+    <h2 style="text-align: center; color: white">Coaches of {{ association }} Association</h2>
+    <br>
 
     <style>
         .table-style {
@@ -12,6 +12,18 @@
             opacity: 0.8;
         }
     </style>
+
+    {% for message in messages %}
+        <div style="text-align: center">
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert"
+                 style="background-color: #148a12; color: white; text-align: center; width: 50%; display: inline-block">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
 
     <table class="table mb-0 table-style">
         <thead>

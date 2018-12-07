@@ -15,6 +15,7 @@ slkfDecorators = [login_required, slkf_required]
 associationDecorators = [login_required, association_required]
 associationOrSlkfDecorators = [login_required, association_or_slkf_required]
 
+
 @method_decorator(slkfDecorators, name='dispatch')
 class AssociationSignUpView(CreateView):
     model = User
@@ -97,7 +98,11 @@ class CoachRegistrationView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponseRedirect('coach-registered')
+        messages.success(self.request, 'New coach added successfully!')
+        if self.request.user.userType == 'AS':
+            return HttpResponseRedirect(reverse('view-coaches'))
+        else:
+            return HttpResponseRedirect(reverse('slkf-portal'))
 
 
 @method_decorator(associationDecorators, name='dispatch')
@@ -150,15 +155,15 @@ class PlayersListByEventViewBeforeShuffle(ListView):
                 d[player[1]].append([player[0], player[2]])
 
         afterList = []
-        while (d != {}):
+        while d != {}:
             for asso in d.keys():
                 afterList.append(d[asso][0])
                 d[asso].remove(d[asso][0])
-                if (d[asso] == []):
+                if not d[asso]:
                     del d[asso]
-                if (d == {}):
+                if d == {}:
                     break
-        if (len(afterList) == 0):
+        if len(afterList) == 0:
             return queryset
         return afterList
 
