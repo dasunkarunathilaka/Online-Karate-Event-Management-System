@@ -26,7 +26,7 @@ class DistrictSignUpView(CreateView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, 'New District user created successfully!')
-        return HttpResponseRedirect(reverse('slkf-portal'))
+        return HttpResponseRedirect(reverse('district-users'))
 
 
 @method_decorator(districtDecorators, name='dispatch')

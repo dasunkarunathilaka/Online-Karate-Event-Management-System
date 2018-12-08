@@ -13,6 +13,8 @@
         }
     </style>
 
+    {% include 'event-management-system/includes/successMessage.html' %}
+
     <table class="table mb-0 table-style">
         <thead>
         <tr>
@@ -34,12 +36,14 @@
                 <td style="width: 15%">{{ association.chiefInstructorName }}</td>
                 <td style="width: 15%; text-align: center">{{ association.telephone }}</td>
                 <td style="width: 25%">{{ association.address }}</td>
-                <td style="width: 10%; text-align: center"><a href="{% url 'slkf-player-list' %}?association={{ association.user.username }}"
-                       class="btn btn-block btn-primary btn-lf"
-                       role="button">View</a></td>
-                <td style="width: 10%; text-align: center"><a href="{% url 'slkf-coach-list' %}?association={{ association.user.username }}"
-                       class="btn btn-block btn-primary btn-lf"
-                       role="button">View</a></td>
+                <td style="width: 10%; text-align: center"><a
+                        href="{% url 'slkf-player-list' %}?association={{ association.user.username }}"
+                        class="btn btn-block btn-primary btn-lf"
+                        role="button">View</a></td>
+                <td style="width: 10%; text-align: center"><a
+                        href="{% url 'slkf-coach-list' %}?association={{ association.user.username }}"
+                        class="btn btn-block btn-primary btn-lf"
+                        role="button">View</a></td>
             </tr>
 
         {% empty %}
@@ -49,4 +53,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
+    <div style="text-align: center;"><a href="{% url 'association_signup' %}" class="btn-lg btn-success" role="button">New
+        Association</a></div>
 {% endblock %}

@@ -34,7 +34,7 @@ class SlkfSignUpView(CreateView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, 'New SLKF user created successfully!')
-        return HttpResponseRedirect(reverse('slkf-portal'))
+        return HttpResponseRedirect(reverse('slkf-users'))
 
 
 @method_decorator(decorators, name='dispatch')

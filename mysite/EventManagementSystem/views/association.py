@@ -29,7 +29,8 @@ class AssociationSignUpView(CreateView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, 'New Association user created successfully!')
-        return HttpResponseRedirect(reverse('slkf-portal'))
+        return HttpResponseRedirect(reverse('association-list'))
+
 
 @method_decorator(associationDecorators, name='dispatch')
 class AssociationPortal(ListView):

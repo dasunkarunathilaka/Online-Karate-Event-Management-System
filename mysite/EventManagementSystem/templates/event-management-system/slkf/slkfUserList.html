@@ -13,6 +13,8 @@
         }
     </style>
 
+    {% include 'event-management-system/includes/successMessage.html' %}
+
     <table class="table mb-0 table-style">
         <thead>
         <tr>
@@ -41,4 +43,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
+    <div style="text-align: center;"><a href="{% url 'slkf_signup' %}" class="btn-lg btn-success" role="button">New
+        SLKF User</a></div>
 {% endblock %}

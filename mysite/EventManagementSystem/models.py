@@ -71,17 +71,16 @@ class District(models.Model):
     districtSecretaryName = models.CharField(max_length=100, blank=False, verbose_name="District Secretary Name")
     telephone = models.CharField(max_length=12, blank=False)
 
-    # userType = models.CharField(max_length=2, choices=USER_TYPE_CHOICES, default='AD')
-
     def __unicode__(self):
         return self.user.username
 
 
 class Event(models.Model):
+    BOOL_CHOICES = ((True, 'Kumite'), (False, 'Kata'))
+
     eventID = models.SmallIntegerField(primary_key=True, verbose_name="Event Number", validators=[MinValueValidator(1)])
     eventName = models.CharField(max_length=100, blank=False, verbose_name="Event Name")
-
-    # Weight, Age, Kata, Kumite.... details.
+    kumite = models.BooleanField(choices=BOOL_CHOICES, default=True, verbose_name="Event Category")
 
     def __unicode__(self):
         # return self.eventID

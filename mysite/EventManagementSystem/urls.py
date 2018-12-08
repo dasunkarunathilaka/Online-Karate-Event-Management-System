@@ -73,6 +73,8 @@ urlpatterns = [
     url(r'^slkf-portal/display-associations$', slkf.AssociationsListView.as_view(), name='association-list'),
     url(r'^slkf-portal/view-users$',
         TemplateView.as_view(template_name='event-management-system/slkf/userListDirect.html'), name='view-users'),
+    url(r'^slkf-portal/tournament-options$',
+        TemplateView.as_view(template_name='event-management-system/slkf/tournamentOptions.html'), name='tournament-options'),
 
     url(r'^slkf-portal/view-users/display-slkf-users$', slkf.SlkfUsersListView.as_view(), name='slkf-users'),
     url(r'^slkf-portal/view-users/display-district-users$', slkf.DistrictUsersListView.as_view(),

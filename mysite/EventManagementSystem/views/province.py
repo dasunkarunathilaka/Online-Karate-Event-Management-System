@@ -26,7 +26,7 @@ class ProvinceSignUpView(CreateView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, 'New province user created successfully!')
-        return HttpResponseRedirect(reverse('slkf-portal'))
+        return HttpResponseRedirect(reverse('province-users'))
 
 
 @method_decorator(provinceDecorators, name='dispatch')
