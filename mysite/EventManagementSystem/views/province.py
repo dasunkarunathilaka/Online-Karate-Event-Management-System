@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, TemplateView, ListView
@@ -10,19 +12,21 @@ from ..forms.provinceSignupForm import ProvinceSignupForm
 slkfDecorators = [login_required, slkf_required]
 provinceDecorators = [login_required, province_required]
 
+
 @method_decorator(slkfDecorators, name='dispatch')
 class ProvinceSignUpView(CreateView):
     model = User
     form_class = ProvinceSignupForm
-    template_name = 'event-management-system/registration/provinceSignupForm.html'
+    template_name = 'event-management-system/registration/userCreationForm.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'Province'
         return super(ProvinceSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
-        return HttpResponseRedirect('signup-success')
+        form.save()
+        messages.success(self.request, 'New province user created successfully!')
+        return HttpResponseRedirect(reverse('slkf-portal'))
 
 
 @method_decorator(provinceDecorators, name='dispatch')

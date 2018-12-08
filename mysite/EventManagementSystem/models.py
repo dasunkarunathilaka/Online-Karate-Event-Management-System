@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -39,10 +40,10 @@ class Association(models.Model):
     # Association does not need a unique ID because it can have username from User model.
 
     # associationID = models.CharField(max_length=100, blank=False, unique=True)
-    associationName = models.CharField(max_length=100, blank=False)
+    associationName = models.CharField(max_length=100, blank=False, verbose_name="Association Name")
     address = models.CharField(max_length=1000, blank=False)
     telephone = models.CharField(max_length=12, blank=False)
-    chiefInstructorName = models.CharField(max_length=100, blank=False)
+    chiefInstructorName = models.CharField(max_length=100, blank=False, verbose_name="Chief Instructor Name")
 
     def __unicode__(self):
         return self.user.username
@@ -77,7 +78,7 @@ class District(models.Model):
 
 
 class Event(models.Model):
-    eventID = models.SmallIntegerField(primary_key=True, verbose_name="Event Number")
+    eventID = models.SmallIntegerField(primary_key=True, verbose_name="Event Number", validators=[MinValueValidator(1)])
     eventName = models.CharField(max_length=100, blank=False, verbose_name="Event Name")
 
     # Weight, Age, Kata, Kumite.... details.

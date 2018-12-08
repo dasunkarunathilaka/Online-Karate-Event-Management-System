@@ -14,8 +14,9 @@ class DistrictSignupForm(UserCreationForm):
     # In the drop down, the unicode function defined in Model class is called.
     # It returns the username of the Province, which is the provinceName.
 
-    districtSecretaryName = forms.CharField(required=True)
-    telephone = forms.CharField(required=True)
+    districtSecretaryName = forms.CharField(required=True, label="District Secretary Name")
+    telephone = forms.RegexField(regex=r'^(\+94)?1?\d{9}$', error_message=(
+        "Phone number must be entered in the format: '+94769266301'. 11 digits allowed."))
 
     class Meta(UserCreationForm.Meta):
         model = User

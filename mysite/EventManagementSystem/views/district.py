@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, TemplateView, ListView
@@ -15,15 +17,16 @@ districtDecorators = [login_required, district_required]
 class DistrictSignUpView(CreateView):
     model = User
     form_class = DistrictSignupForm
-    template_name = 'event-management-system/registration/districtSignupForm.html'
+    template_name = 'event-management-system/registration/userCreationForm.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'District'
         return super(DistrictSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
-        return HttpResponseRedirect('signup-success')
+        form.save()
+        messages.success(self.request, 'New District user created successfully!')
+        return HttpResponseRedirect(reverse('slkf-portal'))
 
 
 @method_decorator(districtDecorators, name='dispatch')

@@ -12,12 +12,12 @@ class AssociationSignupForm(UserCreationForm):
 
     # associationID = forms.CharField(required=True)
 
-    associationName = forms.CharField(required=True)
+    associationName = forms.CharField(required=True, label="Association Name")
     address = forms.CharField()
     telephone = forms.RegexField(regex=r'^(\+94)?1?\d{9}$', error_message=(
         "Phone number must be entered in the format: '+94769266301'. 11 digits allowed."))
 
-    chiefInstructorName = forms.CharField(required=True)
+    chiefInstructorName = forms.CharField(required=True, label="Chief Instructor Name")
 
     class Meta(UserCreationForm.Meta):
         model = User

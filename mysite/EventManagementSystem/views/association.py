@@ -20,16 +20,16 @@ associationOrSlkfDecorators = [login_required, association_or_slkf_required]
 class AssociationSignUpView(CreateView):
     model = User
     form_class = AssociationSignupForm
-    template_name = 'event-management-system/registration/associationSignupForm.html'
+    template_name = 'event-management-system/registration/userCreationForm.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'Association'
         return super(AssociationSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
-        return HttpResponseRedirect('signup-success')
-
+        form.save()
+        messages.success(self.request, 'New Association user created successfully!')
+        return HttpResponseRedirect(reverse('slkf-portal'))
 
 @method_decorator(associationDecorators, name='dispatch')
 class AssociationPortal(ListView):

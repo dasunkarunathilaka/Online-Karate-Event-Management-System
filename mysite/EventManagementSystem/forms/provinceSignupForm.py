@@ -7,8 +7,9 @@ from ..models import User, Province
 
 class ProvinceSignupForm(UserCreationForm):
 
-    provinceSecretaryName = forms.CharField(required=True)
-    telephone = forms.CharField(required=True)
+    provinceSecretaryName = forms.CharField(required=True, label="Province Secretary Name")
+    telephone = forms.RegexField(regex=r'^(\+94)?1?\d{9}$', error_message=(
+        "Phone number must be entered in the format: '+94769266301'. 11 digits allowed."))
 
     class Meta(UserCreationForm.Meta):
         model = User
