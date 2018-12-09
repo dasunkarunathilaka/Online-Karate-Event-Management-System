@@ -131,6 +131,10 @@ class EventsListViewForDraws(ListView):
         queryset = Event.objects.all()
         return queryset
 
+    def get_context_data(self, **kwargs):
+        kwargs['states'] = State.objects.filter(stateID=1)
+        return super(EventsListViewForDraws, self).get_context_data(**kwargs)
+
 
 # List players on events as A list before shuffling.
 @method_decorator(associationDecorators, name='dispatch')
