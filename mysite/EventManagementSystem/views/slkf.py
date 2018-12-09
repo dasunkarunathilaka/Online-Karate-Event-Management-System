@@ -58,7 +58,7 @@ class EventCreationView(CreateView):
 class AssociationsListView(ListView):
     model = Association
     context_object_name = 'associationList'
-    template_name = 'event-management-system/slkf/associationList.html'
+    template_name = 'event-management-system/object-lists/associationList.html'
 
     def get_queryset(self):
         queryset = Association.objects.all()
@@ -103,17 +103,14 @@ class ProvinceUsersListView(ListView):
 class PlayersListByAssociationView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/association/playerList.html'
-    # request.session['my_thing'] = my_thing
-
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(association__user__username=self.request.GET.get('association', ""))
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['association'] = self.request.GET.get('association', "")
-        # self.request.session['association'] = "d"
+        kwargs['institute'] = self.request.GET.get('association', "")
         return super(PlayersListByAssociationView, self).get_context_data(**kwargs)
 
 
@@ -122,7 +119,7 @@ class PlayersListByAssociationView(ListView):
 class RegisteredCoachSlkfListView(ListView):
     model = Coach
     context_object_name = 'coachList'
-    template_name = 'event-management-system/association/coachList.html'
+    template_name = 'event-management-system/object-lists/coachList.html'
 
     def get_queryset(self):
         queryset = Coach.objects.filter(association__user__username=self.request.GET.get('association', ""))
@@ -138,11 +135,15 @@ class RegisteredCoachSlkfListView(ListView):
 class AllPlayersListView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playerList.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.all()
         return queryset
+
+    def get_context_data(self, **kwargs):
+        kwargs['institute'] = "SLKF"
+        return super(AllPlayersListView, self).get_context_data(**kwargs)
 
 
 # List players on events.
@@ -150,14 +151,14 @@ class AllPlayersListView(ListView):
 class PlayersListByEventView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playersByEvent.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['event'] = self.request.GET.get('event', "")
+        kwargs['institute'] = self.request.GET.get('event', "")
         return super(PlayersListByEventView, self).get_context_data(**kwargs)
 
 
@@ -166,14 +167,14 @@ class PlayersListByEventView(ListView):
 class PlayersListByDistrictView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playersByDistrict.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(district__user__username=self.request.GET.get('district', ""))
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['district'] = self.request.GET.get('district', "")
+        kwargs['institute'] = self.request.GET.get('district', "")
         return super(PlayersListByDistrictView, self).get_context_data(**kwargs)
 
 
@@ -182,14 +183,14 @@ class PlayersListByDistrictView(ListView):
 class PlayersListByProvinceView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playersByProvince.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(district__province__user__username=self.request.GET.get('province', ""))
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['province'] = self.request.GET.get('province', "")
+        kwargs['institute'] = self.request.GET.get('province', "")
         return super(PlayersListByProvinceView, self).get_context_data(**kwargs)
 
 
@@ -237,7 +238,7 @@ class CloseTournament(View):
 class EventsListViewForEvents(ListView):
     model = Event
     context_object_name = 'eventList'
-    template_name = 'event-management-system/slkf/eventListWithPlayersbtn.html'
+    template_name = 'event-management-system/object-lists/eventListWithPlayersbtn.html'
 
     def get_queryset(self):
         queryset = Event.objects.all()
@@ -248,7 +249,7 @@ class EventsListViewForEvents(ListView):
 class EventsListViewForDraws(ListView):
     model = Event
     context_object_name = 'eventList'
-    template_name = 'event-management-system/slkf/eventListWithDrawsbtn.html'
+    template_name = 'event-management-system/object-lists/eventListWithDrawsbtn.html'
 
     def get_queryset(self):
         queryset = Event.objects.all()
@@ -290,7 +291,6 @@ class PlayersListByEventViewBeforeShuffle(ListView):
         if len(afterList) == 0:
             return queryset
         return afterList
-
 
     def get_context_data(self, **kwargs):
         kwargs['event'] = self.request.GET.get('event', "")

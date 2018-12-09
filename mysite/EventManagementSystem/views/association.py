@@ -75,14 +75,14 @@ class PlayerRegistrationView(CreateView):
 class RegisteredPlayerListView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/association/playerList.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(association=self.request.user.association)
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['association'] = self.request.user.username
+        kwargs['institute'] = self.request.user.username
         return super(RegisteredPlayerListView, self).get_context_data(**kwargs)
 
 
@@ -110,14 +110,14 @@ class CoachRegistrationView(CreateView):
 class RegisteredCoachListView(ListView):
     model = Coach
     context_object_name = 'coachList'
-    template_name = 'event-management-system/association/coachList.html'
+    template_name = 'event-management-system/object-lists/coachList.html'
 
     def get_queryset(self):
         queryset = Coach.objects.filter(association=self.request.user.association)
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['association'] = self.request.user.username
+        kwargs['institute'] = self.request.user.username
         return super(RegisteredCoachListView, self).get_context_data(**kwargs)
 
 
@@ -125,7 +125,7 @@ class RegisteredCoachListView(ListView):
 class EventsListViewForDraws(ListView):
     model = Event
     context_object_name = 'eventList'
-    template_name = 'event-management-system/association/eventListWithDrawsbtn.html'
+    template_name = 'event-management-system/object-lists/eventListWithDrawsbtn.html'
 
     def get_queryset(self):
         queryset = Event.objects.all()

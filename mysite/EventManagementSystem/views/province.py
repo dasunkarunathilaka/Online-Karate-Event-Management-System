@@ -38,7 +38,7 @@ class ProvincePortal(TemplateView):
 class ProvincePlayersListView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playersByProvince.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(district__province__user=self.request.user)
@@ -53,18 +53,22 @@ class ProvincePlayersListView(ListView):
 class ProvinceCoachesListView(ListView):
     model = Coach
     context_object_name = 'coachList'
-    template_name = 'event-management-system/province/coachList.html'
+    template_name = 'event-management-system/object-lists/coachList.html'
 
     def get_queryset(self):
         queryset = Coach.objects.all()
         return queryset
+
+    def get_context_data(self, **kwargs):
+        kwargs['institute'] = self.request.user.username
+        return super(ProvinceCoachesListView, self).get_context_data(**kwargs)
 
 
 @method_decorator(provinceDecorators, name='dispatch')
 class ProvinceEventsListView(ListView):
     model = Event
     context_object_name = 'eventList'
-    template_name = 'event-management-system/province/provinceEventList.html'
+    template_name = 'event-management-system/object-lists/eventListWithPlayersbtn.html'
 
     def get_queryset(self):
         queryset = Event.objects.all()
@@ -75,7 +79,7 @@ class ProvinceEventsListView(ListView):
 class ProvincePlayersByEventListView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playersByEvent.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""),

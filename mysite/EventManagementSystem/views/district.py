@@ -38,14 +38,14 @@ class DistrictPortal(TemplateView):
 class DistrictPlayersListView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playersByDistrict.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(district__user=self.request.user)
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['district'] = self.request.user.username
+        kwargs['institute'] = self.request.user.username
         return super(DistrictPlayersListView, self).get_context_data(**kwargs)
 
 
@@ -53,18 +53,22 @@ class DistrictPlayersListView(ListView):
 class DistrictCoachesListView(ListView):
     model = Coach
     context_object_name = 'coachList'
-    template_name = 'event-management-system/district/coachList.html'
+    template_name = 'event-management-system/object-lists/coachList.html'
 
     def get_queryset(self):
         queryset = Coach.objects.all()
         return queryset
+
+    def get_context_data(self, **kwargs):
+        kwargs['institute'] = self.request.user.username
+        return super(DistrictCoachesListView, self).get_context_data(**kwargs)
 
 
 @method_decorator(districtDecorators, name='dispatch')
 class DistrictEventsListView(ListView):
     model = Event
     context_object_name = 'eventList'
-    template_name = 'event-management-system/district/districtEventList.html'
+    template_name = 'event-management-system/object-lists/eventListWithPlayersbtn.html'
 
     def get_queryset(self):
         queryset = Event.objects.all()
@@ -75,7 +79,7 @@ class DistrictEventsListView(ListView):
 class DistrictPlayersByEventListView(ListView):
     model = Player
     context_object_name = 'playerList'
-    template_name = 'event-management-system/slkf/playersByEvent.html'
+    template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
         queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""),
@@ -83,5 +87,5 @@ class DistrictPlayersByEventListView(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['event'] = self.request.GET.get('event', "")
+        kwargs['institute'] = self.request.GET.get('event', "")
         return super(DistrictPlayersByEventListView, self).get_context_data(**kwargs)

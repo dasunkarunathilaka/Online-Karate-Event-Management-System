@@ -71,7 +71,7 @@ def tournamentPage(request):
 class EventsListView(ListView):
     model = Event
     context_object_name = 'eventList'
-    template_name = 'event-management-system/generic-user/eventList.html'
+    template_name = 'event-management-system/object-lists/eventListWithDrawsbtn.html'
 
     def get_queryset(self):
         queryset = Event.objects.all()
@@ -81,7 +81,7 @@ class EventsListView(ListView):
 class AssociationsListView(ListView):
     model = Association
     context_object_name = 'associationList'
-    template_name = 'event-management-system/generic-user/associationList.html'
+    template_name = 'event-management-system/object-lists/associationList.html'
 
     def get_queryset(self):
         queryset = Association.objects.all()

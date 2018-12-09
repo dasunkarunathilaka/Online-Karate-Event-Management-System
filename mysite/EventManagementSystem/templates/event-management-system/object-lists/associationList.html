@@ -23,8 +23,11 @@
             <th style="width: 15%">Chief Instructor</th>
             <th style="width: 15%; text-align: center">Telephone</th>
             <th style="width: 25%">Address</th>
-            <th style="width: 10%; text-align: center">Registered Players</th>
-            <th style="width: 10%; text-align: center">Registered Coaches</th>
+
+            {% if user.userType == "SL" or user.userType == "AD" %}
+                <th style="width: 10%; text-align: center">Registered Players</th>
+                <th style="width: 10%; text-align: center">Registered Coaches</th>
+            {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -36,14 +39,17 @@
                 <td style="width: 15%">{{ association.chiefInstructorName }}</td>
                 <td style="width: 15%; text-align: center">{{ association.telephone }}</td>
                 <td style="width: 25%">{{ association.address }}</td>
-                <td style="width: 10%; text-align: center"><a
-                        href="{% url 'slkf-player-list' %}?association={{ association.user.username }}"
-                        class="btn btn-block btn-primary btn-lf"
-                        role="button">View</a></td>
-                <td style="width: 10%; text-align: center"><a
-                        href="{% url 'slkf-coach-list' %}?association={{ association.user.username }}"
-                        class="btn btn-block btn-primary btn-lf"
-                        role="button">View</a></td>
+
+                {% if user.userType == "SL" or user.userType == "AD" %}
+                    <td style="width: 10%; text-align: center"><a
+                            href="{% url 'slkf-player-list' %}?association={{ association.user.username }}"
+                            class="btn btn-block btn-primary btn-lf"
+                            role="button">View</a></td>
+                    <td style="width: 10%; text-align: center"><a
+                            href="{% url 'slkf-coach-list' %}?association={{ association.user.username }}"
+                            class="btn btn-block btn-primary btn-lf"
+                            role="button">View</a></td>
+                {% endif %}
             </tr>
 
         {% empty %}
@@ -54,6 +60,9 @@
         </tbody>
     </table>
     <br>
-    <div style="text-align: center;"><a href="{% url 'association_signup' %}" class="btn-lg btn-success" role="button">New
-        Association</a></div>
+    {% if user.userType == "SL" or user.userType == "AD" %}
+        <div style="text-align: center;"><a href="{% url 'association_signup' %}" class="btn-lg btn-success"
+                                            role="button">New
+            Association</a></div>
+    {% endif %}
 {% endblock %}
