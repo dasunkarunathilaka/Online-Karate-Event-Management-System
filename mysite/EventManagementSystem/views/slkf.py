@@ -25,15 +25,16 @@ class SignUpDirectingView(TemplateView):
 class SlkfSignUpView(CreateView):
     model = User
     form_class = SlkfSignupForm
-    template_name = 'event-management-system/registration/slkfSignupForm.html'
+    template_name = 'event-management-system/registration/userCreationForm.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'SLKF User'
         return super(SlkfSignUpView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
-        return HttpResponseRedirect('signup-success')
+        form.save()
+        messages.success(self.request, 'New SLKF user created successfully!')
+        return HttpResponseRedirect(reverse('slkf-users'))
 
 
 @method_decorator(decorators, name='dispatch')
@@ -49,7 +50,8 @@ class EventCreationView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponseRedirect('event-created')
+        messages.success(self.request, 'New Event created successfully!')
+        return HttpResponseRedirect(reverse('all-events-players'))
 
 
 # @method_decorator(decorators, name='dispatch')

@@ -2,17 +2,7 @@
 
 {% block content %}
 
-    {% for message in messages %}
-        <div style="text-align: center">
-            <div class="alert {{ message.tags }} alert-dismissible" role="alert"
-                 style="background-color: #148a12; color: white; text-align: center; width: 50%; display: inline-block">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ message }}
-            </div>
-        </div>
-    {% endfor %}
+    {% include 'event-management-system/includes/successMessage.html' %}
 
     <div class="container-fluid">
         <div class="row">
@@ -44,37 +34,28 @@
                 <!--</div>-->
                 <div class="row">
                     <div class="col-sm-6 column-style">
-                        <a href="{% url 'all-events-players' %}" class="btn btn-block btn-primary btn-lf" role="button">View
-                            Events</a>
+                        <a href="{% url 'tournament-options' %}" class="btn btn-block btn-primary btn-lf" role="button">Tournament
+                            Options</a></a>
                     </div>
                     <div class="col-sm-6 column-style">
-                        <a href="{% url 'association-list' %}" class="btn btn-block btn-primary btn-lf" role="button">View
-                            Associations</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 column-style">
-                        <a href="{% url 'view-users' %}" class="btn btn-block btn-primary btn-lf" role="button">View
-                            System
+                        <a href="{% url 'view-users' %}" class="btn btn-block btn-primary btn-lf" role="button">System
                             Users</a>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6 column-style">
-                        <a href="{% url 'view-all-players' %}" class="btn btn-block btn-primary btn-lf" role="button">View
-                            All Players</a>
+                        <a href="{% url 'association-list' %}" class="btn btn-block btn-primary btn-lf" role="button">Associations</a>
+                    </div>
+                    <div class="col-sm-6 column-style">
+                        <a href="{% url 'view-all-players' %}" class="btn btn-block btn-primary btn-lf" role="button">All
+                            Players</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 column-style">
-                        <a href="{% url 'open-tournament' %}" class="btn btn-block btn-primary btn-lf" role="button">Open
-                            Registration</a>
+                        <a href="{% url 'all-events-players' %}" class="btn btn-block btn-primary btn-lf" role="button">Events</a>
                     </div>
                     <div class="col-sm-6 column-style">
-                        <a href="{% url 'close-tournament' %}" class="btn btn-block btn-primary btn-lf" role="button">Close
-                            Registration</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 column-style">
                         <a href="{% url 'all-events-draws' %}" class="btn btn-block btn-primary btn-lf" role="button">View
                             Draws</a>
                     </div>

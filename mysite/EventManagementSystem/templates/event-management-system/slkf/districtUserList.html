@@ -13,6 +13,8 @@
         }
     </style>
 
+    {% include 'event-management-system/includes/successMessage.html' %}
+
     <table class="table mb-0 table-style">
         <thead>
         <tr>
@@ -47,4 +49,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
+    <div style="text-align: center;"><a href="{% url 'district_signup' %}" class="btn-lg btn-success" role="button">New
+        District</a></div>
 {% endblock %}

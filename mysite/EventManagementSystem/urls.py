@@ -22,8 +22,6 @@ urlpatterns = [
     url(r'^accounts/signup/district$', district.DistrictSignUpView.as_view(), name='district_signup'),
     url(r'^accounts/signup/province$', province.ProvinceSignUpView.as_view(), name='province_signup'),
 
-    url(r'^accounts/signup/signup-success$', genericUser.signupSuccess, name='signup-success'),
-
     # Login urls.
     url(r'^accounts/login$', genericUser.customLogin, name='login'),
     url(r'^accounts/auth$', genericUser.userAuth, name='auth'),
@@ -38,8 +36,6 @@ urlpatterns = [
     # Event urls
     # Create new event - done by the SLKF.
     url(r'^slkf-portal/create-event$', slkf.EventCreationView.as_view(), name='create-event'),
-    url(r'^slkf-portal/event-created$',
-        TemplateView.as_view(template_name='event-management-system/slkf/eventCreated.html')),
 
     # Opening/closing tournaments by SLKF
     url(r'^slkf-portal/open-tournament$', slkf.OpenTournament.as_view(), name='open-tournament'),
@@ -55,8 +51,6 @@ urlpatterns = [
     # Coach Registration
     url(r'^association-portal/coach-registration$', association.CoachRegistrationView.as_view(),
         name='coach-registration'),
-    url(r'^association-portal/coach-registered$',
-        TemplateView.as_view(template_name='event-management-system/association/coachRegistrationSuccess.html')),
 
     # View registered players/coaches
     url(r'^association-portal/view-players$', association.RegisteredPlayerListView.as_view(),
@@ -79,6 +73,8 @@ urlpatterns = [
     url(r'^slkf-portal/display-associations$', slkf.AssociationsListView.as_view(), name='association-list'),
     url(r'^slkf-portal/view-users$',
         TemplateView.as_view(template_name='event-management-system/slkf/userListDirect.html'), name='view-users'),
+    url(r'^slkf-portal/tournament-options$',
+        TemplateView.as_view(template_name='event-management-system/slkf/tournamentOptions.html'), name='tournament-options'),
 
     url(r'^slkf-portal/view-users/display-slkf-users$', slkf.SlkfUsersListView.as_view(), name='slkf-users'),
     url(r'^slkf-portal/view-users/display-district-users$', slkf.DistrictUsersListView.as_view(),

@@ -6,8 +6,6 @@
     <meta charset="UTF-8">
     <title>Online Karate Event Management System</title>
 
-    <!--{% block customCss %}-->
-    <!--{% endblock %}-->
     <!--Draw-css-->
     {% block stylesheet %}{% endblock %}
 
@@ -44,53 +42,53 @@
 
             {% if user.is_authenticated %}
 
-            {% if user.userType == "SL" or user.userType == "AD" %}
-            <li>
-                <a href="{% url 'slkf-portal' %}">SLKF Portal</a>
-            </li>
-            {% endif %}
+                {% if user.userType == "SL" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'slkf-portal' %}">SLKF Portal</a>
+                    </li>
+                {% endif %}
 
-            {% if user.userType == "AS" or user.userType == "AD" %}
-            <li>
-                <a href="{% url 'association-portal' %}">Association Portal</a>
-            </li>
-            {% endif %}
+                {% if user.userType == "AS" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'association-portal' %}">Association Portal</a>
+                    </li>
+                {% endif %}
 
-            {% if user.userType == "DI" or user.userType == "AD" %}
-            <li>
-                <a href="{% url 'district-portal' %}">District Portal</a>
-            </li>
-            {% endif %}
+                {% if user.userType == "DI" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'district-portal' %}">District Portal</a>
+                    </li>
+                {% endif %}
 
-            {% if user.userType == "PR" or user.userType == "AD" %}
-            <li>
-                <a href="{% url 'province-portal' %}">Province Portal</a>
-            </li>
-            {% endif %}
-            <!--<li>-->
-            <!--<a href="/event-management-system/accounts/signup">-->
-            <!--<span class="glyphicon glyphicon-user"></span> Sign Up</a>-->
-            <!--</li>-->
-            <!--No need of a signup. Users are created by the SLKF/admin. -->
+                {% if user.userType == "PR" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'province-portal' %}">Province Portal</a>
+                    </li>
+                {% endif %}
+                <!--<li>-->
+                <!--<a href="/event-management-system/accounts/signup">-->
+                <!--<span class="glyphicon glyphicon-user"></span> Sign Up</a>-->
+                <!--</li>-->
+                <!--No need of a signup. Users are created by the SLKF/admin. -->
 
 
-            <li>
-                <a href="{% url 'user-profile' %}">
-                    <span class="glyphicon glyphicon-user"></span>
-                    {{ user.username }} </a>
-            </li>
+                <li>
+                    <a href="{% url 'user-profile' %}">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {{ user.username }} </a>
+                </li>
 
-            <li>
-                <a href="{% url 'logout' %}">
-                    <span class="glyphicon glyphicon-log-out"></span> Logout </a>
-            </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="glyphicon glyphicon-log-out"></span> Logout </a>
+                </li>
 
 
             {% else %}
-            <li>
-                <a href="{% url 'login' %}">
-                    <span class="glyphicon glyphicon-log-in"></span> Login</a>
-            </li>
+                <li>
+                    <a href="{% url 'login' %}">
+                        <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
 
             {% endif %}
 
@@ -101,7 +99,7 @@
 
 <div>
     {% block content %}
-    <!-- content is the name of the block -->
+        <!-- content is the name of the block -->
     {% endblock %}
     {% block javascript %}{% endblock %}
 

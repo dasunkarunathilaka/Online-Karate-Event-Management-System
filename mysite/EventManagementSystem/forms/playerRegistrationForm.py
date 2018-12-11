@@ -17,6 +17,8 @@ class PlayerRegistrationForm(ModelForm):
 
     district = forms.ModelChoiceField(queryset=District.objects.all())
     event = forms.ModelChoiceField(queryset=Event.objects.all())
+    telephone = forms.RegexField(regex=r'^(\+94)?1?\d{9}$', error_message=(
+        "Phone number must be entered in the format: '+94769266301'. 11 digits allowed."))
 
     class Meta:
         model = Player

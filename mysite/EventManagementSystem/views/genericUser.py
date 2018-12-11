@@ -15,11 +15,6 @@ def index(request):
     return render(request, 'event-management-system/index.html')
 
 
-@login_required
-def signupSuccess(request):
-    return render(request, 'event-management-system/registration/signupSuccess.html')
-
-
 def customLogin(request):
     # To identify whether a user has already logged in or not.
     if request.user.is_authenticated():
