@@ -49,6 +49,12 @@
                             href="{% url 'slkf-coach-list' %}?association={{ association.user.username }}"
                             class="btn btn-block btn-primary btn-lf"
                             role="button">View</a></td>
+
+                    <td style="width: 10%; text-align: center;"><a
+                            onclick="return confirm('Are you sure you want to delete this?')"
+                            href="{% url 'delete-association' association.user_id %}"
+                            class="btn btn-block btn-danger"
+                            role="button">Delete</a></td>
                 {% endif %}
             </tr>
 

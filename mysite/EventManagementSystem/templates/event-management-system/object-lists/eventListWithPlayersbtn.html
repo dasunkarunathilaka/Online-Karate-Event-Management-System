@@ -40,4 +40,10 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
+    {% if user.userType == "SL" or user.userType == "AD" %}
+        <div style="text-align: center;"><a href="{% url 'create-event' %}" class="btn-lg btn-success"
+                                            role="button">New
+            Event</a></div>
+    {% endif %}
 {% endblock %}

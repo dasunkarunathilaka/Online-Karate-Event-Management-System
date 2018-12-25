@@ -83,6 +83,7 @@ class RegisteredPlayerListView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['institute'] = self.request.user.username
+        kwargs['states'] = State.objects.filter(stateID=1)
         return super(RegisteredPlayerListView, self).get_context_data(**kwargs)
 
 

@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, TemplateView, ListView, View
+from django.views.generic import CreateView, TemplateView, ListView, View, DeleteView
 
 # This is a class based view. Instead of using a method as a view, this whole class can be used.
 # as_view() method needs to be called (inherited from CreateView) in the urls.py
@@ -61,7 +63,7 @@ class AssociationsListView(ListView):
     template_name = 'event-management-system/object-lists/associationList.html'
 
     def get_queryset(self):
-        queryset = Association.objects.all()
+        queryset = Association.objects.all().order_by('user__username')
         return queryset
 
 
@@ -111,6 +113,7 @@ class PlayersListByAssociationView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['institute'] = self.request.GET.get('association', "")
+        kwargs['states'] = State.objects.filter(stateID=1)
         return super(PlayersListByAssociationView, self).get_context_data(**kwargs)
 
 
@@ -154,7 +157,17 @@ class PlayersListByEventView(ListView):
     template_name = 'event-management-system/object-lists/playerList.html'
 
     def get_queryset(self):
-        queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
+        if self.request.user.userType == 'AD' or self.request.user.userType == 'SL':
+            queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""))
+        elif self.request.user.userType == 'DI':
+            queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""),
+                                             district__user__username=self.request.user.username)
+        elif self.request.user.userType == 'PR':
+            queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""),
+                                             district__province__user__username=self.request.user.username)
+        elif self.request.user.userType == 'AS':
+            queryset = Player.objects.filter(event__eventID=self.request.GET.get('event', ""),
+                                             association__user__username=self.request.user.username)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -299,3 +312,9 @@ class PlayersListByEventViewBeforeShuffle(ListView):
     def get_context_data(self, **kwargs):
         kwargs['event'] = self.request.GET.get('event', "")
         return super(PlayersListByEventViewBeforeShuffle, self).get_context_data(**kwargs)
+
+
+def delete_association(request, pk):
+    query = User.objects.get(pk=pk)
+    query.delete()
+    return HttpResponseRedirect(reverse('association-list'))

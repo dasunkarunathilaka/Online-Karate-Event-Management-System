@@ -15,6 +15,8 @@ class PlayerRegistrationForm(ModelForm):
     # association = forms.ModelChoiceField(queryset=Association.objects.all())
     # This would allow Associations to submit players from other Associations.
 
+    firstName = forms.CharField(required=True, label="Player First Name")
+    lastName = forms.CharField(required=True, label="Player Last Name")
     district = forms.ModelChoiceField(queryset=District.objects.all())
     event = forms.ModelChoiceField(queryset=Event.objects.all())
     telephone = forms.RegexField(regex=r'^(\+94)?1?\d{9}$', error_message=(
@@ -22,11 +24,11 @@ class PlayerRegistrationForm(ModelForm):
 
     class Meta:
         model = Player
-        fields = ('playerName', 'telephone', 'district', 'event')
+        fields = ('firstName', 'lastName', 'telephone', 'district', 'event')
 
     @transaction.atomic
     def save(self, commit=True):
-        playerName = self.cleaned_data['playerName']
+        playerName = self.cleaned_data['firstName'] + " " + self.cleaned_data['lastName']
         telephone = self.cleaned_data['telephone']
         district = self.cleaned_data['district']
         event = self.cleaned_data['event']

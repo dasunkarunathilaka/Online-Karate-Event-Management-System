@@ -45,7 +45,7 @@
     </table>
     <br>
 
-    {% if user.userType == "AS" or user.userType == "AD" %}
+    {% if user.userType == "AD" and states.0.isOpen or user.userType == "AS" and states.0.isOpen %}
         <div style="text-align: center;"><a href="{% url 'player-registration' %}?association={{ association }}"
                                             class="btn-lg btn-success" role="button">Add
             Player</a></div>

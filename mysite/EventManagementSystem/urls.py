@@ -107,6 +107,10 @@ urlpatterns = [
     url(r'^slkf-portal/view-users/display-province-users/players/$', slkf.PlayersListByProvinceView.as_view(),
         name='view-players-on-provinces'),
 
+    # Delete objects
+    url(r'^slkf-portal/display-associations/remove/(?P<pk>\d+)/$', slkf.delete_association,
+        name='delete-association'),
+
     # User profile options
     url(r'^profile$',
         TemplateView.as_view(template_name='event-management-system/user-profile/userProfile.html'),
