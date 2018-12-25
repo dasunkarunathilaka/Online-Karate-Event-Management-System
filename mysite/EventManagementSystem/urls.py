@@ -74,7 +74,8 @@ urlpatterns = [
     url(r'^slkf-portal/view-users$',
         TemplateView.as_view(template_name='event-management-system/slkf/userListDirect.html'), name='view-users'),
     url(r'^slkf-portal/tournament-options$',
-        TemplateView.as_view(template_name='event-management-system/slkf/tournamentOptions.html'), name='tournament-options'),
+        TemplateView.as_view(template_name='event-management-system/slkf/tournamentOptions.html'),
+        name='tournament-options'),
 
     url(r'^slkf-portal/view-users/display-slkf-users$', slkf.SlkfUsersListView.as_view(), name='slkf-users'),
     url(r'^slkf-portal/view-users/display-district-users$', slkf.DistrictUsersListView.as_view(),
@@ -108,8 +109,23 @@ urlpatterns = [
         name='view-players-on-provinces'),
 
     # Delete objects
-    url(r'^slkf-portal/display-associations/remove/(?P<pk>\d+)/$', slkf.delete_association,
+    url(r'^slkf-portal/display-associations/remove/(?P<pk>\d+)/$', slkf.delete_user,
         name='delete-association'),
+    url(r'^slkf-portal/display-district-users/remove/(?P<pk>\d+)/$', slkf.delete_user,
+        name='delete-district'),
+    url(r'^slkf-portal/display-province-users/remove/(?P<pk>\d+)/$', slkf.delete_user,
+        name='delete-province'),
+    url(r'^slkf-portal/display-slkf-users/remove/(?P<pk>\d+)/$', slkf.delete_user,
+        name='delete-slkf'),
+    url(r'^slkf-portal/display-all-events/remove/(?P<pk>\d+)/$', slkf.delete_event,
+        name='delete-event'),
+
+    url(r'^association-portal/view-players/remove/(?P<pk>\d+)/$', association.delete_player,
+        name='delete-player'),
+    url(r'^association-portal/view-coaches/remove/(?P<pk>[\w\-]+)/$', association.delete_coach,
+        name='delete-coach'),
+    # The above regex can accept any string as the pk.
+
 
     # User profile options
     url(r'^profile$',

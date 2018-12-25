@@ -43,6 +43,10 @@ class SlkfSignUpView(CreateView):
 class SlkfPortal(TemplateView):
     template_name = 'event-management-system/slkf/slkfPortal.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs['states'] = State.objects.filter(stateID=1)
+        return super(SlkfPortal, self).get_context_data(**kwargs)
+
 
 @method_decorator(decorators, name='dispatch')
 class EventCreationView(CreateView):
@@ -85,7 +89,7 @@ class DistrictUsersListView(ListView):
     template_name = 'event-management-system/slkf/districtUserList.html'
 
     def get_queryset(self):
-        queryset = District.objects.all()
+        queryset = District.objects.all().order_by('province__user__username')
         return queryset
 
 
@@ -269,7 +273,6 @@ class EventsListViewForDraws(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs['states'] = State.objects.filter(stateID=1)
         return super(EventsListViewForDraws, self).get_context_data(**kwargs)
 
 
@@ -314,7 +317,19 @@ class PlayersListByEventViewBeforeShuffle(ListView):
         return super(PlayersListByEventViewBeforeShuffle, self).get_context_data(**kwargs)
 
 
-def delete_association(request, pk):
+@login_required
+@slkf_required
+def delete_user(request, pk):
     query = User.objects.get(pk=pk)
     query.delete()
-    return HttpResponseRedirect(reverse('association-list'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+# This will not work if the client disabled sending referrer information
+# (for example, using a private/incognito browser Window). In such a case it will redirect to /.
+
+
+@login_required
+@slkf_required
+def delete_event(request, pk):
+    query = Event.objects.get(pk=pk)
+    query.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

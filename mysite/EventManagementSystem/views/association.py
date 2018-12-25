@@ -176,3 +176,19 @@ class PlayersListByEventViewBeforeShuffle(ListView):
     def get_context_data(self, **kwargs):
         kwargs['event'] = self.request.GET.get('event', "")
         return super(PlayersListByEventViewBeforeShuffle, self).get_context_data(**kwargs)
+
+
+@login_required
+@association_required
+def delete_player(request, pk):
+    query = Player.objects.get(pk=pk)
+    query.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+@login_required
+@association_required
+def delete_coach(request, pk):
+    query = Coach.objects.get(pk=pk)
+    query.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

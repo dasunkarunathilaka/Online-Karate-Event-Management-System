@@ -1,6 +1,11 @@
 {% extends 'event-management-system/header.html' %}
 
 {% block content %}
+    <script type="text/javascript">
+        function AlertIt() {
+            alert('Match draws can only be viewed after tournament registration is closed.')
+        }
+    </script>
 
     {% include 'event-management-system/includes/successMessage.html' %}
 
@@ -21,17 +26,7 @@
                         padding: 2px;
                     }
                 </style>
-                <!--<div class="row margin">-->
-                <!--<div class="col-sm-6">-->
-                <!--&lt;!&ndash;Directs to the page where SLKF can choose which type of user to be created&ndash;&gt;-->
-                <!--<a href="{% url 'signup' %}" class="btn btn-block btn-primary btn-lf" role="button">Create New-->
-                <!--User</a>-->
-                <!--</div>-->
-                <!--<div class="col-sm-6">-->
-                <!--<a href="{% url 'create-event' %}" class="btn btn-block btn-primary btn-lf" role="button">Create New-->
-                <!--Event</a>-->
-                <!--</div>-->
-                <!--</div>-->
+
                 <div class="row">
                     <div class="col-sm-6 column-style">
                         <a href="{% url 'tournament-options' %}" class="btn btn-block btn-primary btn-lf" role="button">Tournament
@@ -55,10 +50,19 @@
                     <div class="col-sm-6 column-style">
                         <a href="{% url 'all-events-players' %}" class="btn btn-block btn-primary btn-lf" role="button">Events</a>
                     </div>
-                    <div class="col-sm-6 column-style">
-                        <a href="{% url 'all-events-draws' %}" class="btn btn-block btn-primary btn-lf" role="button">View
-                            Draws</a>
-                    </div>
+                    {% if states.0.isOpen %}
+                        <div class="col-sm-6 column-style">
+                            <a href="javascript:AlertIt();" class="btn btn-block btn-primary btn-lf"
+                               role="button">View
+                                Draws</a>
+                        </div>
+                    {% else %}
+                        <div class="col-sm-6 column-style">
+                            <a href="{% url 'all-events-draws' %}" class="btn btn-block btn-primary btn-lf"
+                               role="button">View
+                                Draws</a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-sm-2"></div>

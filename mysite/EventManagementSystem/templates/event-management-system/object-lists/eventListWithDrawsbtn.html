@@ -24,7 +24,7 @@
                 <td style="width: 15%; text-align: center">{{ event.eventID }}</td>
                 <td style="width: 55%">{{ event.eventName }}</td>
 
-                {% if event.kumite and not states.0.isOpen %}
+                {% if event.kumite %}
                     <td style="width: 30%"><a
                             href="{% url 'view-players-on-events-draws-for-association' %}?event={{ event.eventID }}"
                             class="btn btn-block btn-primary btn-lf"
