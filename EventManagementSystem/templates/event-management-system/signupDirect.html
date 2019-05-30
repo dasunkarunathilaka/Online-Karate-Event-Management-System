@@ -1,0 +1,11 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+<h2>Create New User</h2>
+    <p class="lead">Select the type of account you want to create</p>
+    <a href="{% url 'slkf_signup' %}" class="btn btn-lg" role="button">SLKF</a>
+    <a href="{% url 'association_signup' %}" class="btn btn-lg" role="button">Association</a>
+    <a href="{% url 'district_signup' %}" class="btn btn-lg" role="button">District</a>
+    <a href="{% url 'province_signup' %}" class="btn btn-lg" role="button">Province</a>
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <style>
+                .btn-lf {
+                    margin-bottom: 0.5rem;
+                    font-size: 2.25rem;
+                    line-height: 5;
+                    border-radius: 0.1rem;
+                    height: 120px;
+                }
+                .column-style {
+                    padding: 2px;
+                }
+            </style>
+            <div class="row margin">
+                <div class="col-sm-12 column-style">
+                    <a href="{% url 'reset-password' %}" class="btn btn-block btn-primary btn-lf" role="button">Change Password</a>
+                </div>
+                <!--<div class="col-sm-6">-->
+                    <!--<a href="{% url 'district-users' %}" class="btn btn-block btn-primary btn-lf" role="button">View District Users</a>-->
+                <!--</div>-->
+            </div>
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6">-->
+                    <!--<a href="{% url 'province-users' %}" class="btn btn-block btn-primary btn-lf" role="button">View Province Users</a>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<a href="#" class="btn btn-block btn-primary btn-lf" role="button">btn</a>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6">-->
+                    <!--<a href="{% url 'view-users' %}" class="btn btn-block btn-primary btn-lf" role="button">btn</a>-->
+                <!--</div>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<a href="#" class="btn btn-block btn-primary btn-lf" role="button">btn</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+{% endblock %}

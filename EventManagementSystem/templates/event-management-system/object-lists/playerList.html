@@ -1,0 +1,63 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+    <h2 style="text-align: center; color: white">Registered Players of {{ institute }}</h2>
+    <br>
+
+    <style>
+        .table-style {
+            width: 90%;
+            margin-left: 5%;
+            background-color: white;
+            opacity: 0.8;
+        }
+    </style>
+
+    <table class="table mb-0 table-style">
+        <thead>
+        <tr>
+            <th style="width: 10%">Player ID</th>
+            <th style="width: 20%">Player Name</th>
+            <th style="width: 10%; text-align: center">Telephone</th>
+            <th style="width: 10%">Association</th>
+            <th style="width: 20%">District</th>
+            <th style="width: 20%">Province</th>
+            <th style="width: 10%">Event</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for player in playerList %}
+            <tr>
+                <td style="width: 10%">{{ player.id }}</td>
+                <td style="width: 20%">{{ player.playerName }}</td>
+                <td style="width: 10%; text-align: center">{{ player.telephone }}</td>
+                <td style="width: 10%">{{ player.association.user.username }}</td>
+                <td style="width: 20%">{{ player.district.user.username }}</td>
+                <td style="width: 20%">{{ player.district.province.user.username }}</td>
+                <td style="width: 10%">{{ player.event.eventID }}</td>
+                {% if user.userType == "AD" and states.0.isOpen or user.userType == "AS" and states.0.isOpen %}
+                    <td style="width: 10%; text-align: center;"><a
+                            onclick="return confirm('Are you sure you want to delete this?')"
+                            href="{% url 'delete-player' player.id %}"
+                            class="btn btn-block btn-danger"
+                            role="button">Delete</a></td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="3">No players have been registered yet.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    {#    Admin has the ability to add players on behalf of associations #}
+    {% if user.userType == "AD" and states.0.isOpen or user.userType == "AS" and states.0.isOpen %}
+        <div style="text-align: center;"><a href="{% url 'player-registration' %}?association={{ association }}"
+                                            class="btn-lg btn-success" role="button">Add
+            Player</a></div>
+    {% endif %}
+
+
+{% endblock %}

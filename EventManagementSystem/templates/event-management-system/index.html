@@ -1,0 +1,100 @@
+{% extends 'event-management-system/header.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    {% include 'event-management-system/includes/successMessage.html' %}
+
+    <div style="text-align: center; color: white; margin-top: 3%">
+        <h2>E-DOJO</h2>
+        Online Tournament Management System for SLKF
+    </div>
+    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 5%">
+        {% if user.is_authenticated %}
+
+            {% if user.userType == "AD" or user.userType == "SL" %}
+                <div class="panel panel-info" style="height:200px; width: 100%; opacity: 0.7">
+                    <div class="panel-heading" style="height: 25%; text-align: center">
+                        <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+                    </div>
+                    <div class="panel-body" style="height: 75%;">
+                        <p style="text-align: center; font-size: large">Basic details about the tournament.</p>
+                        <div style="width:60%; margin-left: 20%; margin-top: 5% ">
+                            <a href="{% url 'slkf-portal' %}"
+                               class="btn btn-block btn-primary btn-lf"
+                               style="height: 45px; font-size: large"
+                               role="button">Click</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% elif user.userType == "DI" %}
+                <div class="panel panel-info" style="height:200px; width: 100%; opacity: 0.7">
+                    <div class="panel-heading" style="height: 25%; text-align: center">
+                        <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+                    </div>
+                    <div class="panel-body" style="height: 75%;">
+                        <p style="text-align: center; font-size: large">Basic details about the tournament.</p>
+                        <div style="width:60%; margin-left: 20%; margin-top: 5% ">
+                            <a href="{% url 'district-portal' %}"
+                               class="btn btn-block btn-primary btn-lf"
+                               style="height: 45px; font-size: large"
+                               role="button">Click</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% elif user.userType == "PR" %}
+                <div class="panel panel-info" style="height:200px; width: 100%; opacity: 0.7">
+                    <div class="panel-heading" style="height: 25%; text-align: center">
+                        <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+                    </div>
+                    <div class="panel-body" style="height: 75%;">
+                        <p style="text-align: center; font-size: large">Basic details about the tournament.</p>
+                        <div style="width:60%; margin-left: 20%; margin-top: 5% ">
+                            <a href="{% url 'province-portal' %}"
+                               class="btn btn-block btn-primary btn-lf"
+                               style="height: 45px; font-size: large"
+                               role="button">Click</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% elif user.userType == "AS" %}
+                <div class="panel panel-info" style="height:200px; width: 100%; opacity: 0.7">
+                    <div class="panel-heading" style="height: 25%; text-align: center">
+                        <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+                    </div>
+                    <div class="panel-body" style="height: 75%;">
+                        <p style="text-align: center; font-size: large">Basic details about the tournament.</p>
+                        <div style="width:60%; margin-left: 20%; margin-top: 5% ">
+                            <a href="{% url 'association-portal' %}"
+                               class="btn btn-block btn-primary btn-lf"
+                               style="height: 45px; font-size: large"
+                               role="button">Click</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        {% else %}
+            <div class="panel panel-info" style="height:200px; width: 100%; opacity: 0.7">
+                <div class="panel-heading" style="height: 25%; text-align: center">
+                    <h3 class="panel-title" style="font-weight: bold">Karate Tournament - Kalutara 2018</h3>
+                </div>
+                <div class="panel-body" style="height: 75%;">
+                    <p style="text-align: center; font-size: large">Basic details about the tournament.</p>
+                    <div style="width:60%; margin-left: 20%; margin-top: 5% ">
+                        <a href="{% url 'tournament-page' %}"
+                           class="btn btn-block btn-primary btn-lf"
+                           style="height: 45px; font-size: large"
+                           role="button">Click</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

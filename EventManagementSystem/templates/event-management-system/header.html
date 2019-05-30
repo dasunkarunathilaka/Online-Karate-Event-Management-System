@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+
+    <meta charset="UTF-8">
+    <title>Online Karate Event Management System</title>
+
+    <!--Draw-css-->
+    {% block stylesheet %}{% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'event-management-system/css/style-index.css' %}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<body background="{% static 'event-management-system/img/background-image.jpg' %}" style="background-size: cover">
+<nav class="navbar navbar-inverse" style="background-color: #333">
+    <div class="container-fluid">
+        <div class="navbar-header active">
+            <a href="{% url 'index' %}">
+                <div class="navbar-brand">E-DOJO</div>
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#">Up coming events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Contact Us</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+            {% if user.is_authenticated %}
+
+                {% if user.userType == "SL" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'slkf-portal' %}">SLKF Portal</a>
+                    </li>
+                {% endif %}
+
+                {% if user.userType == "AS" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'association-portal' %}">Association Portal</a>
+                    </li>
+                {% endif %}
+
+                {% if user.userType == "DI" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'district-portal' %}">District Portal</a>
+                    </li>
+                {% endif %}
+
+                {% if user.userType == "PR" or user.userType == "AD" %}
+                    <li>
+                        <a href="{% url 'province-portal' %}">Province Portal</a>
+                    </li>
+                {% endif %}
+                <!--<li>-->
+                <!--<a href="/event-management-system/accounts/signup">-->
+                <!--<span class="glyphicon glyphicon-user"></span> Sign Up</a>-->
+                <!--</li>-->
+                <!--No need of a signup. Users are created by the SLKF/admin. -->
+
+
+                <li>
+                    <a href="{% url 'user-profile' %}">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {{ user.username }} </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="glyphicon glyphicon-log-out"></span> Logout </a>
+                </li>
+
+
+            {% else %}
+                <li>
+                    <a href="{% url 'login' %}">
+                        <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
+
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+
+
+<div>
+    {% block content %}
+        <!-- content is the name of the block -->
+    {% endblock %}
+    {% block javascript %}{% endblock %}
+
+</div>
+
+
+</body>
+</html>

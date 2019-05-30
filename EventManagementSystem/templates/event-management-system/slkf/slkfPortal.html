@@ -1,0 +1,72 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+    <script type="text/javascript">
+        function AlertIt() {
+            alert('Match draws can only be viewed after tournament registration is closed.')
+        }
+    </script>
+
+    {% include 'event-management-system/includes/successMessage.html' %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <style>
+                    .btn-lf {
+                        margin-bottom: 0.5rem;
+                        font-size: 2.25rem;
+                        line-height: 5;
+                        border-radius: 0.1rem;
+                        height: 120px;
+                    }
+
+                    .column-style {
+                        padding: 2px;
+                    }
+                </style>
+
+                <div class="row">
+                    <div class="col-sm-6 column-style">
+                        <a href="{% url 'tournament-options' %}" class="btn btn-block btn-primary btn-lf" role="button">Tournament
+                            Options</a></a>
+                    </div>
+                    <div class="col-sm-6 column-style">
+                        <a href="{% url 'view-users' %}" class="btn btn-block btn-primary btn-lf" role="button">System
+                            Users</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 column-style">
+                        <a href="{% url 'association-list' %}" class="btn btn-block btn-primary btn-lf" role="button">Associations</a>
+                    </div>
+                    <div class="col-sm-6 column-style">
+                        <a href="{% url 'view-all-players' %}" class="btn btn-block btn-primary btn-lf" role="button">All
+                            Players</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 column-style">
+                        <a href="{% url 'all-events-players' %}" class="btn btn-block btn-primary btn-lf" role="button">Events</a>
+                    </div>
+                    {% if states.0.isOpen %}
+                        <div class="col-sm-6 column-style">
+                            <a href="javascript:AlertIt();" class="btn btn-block btn-primary btn-lf"
+                               role="button">View
+                                Draws</a>
+                        </div>
+                    {% else %}
+                        <div class="col-sm-6 column-style">
+                            <a href="{% url 'all-events-draws' %}" class="btn btn-block btn-primary btn-lf"
+                               role="button">View
+                                Draws</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'event-management-system/header.html' %}
+
+{% block content %}
+
+<div class="row">
+        <div style="text-align: center">
+            <h2 style="text-align: center; color: white">New Event</h2>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <div style="display: inline-block">
+                    {% include 'event-management-system/includes/bootstrap-form.html' with form=form %}
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
