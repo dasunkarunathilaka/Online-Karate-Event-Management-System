@@ -249,8 +249,6 @@ class CloseTournament(View):
         return HttpResponseRedirect(reverse('slkf-portal'))
 
 
-# ------------------------------------------------------------------------------
-
 @method_decorator(decorators, name='dispatch')
 class EventsListViewForEvents(ListView):
     model = Event
